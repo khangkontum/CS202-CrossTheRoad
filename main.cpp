@@ -1,5 +1,5 @@
 #define OLC_PGE_APPLICATION
-#include "olcPixelGameEngine.h"
+#include "./includes/olcPixelGameEngine.h"
 
 // Override base class with your custom functionality
 class Example : public olc::PixelGameEngine
