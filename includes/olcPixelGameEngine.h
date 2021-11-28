@@ -556,7 +556,7 @@ namespace olc
 		CYAN(0, 255, 255), DARK_CYAN(0, 128, 128), VERY_DARK_CYAN(0, 64, 64),
 		BLUE(0, 0, 255), DARK_BLUE(0, 0, 128), VERY_DARK_BLUE(0, 0, 64),
 		MAGENTA(255, 0, 255), DARK_MAGENTA(128, 0, 128), VERY_DARK_MAGENTA(64, 0, 64),
-		WHITE(255, 255, 255), BLACK(0, 0, 0), BLANK(0, 0, 0, 0);
+		WHITE(255, 255, 255), BLACK(0, 0, 0), BLANK(0, 0, 0, 0), CREAM(255, 253, 208);
 
 	// Thanks to scripticuk and others for updating the key maps
 	// NOTE: The GLUT platform will need updating, open to contributions ;)

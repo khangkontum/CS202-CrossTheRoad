@@ -20,9 +20,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\CGame.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\CPeople.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\CObstacle.h" />
+    <ClInclude Include="includes\CPeople.h" />
+    <ClInclude Include="includes\CGame.h" />
+    <ClInclude Include="includes\Menu.h" />
     <ClInclude Include="includes\olcPixelGameEngine.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\grandma.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
