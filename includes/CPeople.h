@@ -1,13 +1,13 @@
 ﻿#pragma once
 
-#include "olcPixelGameEngine.h"
+#include "../olc/olcPixelGameEngine.h"
 #include "CObstacle.h"
 
-class CPeople : public olc::PixelGameEngine {
+class CPeople {
 public:
-	CPeople();
+	CPeople(olc::PixelGameEngine* pge);
 
-	void Draw(olc::PixelGameEngine* pge);
+	void Draw();
 	void Up(float fElapsedTime);
 	void Left(float fElapsedTime);
 	void Right(float fElapsedTime);
@@ -21,6 +21,7 @@ private:
 	std::unique_ptr<olc::Decal> decal;
 	float speed;
 	olc::vf2d position;
+	olc::PixelGameEngine* pge;
 };
 
 /*
