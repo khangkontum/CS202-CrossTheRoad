@@ -3,11 +3,11 @@
 CPeople::CPeople(olc::PixelGameEngine* pge) : pge(pge) {
 	speed = 50;
 	position = {float(pge->ScreenWidth() / 2 - 10), float(pge->ScreenHeight() - 30)};
+	sprite = std::make_unique<olc::Sprite>("./assets/grandma.png");
+	decal = std::make_unique <olc::Decal>(sprite.get());
 }
 
 void CPeople::Draw() {
-	sprite = std::make_unique<olc::Sprite>("./assets/grandma.png");
-	decal = std::make_unique <olc::Decal>(sprite.get());
 	pge->DrawDecal(this->position, decal.get(), {0.1f, 0.1f});
 }
 
@@ -31,7 +31,7 @@ void CPeople::Down(float fElapsedTime) {
 	position.y += speed * fElapsedTime;
 	position.y = std::min(float(pge->ScreenHeight() - 30), position.y);
 }
-bool isImpact(const CObstacle*& object) {
+bool isImpact(const CAnimal* object) {
 	return true;
 }
 bool isFinish() {
@@ -39,4 +39,10 @@ bool isFinish() {
 }
 bool isDead() {
 	return true;
+}
+
+olc::vf2d CPeople::size() {
+	float w = sprite.get()->width * 0.1;
+	float h = sprite.get()->height * 0.1;
+	return olc::vf2d({ w, h });
 }

@@ -7,6 +7,20 @@ CGame::CGame() {
 bool CGame::OnUserCreate() {
 	cPeople = std::make_unique<CPeople>(this);
 	background = std::make_unique<Background>(this);
+
+	olc::vf2d limitSpawn = cPeople->size() * 2;
+	
+
+	std::ifstream fi("./database/game.json");
+	fi >> gameData;
+
+	std::cout << ( float(gameData["CBird"]) * ScreenHeight() ) << '\n';
+
+	//Loading default bird
+	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * ScreenHeight()}), 1, this);
+	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, limitSpawn,this);
+	
+	
 	return true;
 }
 
@@ -20,15 +34,23 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		cPeople.get()->Left(fElapsedTime);
 	if (GetKey(olc::Key::D).bHeld || GetKey(olc::Key::RIGHT).bHeld)
 		cPeople.get()->Right(fElapsedTime);
-	if (GetKey(olc::Key::CTRL).bHeld && GetKey(olc::Key::Q).bHeld)
+	if (GetKey(olc::Key::Q).bHeld)
 		return false;
+
+	birdSpawner.get()->run(fElapsedTime);
 
 	Clear(olc::CREAM);
 
 
 	//Drawing
-	background->Draw();
-	cPeople->Draw();
+	drawGame();
 	
 	return true;
+}
+
+void CGame::drawGame() {
+	background->Draw();
+	cPeople->Draw();
+
+	birdSpawner.get()->Draw();
 }

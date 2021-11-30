@@ -1,7 +1,9 @@
 #include "../includes/BackGround.h"
 
 Background::Background(olc::PixelGameEngine* pge) : pge(pge) {
-	grassDecal = nullptr;
+	//Loading assets
+	sprite = std::make_unique<olc::Sprite>("./assets/grass.png");
+	grassDecal = std::make_unique<olc::Decal>(sprite.get());
 }
 
 /*
@@ -12,13 +14,15 @@ Background::Background(olc::PixelGameEngine* pge) : pge(pge) {
 * h*0.2 -> h*0.5 (h*0.15 lane gap)
 * h*0.55->h*0.85
 * 
+* lane1: h*0.2->h*0.35
+* lane2: h*0.35->h*0.5
+* lane3: h*0.55->h*0.70
+* lane4: h*0.70->h*0.85
+* 
 * End Gap
 * h->h*0.2
 */
 void Background::Draw() {
-	//Loading assets
-	std::unique_ptr<olc::Sprite> sprite = std::make_unique<olc::Sprite>("./assets/grass.png");
-	grassDecal = std::make_unique<olc::Decal>(sprite.get());
 
 	//Draw grass
 	int h = pge->ScreenHeight();
@@ -36,11 +40,6 @@ void Background::Draw() {
 	pge->FillRectDecal(olc::vf2d({ 0,float(h * 0.85) }), olc::vf2d({ float(w), float(1) })); //Draw outliner
 	DrawBreakLine(0, h * 0.7, w, h * 0.7);
 	pge->FillRectDecal(olc::vf2d({ 0,float(h * 0.55) }), olc::vf2d({ float(w), float(1) }));
-
-	//Draw grass
-	for (float j = 0; j < w; j += grassW) {
-			pge->DrawDecal(olc::vf2d( { float(j), float(h * 0.55 - 1 - grassH) }), grassDecal.get(), {0.05f, 0.05f});
-	}
 
 	//Draw Road
 	pge->FillRectDecal(olc::vf2d({ float(0), float(h * 0.2) }), olc::vf2d({ float(w), float(h * 0.3) }), olc::DARK_GREY);

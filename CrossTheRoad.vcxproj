@@ -19,25 +19,35 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="olc\olcPixelGameEngine.cpp" />
     <ClCompile Include="src\Background.cpp" />
+    <ClCompile Include="src\CBird.cpp" />
+    <ClCompile Include="src\CDinosaur.cpp" />
     <ClCompile Include="src\CGame.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\CPeople.cpp" />
+    <ClCompile Include="src\ObjectSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\BackGround.h" />
-    <ClInclude Include="includes\CObstacle.h" />
+    <ClInclude Include="includes\CAnimal.h" />
+    <ClInclude Include="includes\CBird.h" />
+    <ClInclude Include="includes\CDinosaur.h" />
     <ClInclude Include="includes\CPeople.h" />
     <ClInclude Include="includes\CGame.h" />
     <ClInclude Include="includes\Menu.h" />
-    <ClInclude Include="olc\olcPixelGameEngine.h" />
+    <ClInclude Include="includes\ObjectSpawner.h" />
+    <ClInclude Include="lib\olcPixelGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\car.png" />
     <Image Include="assets\grandma.png" />
     <Image Include="assets\grass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="database\game.json" />
+    <None Include="doc\Final Project.pdf" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

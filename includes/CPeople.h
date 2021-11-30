@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "../olc/olcPixelGameEngine.h"
-#include "CObstacle.h"
+#include "../lib/olcPixelGameEngine.h"
+#include "CAnimal.h"
 
 class CPeople {
 public:
@@ -12,9 +12,11 @@ public:
 	void Left(float fElapsedTime);
 	void Right(float fElapsedTime);
 	void Down(float fElapsedTime);
-	bool isImpact(const CObstacle*& object);
+	bool isImpact(const CAnimal* object);
 	bool isFinish();
 	bool isDead();
+
+	olc::vf2d size();
 
 private:
 	std::unique_ptr<olc::Sprite> sprite;
