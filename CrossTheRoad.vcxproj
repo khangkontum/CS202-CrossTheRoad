@@ -23,8 +23,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Background.cpp" />
     <ClCompile Include="src\CBird.cpp" />
+    <ClCompile Include="src\CCar.cpp" />
     <ClCompile Include="src\CDinosaur.cpp" />
     <ClCompile Include="src\CGame.cpp" />
+    <ClCompile Include="src\CTruck.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\CPeople.cpp" />
     <ClCompile Include="src\ObjectSpawner.cpp" />
@@ -33,9 +35,12 @@
     <ClInclude Include="includes\BackGround.h" />
     <ClInclude Include="includes\CAnimal.h" />
     <ClInclude Include="includes\CBird.h" />
+    <ClInclude Include="includes\CCar.h" />
     <ClInclude Include="includes\CDinosaur.h" />
     <ClInclude Include="includes\CPeople.h" />
     <ClInclude Include="includes\CGame.h" />
+    <ClInclude Include="includes\CTruck.h" />
+    <ClInclude Include="includes\CVehicle.h" />
     <ClInclude Include="includes\Menu.h" />
     <ClInclude Include="includes\ObjectSpawner.h" />
     <ClInclude Include="lib\olcPixelGameEngine.h" />

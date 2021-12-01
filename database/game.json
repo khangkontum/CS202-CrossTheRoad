@@ -1,4 +1,6 @@
 {
     "CBird": 0.2,
-    "CDinosaur": 0.6
+    "CDinosaur": 0.3,
+    "CTruck": 0.45,
+    "CCar" :  0.7
 }

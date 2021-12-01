@@ -3,6 +3,9 @@
 #include "CPeople.h"
 #include "CAnimal.h"
 #include "CBird.h"
+#include "CDinosaur.h"
+#include "CTruck.h"
+#include "CCar.h"
 #include "ObjectSpawner.h"
 #include "BackGround.h"
 #include "json.hpp"
@@ -34,12 +37,12 @@ public:
 private:
 	json gameData;
 	std::unique_ptr<ObjectSpawner<CBird*>> birdSpawner;
+	std::unique_ptr<ObjectSpawner<CDinosaur*>> dinosaurSpawner;
+	std::unique_ptr<ObjectSpawner<CCar*>> carSpawner;
+	std::unique_ptr<ObjectSpawner<CTruck*>> truckSpawner;
 
 	std::unique_ptr<CPeople> cPeople;
 	std::unique_ptr<Background> background;
-
-	std::list<CBird*> cBirdList;
-	
 	/*
 	CTRUCK* axt;
 	CCAR * axh;

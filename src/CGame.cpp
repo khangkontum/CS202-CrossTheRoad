@@ -14,12 +14,21 @@ bool CGame::OnUserCreate() {
 	std::ifstream fi("./database/game.json");
 	fi >> gameData;
 
-	std::cout << ( float(gameData["CBird"]) * ScreenHeight() ) << '\n';
-
 	//Loading default bird
 	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * ScreenHeight()}), 1, this);
 	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, limitSpawn,this);
 	
+	//Loading default dinosaur
+	CDinosaur* dinosaur = new CDinosaur(olc::vf2d({ 0, float(gameData["CDinosaur"]) * ScreenHeight() }), -1, this);
+	dinosaurSpawner = std::make_unique<ObjectSpawner<CDinosaur*>>(dinosaur, limitSpawn, this);
+
+	//Loading default car
+	CCar* car = new CCar(olc::vf2d({ 0, float(gameData["CCar"]) * ScreenHeight() }), -1, this);
+	carSpawner = std::make_unique<ObjectSpawner<CCar*>>(car, limitSpawn, this);
+
+	//Loading default truck
+	CTruck* truck = new CTruck(olc::vf2d({ 0, float(gameData["CTruck"]) * ScreenHeight() }), 1, this);
+	truckSpawner = std::make_unique<ObjectSpawner<CTruck*>>(truck, limitSpawn, this);
 	
 	return true;
 }
@@ -38,6 +47,9 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		return false;
 
 	birdSpawner.get()->run(fElapsedTime);
+	dinosaurSpawner.get()->run(fElapsedTime);
+	truckSpawner.get()->run(fElapsedTime);
+	carSpawner.get()->run(fElapsedTime);
 
 	Clear(olc::CREAM);
 
@@ -53,4 +65,7 @@ void CGame::drawGame() {
 	cPeople->Draw();
 
 	birdSpawner.get()->Draw();
+	dinosaurSpawner.get()->Draw();
+	truckSpawner.get()->Draw();
+	carSpawner.get()->Draw();
 }

@@ -34,7 +34,6 @@ public:
 		if (objectList.size()) {
 			T frontObject = objectList.front();
 			olc::vf2d position = frontObject->getPosition();
-			//std::cout << position.x << ' ' << limitSpawn.x << '\n';
 			if (position.x < 0 || position.x > pge->ScreenWidth())
 				return;
 			if (frontObject->getDirection() > 0) {
@@ -51,21 +50,18 @@ public:
 		//Spawn
 		int numberSpawn = rand() % 5;
 		int previousX = 0;
-		std::cout << numberSpawn;
 		for (int i = 0; i < numberSpawn; i++) {
 			T newObject;
 			olc::vf2d position = {0, defaultObject->getPosition().y};
 			if (defaultObject->getDirection() > 0) {
-				if (i != 0) {
-					position.x = previousX - defaultObject->size().x / 2;
-				}
+				position.x = previousX - defaultObject->size().x;
 			}
 			else {
 				if (i != 0) {
 					position.x = previousX + defaultObject->size().x;
 				}
 				else {
-					position.x = pge->ScreenWidth();
+					position.x = pge->ScreenWidth() + defaultObject->size().x;
 				}
 			}
 			previousX = position.x;
