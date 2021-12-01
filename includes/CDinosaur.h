@@ -4,6 +4,8 @@
 class CDinosaur : public CAnimal {
 public:
 	CDinosaur(olc::vf2d pos, int direction, olc::PixelGameEngine* pge);
+	CDinosaur(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::shared_ptr<olc::Sprite> sprite, std::shared_ptr<olc::Decal> decal);
+
 	CDinosaur* clone(olc::vf2d pos);
 
 	void move(float fElapsedTime);

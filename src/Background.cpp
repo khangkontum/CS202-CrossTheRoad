@@ -59,6 +59,6 @@ void Background::Draw() {
 void Background::DrawBreakLine(int x1, int y1, int x2, int y2) {
 	float gap = (x1 + x2) / 10;
 	for (float i = x1 + 10; i < x2; i += gap * 2) {
-		pge->FillRectDecal(olc::vf2d({ i,float(y1) }), olc::vf2d({ gap, float(1) }));
+		pge->FillRectDecal(olc::vf2d({ i,float(y1) }), olc::vf2d({ gap, float(2) }));
 	}
 }

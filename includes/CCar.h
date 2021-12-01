@@ -4,6 +4,8 @@
 class CCar : public CVehicle {
 public:
 	CCar(olc::vf2d pos, int direction, olc::PixelGameEngine* pge);
+	CCar(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::shared_ptr<olc::Sprite> sprite, std::shared_ptr<olc::Decal> decal);
+
 	CCar* clone(olc::vf2d pos);
 
 	void move(float fElapsedTime);

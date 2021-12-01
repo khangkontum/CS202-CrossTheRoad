@@ -1,5 +1,14 @@
 #include "../includes/CDinosaur.h"
 
+CDinosaur::CDinosaur(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::shared_ptr<olc::Sprite> sprite, std::shared_ptr<olc::Decal> decal) {
+	this->direction = direction;
+	this->pge = pge;
+	this->speed = 10;
+	this->position = pos;
+	this->sprite = sprite;
+	this->decal = decal;
+}
+
 CDinosaur::CDinosaur(olc::vf2d pos, int direction, olc::PixelGameEngine* pge) {
 	this->direction = direction;
 	this->position = pos;
@@ -41,7 +50,7 @@ bool CDinosaur::isOutScreen() {
 }
 
 CDinosaur* CDinosaur::clone(olc::vf2d pos) {
-	CDinosaur* newDinosaur = new CDinosaur(pos, direction, pge);
+	CDinosaur* newDinosaur = new CDinosaur(pos, direction, pge, sprite, decal);
 	return newDinosaur;
 }
 

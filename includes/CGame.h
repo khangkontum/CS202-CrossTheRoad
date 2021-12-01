@@ -8,7 +8,7 @@
 #include "CCar.h"
 #include "ObjectSpawner.h"
 #include "BackGround.h"
-#include "json.hpp"
+#include "../lib/json.hpp"
 
 using json = nlohmann::json;
 

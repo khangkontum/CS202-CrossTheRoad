@@ -86,6 +86,9 @@
     <ClInclude Include="includes\CTruck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lib\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\grandma.png">

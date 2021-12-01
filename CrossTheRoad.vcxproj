@@ -43,6 +43,7 @@
     <ClInclude Include="includes\CVehicle.h" />
     <ClInclude Include="includes\Menu.h" />
     <ClInclude Include="includes\ObjectSpawner.h" />
+    <ClInclude Include="lib\json.hpp" />
     <ClInclude Include="lib\olcPixelGameEngine.h" />
   </ItemGroup>
   <ItemGroup>

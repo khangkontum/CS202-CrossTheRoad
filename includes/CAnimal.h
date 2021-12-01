@@ -15,8 +15,8 @@ public:
 protected:
 	olc::vf2d position;
 	olc::PixelGameEngine* pge;
-	std::unique_ptr<olc::Sprite> sprite;
-	std::unique_ptr<olc::Decal> decal;
+	std::shared_ptr<olc::Sprite> sprite;
+	std::shared_ptr<olc::Decal> decal;
 	int direction;
 	float speed;
 	

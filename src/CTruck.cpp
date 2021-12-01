@@ -1,5 +1,14 @@
 #include "../includes/CTruck.h"
 
+CTruck::CTruck(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::shared_ptr<olc::Sprite> sprite, std::shared_ptr<olc::Decal> decal) {
+	this->direction = direction;
+	this->pge = pge;
+	this->speed = 10;
+	this->position = pos;
+	this->sprite = sprite;
+	this->decal = decal;
+}
+
 CTruck::CTruck(olc::vf2d pos, int direction, olc::PixelGameEngine* pge) {
 	this->direction = direction;
 	this->position = pos;
@@ -41,7 +50,7 @@ bool CTruck::isOutScreen() {
 }
 
 CTruck* CTruck::clone(olc::vf2d pos) {
-	CTruck* newTruck = new CTruck(pos, direction, pge);
+	CTruck* newTruck = new CTruck(pos, direction, pge, sprite, decal);
 	return newTruck;
 }
 

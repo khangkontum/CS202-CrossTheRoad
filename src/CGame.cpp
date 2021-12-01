@@ -62,10 +62,14 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 
 void CGame::drawGame() {
 	background->Draw();
-	cPeople->Draw();
 
 	birdSpawner.get()->Draw();
 	dinosaurSpawner.get()->Draw();
-	truckSpawner.get()->Draw();
 	carSpawner.get()->Draw();
+
+	cPeople->Draw();
+
+	truckSpawner.get()->Draw();
+	
+
 }
