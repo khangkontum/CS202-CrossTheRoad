@@ -26,6 +26,7 @@
     <ClCompile Include="src\CCar.cpp" />
     <ClCompile Include="src\CDinosaur.cpp" />
     <ClCompile Include="src\CGame.cpp" />
+    <ClCompile Include="src\Collider2D.cpp" />
     <ClCompile Include="src\CTruck.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\CPeople.cpp" />
@@ -37,6 +38,7 @@
     <ClInclude Include="includes\CBird.h" />
     <ClInclude Include="includes\CCar.h" />
     <ClInclude Include="includes\CDinosaur.h" />
+    <ClInclude Include="includes\Collider2D.h" />
     <ClInclude Include="includes\CPeople.h" />
     <ClInclude Include="includes\CGame.h" />
     <ClInclude Include="includes\CTruck.h" />
@@ -60,7 +62,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{cdbd4cef-9373-4f00-a6f3-82cd70fb1dfd}</ProjectGuid>
     <RootNamespace>CrossTheRoad</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -79,7 +81,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">

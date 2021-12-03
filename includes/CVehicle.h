@@ -10,7 +10,7 @@ public:
 	virtual olc::vf2d getPosition() = 0;
 	virtual int getDirection() = 0;
 	virtual CVehicle* clone(olc::vf2d pos) = 0;
-
+	virtual void getName() = 0;
 protected:
 	olc::vf2d position;
 	olc::PixelGameEngine* pge;

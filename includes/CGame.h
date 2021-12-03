@@ -1,4 +1,8 @@
-﻿#pragma once
+﻿//#pragma once
+#ifndef CGAME_H_
+#define CGAME_H_
+
+//#include "Collider2D.h"
 #include "../lib/olcPixelGameEngine.h"
 #include "CPeople.h"
 #include "CAnimal.h"
@@ -6,16 +10,17 @@
 #include "CDinosaur.h"
 #include "CTruck.h"
 #include "CCar.h"
-#include "ObjectSpawner.h"
 #include "BackGround.h"
 #include "../lib/json.hpp"
+#include "ObjectSpawner.h"
 
 using json = nlohmann::json;
 
 class CGame : public olc::PixelGameEngine {
-public: 
+public:
 	CGame();
 	void drawGame();
+	void collider2D();
 
 	/*
 	CPEOPLE getPeople();//Lấy thông tin người
@@ -32,7 +37,7 @@ public:
 	void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
 	void updatePosAnimal();//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 	*/
-	
+
 
 private:
 	json gameData;
@@ -49,9 +54,10 @@ private:
 	CDINAUSOR * akl;
 	CBIRD * ac;
 	*/
-	
+
 
 public:
 	bool OnUserCreate();
 	bool OnUserUpdate(float fElapsedTime);
 };
+#endif

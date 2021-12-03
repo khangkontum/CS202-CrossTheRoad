@@ -1,8 +1,12 @@
-#pragma once
+//#pragma once
+#ifndef OBJECTSPAWNER_H_
+#define OBJECTSPAWNER_H_
+
+//#include "../Collider2D.h"
 #include "../lib/olcPixelGameEngine.h"
 
 template<class T>
-class ObjectSpawner {
+class ObjectSpawner{
 public:
 	ObjectSpawner(T defaultObject, olc::vf2d limitSpawn, olc::PixelGameEngine* pge) : defaultObject(defaultObject), pge(pge), limitSpawn(limitSpawn) {}
 
@@ -28,7 +32,7 @@ public:
 			delete object;
 			objectList.pop_back();
 		}
-		
+
 
 		//Check if able to spawn
 		if (objectList.size()) {
@@ -45,14 +49,14 @@ public:
 					return;
 			}
 		}
-		
+
 
 		//Spawn
 		int numberSpawn = rand() % 5;
 		int previousX = 0;
 		for (int i = 0; i < numberSpawn; i++) {
 			T newObject;
-			olc::vf2d position = {0, defaultObject->getPosition().y};
+			olc::vf2d position = { 0, defaultObject->getPosition().y };
 			if (defaultObject->getDirection() > 0) {
 				position.x = previousX - defaultObject->size().x;
 			}
@@ -67,7 +71,12 @@ public:
 			previousX = position.x;
 			newObject = defaultObject->clone(position);
 			objectList.push_front(newObject);
-		} 
+		}
+	}
+
+	std::list<T> listObjectSpawner()
+	{
+		return objectList;
 	}
 
 private:
@@ -76,3 +85,5 @@ private:
 	olc::vf2d limitSpawn;
 	T defaultObject;
 };
+
+#endif

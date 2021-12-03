@@ -3,7 +3,7 @@
 int main()
 {
 	CGame demo;
-	if (demo.Construct(150, 200,4, 4))
+	if (demo.Construct(150, 200, 4, 4))
 		demo.Start();
 
 	return 0;

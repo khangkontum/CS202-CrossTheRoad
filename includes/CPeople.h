@@ -17,7 +17,8 @@ public:
 	bool isDead();
 
 	olc::vf2d size();
-
+	olc::vf2d getPosition();
+	void getName() { std::cout << "CPeople" << std::endl; }
 private:
 	std::unique_ptr<olc::Sprite> sprite;
 	std::unique_ptr<olc::Decal> decal;
