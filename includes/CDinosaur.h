@@ -15,4 +15,5 @@ public:
 	void Draw();
 	bool isOutScreen();
 	int getDirection();
+	void getName() { std::cout << "CDinosaur" << std::endl; }
 };
