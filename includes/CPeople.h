@@ -1,9 +1,13 @@
 ﻿#pragma once
+#ifndef CPEOPLE_H_
+#define CPEOPLE_H_
 
 #include "../lib/olcPixelGameEngine.h"
+#include "Collider2D.h"
 #include "CAnimal.h"
+#include "CVehicle.h"
 
-class CPeople {
+class CPeople : public Collider2D {
 public:
 	CPeople(olc::PixelGameEngine* pge);
 
@@ -12,19 +16,26 @@ public:
 	void Left(float fElapsedTime);
 	void Right(float fElapsedTime);
 	void Down(float fElapsedTime);
-	bool isImpact(const CAnimal* object);
+
+	//template<class T>
+	bool isImpact(CAnimal* object, float fElapsedTime);
+	bool isImpact(CVehicle* object, float fElapsedTime);
+
 	bool isFinish();
 	bool isDead();
 
 	olc::vf2d size();
 	olc::vf2d getPosition();
+	olc::vf2d getVelocity();
 	void getName() { std::cout << "CPeople" << std::endl; }
 private:
 	std::unique_ptr<olc::Sprite> sprite;
 	std::unique_ptr<olc::Decal> decal;
-	float speed;
 	olc::vf2d position;
+	olc::vf2d velocity;
 	olc::PixelGameEngine* pge;
+	float speed;
+	bool isdead = false;
 };
 
 /*
@@ -43,3 +54,5 @@ bool isFinish();
 bool isDead();
 }
 */
+
+#endif
