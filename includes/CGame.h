@@ -2,7 +2,6 @@
 #ifndef CGAME_H_
 #define CGAME_H_
 
-//#include "Collider2D.h"
 #include "../lib/olcPixelGameEngine.h"
 #include "CPeople.h"
 #include "CAnimal.h"
@@ -20,7 +19,6 @@ class CGame : public olc::PixelGameEngine {
 public:
 	CGame();
 	void drawGame();
-	void collider2D();
 
 	/*
 	CPEOPLE getPeople();//Lấy thông tin người
