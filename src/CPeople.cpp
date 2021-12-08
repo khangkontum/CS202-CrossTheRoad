@@ -85,6 +85,12 @@ bool CPeople::isImpact(CVehicle* object, float fElapsedTime)
 
 bool CPeople::isFinish()
 {
+	olc::vf2d _size = size();
+	int pos = position.y + _size.y;
+	if (pos <= pge->ScreenHeight() * 0.2)
+	{
+		return true;
+	}
 	return false;
 }
 
