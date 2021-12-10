@@ -26,6 +26,7 @@ olc::vf2d CDinosaur::size() {
 
 void CDinosaur::move(float fElapsedTime) {
 	this->position.x += direction * speed * fElapsedTime;
+	this->velocity.x = direction * speed;
 	/*
 	if (this->position.x > pge->ScreenWidth()) {
 		this->position.x = 0;
@@ -56,6 +57,11 @@ CDinosaur* CDinosaur::clone(olc::vf2d pos) {
 
 olc::vf2d CDinosaur::getPosition() {
 	return position;
+}
+
+olc::vf2d CDinosaur::getVelocity()
+{
+	return velocity;
 }
 
 int CDinosaur::getDirection() {
