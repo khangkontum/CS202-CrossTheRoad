@@ -33,47 +33,67 @@ bool CGame::OnUserCreate() {
 }
 
 bool CGame::OnUserUpdate(float fElapsedTime) {
-	//Handle user input
-	if (GetKey(olc::Key::W).bHeld || GetKey(olc::Key::UP).bHeld)
-		cPeople.get()->Up(fElapsedTime);
-	if (GetKey(olc::Key::S).bHeld || GetKey(olc::Key::DOWN).bHeld)
-		cPeople.get()->Down(fElapsedTime);
-	if (GetKey(olc::Key::A).bHeld || GetKey(olc::Key::LEFT).bHeld)
-		cPeople.get()->Left(fElapsedTime);
-	if (GetKey(olc::Key::D).bHeld || GetKey(olc::Key::RIGHT).bHeld)
-		cPeople.get()->Right(fElapsedTime);
 	if (GetKey(olc::Key::Q).bHeld)
 		return false;
+	
+	if (!cPeople.get()->isDead()) {
+		//Handle user input
+		if (GetKey(olc::Key::W).bHeld || GetKey(olc::Key::UP).bHeld)
+			cPeople.get()->Up(fElapsedTime);
+		if (GetKey(olc::Key::S).bHeld || GetKey(olc::Key::DOWN).bHeld)
+			cPeople.get()->Down(fElapsedTime);
+		if (GetKey(olc::Key::A).bHeld || GetKey(olc::Key::LEFT).bHeld)
+			cPeople.get()->Left(fElapsedTime);
+		if (GetKey(olc::Key::D).bHeld || GetKey(olc::Key::RIGHT).bHeld)
+			cPeople.get()->Right(fElapsedTime);
 
-	birdSpawner.get()->run(fElapsedTime);
-	dinosaurSpawner.get()->run(fElapsedTime);
-	truckSpawner.get()->run(fElapsedTime);
-	carSpawner.get()->run(fElapsedTime);
 
-	// Kiểm tra cPeople có va chạm với các object hay không
+		//Move object
+		birdSpawner.get()->move(fElapsedTime);
+		dinosaurSpawner.get()->move(fElapsedTime);
+		truckSpawner.get()->move(fElapsedTime);
+		carSpawner.get()->move(fElapsedTime);
 
-	for (auto obj : birdSpawner.get()->listObjectSpawner())
-	{
-		if (cPeople.get()->isImpact(obj, fElapsedTime))
-			obj->getName();    // nếu va chạm, in ra tên object bị va chạm
+
+		birdSpawner.get()->spawn(fElapsedTime);
+		dinosaurSpawner.get()->spawn(fElapsedTime);
+		truckSpawner.get()->spawn(fElapsedTime);
+		carSpawner.get()->spawn(fElapsedTime);
+
+		// Kiểm tra cPeople có va chạm với các object hay không
+		for (auto obj : birdSpawner.get()->listObjectSpawner())
+		{
+			if (cPeople.get()->isImpact(obj, fElapsedTime))
+				obj->getName();    // nếu va chạm, in ra tên object bị va chạm
+		}
+		for (auto obj : dinosaurSpawner.get()->listObjectSpawner())
+		{
+			if (cPeople.get()->isImpact(obj, fElapsedTime))
+				obj->getName();
+		}
+		for (auto obj : truckSpawner.get()->listObjectSpawner())
+		{
+			if (cPeople.get()->isImpact(obj, fElapsedTime))
+				obj->getName();
+		}
+		for (auto obj : carSpawner.get()->listObjectSpawner())
+		{
+			if (cPeople.get()->isImpact(obj, fElapsedTime))
+				obj->getName();
+		}
 	}
-	for (auto obj : dinosaurSpawner.get()->listObjectSpawner())
-	{
-		if (cPeople.get()->isImpact(obj, fElapsedTime))
-			obj->getName();
+	else {
+		//Draw output to save game
+
 	}
-	for (auto obj : truckSpawner.get()->listObjectSpawner())
-	{
-		if (cPeople.get()->isImpact(obj, fElapsedTime))
-			obj->getName();
-	}
-	for (auto obj : carSpawner.get()->listObjectSpawner())
-	{
-		if (cPeople.get()->isImpact(obj, fElapsedTime))
-			obj->getName();
+	
+	if (cPeople.get()->isFinish()) {
+		
 	}
 
-	Clear(olc::CREAM);
+	
+
+	
 
 	//Drawing
 	drawGame();
@@ -82,6 +102,8 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 }
 
 void CGame::drawGame() {
+	Clear(olc::CREAM);
+
 	background->Draw();
 
 	birdSpawner.get()->Draw();

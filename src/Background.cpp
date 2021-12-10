@@ -8,7 +8,7 @@ Background::Background(olc::PixelGameEngine* pge) : pge(pge) {
 
 /*
 * Start Gap
-* h*0.9->h
+* h*0.85->h
 * 
 * Road Gap:
 * h*0.2 -> h*0.5 (h*0.15 lane gap)

@@ -95,6 +95,9 @@
     <ClInclude Include="includes\Collider2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="includes\Level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\grandma.png">
