@@ -54,7 +54,10 @@ bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 
 	std::vector<rect> vRects;   // vector chứa các bounding box của objects // {pos, size}
 	vRects.push_back({ getPosition(), size() });   // vRects[0] là CPeople
+
 	vRects[0].vel = getVelocity();
+	//vRects[0].vel.x = 100;
+	//vRects[0].vel.y = 100;
 
 	vRects.push_back({ object->getPosition(), object->size() }); // các vRects tiếp theo là các objects càn kiểm tra va chạm
 
@@ -62,11 +65,21 @@ bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 	float t = 0;
 	for (size_t i = 1; i < vRects.size(); i++)
 	{
-		if (DynamicRectVsRect(&vRects[0], fElapsedTime, vRects[i], cp, cn, t))  // kiểm tra va chạm
+		if (RectVsRect(&vRects[0], &vRects[i]))
 		{
 			isdead = true;
 			return true;
 		}
+		//if (ResolveDynamicRectVsRect(&vRects[0], fElapsedTime, &vRects[i]))
+		//{
+		//	isdead = true;
+		//	return true;
+		//}
+		//if (DynamicRectVsRect(&vRects[0], fElapsedTime, vRects[i], cp, cn, t))  // kiểm tra va chạm
+		//{
+		//	isdead = true;
+		//	return true;
+		//}
 	}
 	return false;
 }
