@@ -21,7 +21,7 @@ public:
 		}
 	}
 
-	void run(float fElapsedTime) {
+	void move(float fElapsedTime) {
 		//Move object
 		for (auto object : objectList) {
 			object->move(fElapsedTime);
@@ -32,8 +32,9 @@ public:
 			delete object;
 			objectList.pop_back();
 		}
+	}
 
-
+	void spawn(float fElapsedTime) {
 		//Check if able to spawn
 		if (objectList.size()) {
 			T frontObject = objectList.front();

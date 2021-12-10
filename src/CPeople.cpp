@@ -43,6 +43,15 @@ void CPeople::Down(float fElapsedTime) {
 // template<class T>   // t không thể dùng template  // tìm cách khắc phục giúp t
 bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 {
+	//Check if standing in safe area
+	olc::vf2d _size = size();
+	float pos = position.y + _size.y;
+	if (pos > pge->ScreenHeight() * 0.85 || pos < pge->ScreenHeight() * 0.2)
+		return false;
+	if (pos < pge->ScreenHeight() * 0.55 && pos > pge->ScreenHeight() * 0.5)
+		return false;
+
+
 	std::vector<rect> vRects;   // vector chứa các bounding box của objects // {pos, size}
 	vRects.push_back({ getPosition(), size() });   // vRects[0] là CPeople
 	vRects[0].vel = getVelocity();
@@ -64,6 +73,15 @@ bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 
 bool CPeople::isImpact(CVehicle* object, float fElapsedTime)
 {
+	//Check if standing in safe area
+	olc::vf2d _size = size();
+	float pos = position.y + _size.y;
+	if (pos >= pge->ScreenHeight() * 0.85 || pos < pge->ScreenHeight() * 0.2)
+		return false;
+	if (pos < pge->ScreenHeight() * 0.55 && pos > pge->ScreenHeight() * 0.5)
+		return false;
+
+
 	std::vector<rect> vRects;
 	vRects.push_back({ getPosition(), size() });
 	vRects[0].vel = getVelocity();
@@ -86,7 +104,7 @@ bool CPeople::isImpact(CVehicle* object, float fElapsedTime)
 bool CPeople::isFinish()
 {
 	olc::vf2d _size = size();
-	int pos = position.y + _size.y;
+	float pos = position.y + _size.y;
 	if (pos <= pge->ScreenHeight() * 0.2)
 	{
 		return true;
