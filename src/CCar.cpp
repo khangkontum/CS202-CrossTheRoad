@@ -26,6 +26,7 @@ olc::vf2d CCar::size() {
 
 void CCar::move(float fElapsedTime) {
 	this->position.x += direction * speed * fElapsedTime;
+	this->velocity.x = direction * speed;
 	/*
 	if (this->position.x > pge->ScreenWidth()) {
 		this->position.x = 0;
@@ -56,6 +57,11 @@ CCar* CCar::clone(olc::vf2d pos) {
 
 olc::vf2d CCar::getPosition() {
 	return position;
+}
+
+olc::vf2d CCar::getVelocity()
+{
+	return velocity;
 }
 
 int CCar::getDirection() {
