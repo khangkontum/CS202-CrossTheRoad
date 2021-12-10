@@ -26,6 +26,7 @@ olc::vf2d CTruck::size() {
 
 void CTruck::move(float fElapsedTime) {
 	this->position.x += direction * speed * fElapsedTime;
+	this->velocity.x = direction * speed;
 	/*
 	if (this->position.x > pge->ScreenWidth()) {
 		this->position.x = 0;
@@ -60,4 +61,8 @@ olc::vf2d CTruck::getPosition() {
 
 int CTruck::getDirection() {
 	return direction;
+}
+
+olc::vf2d CTruck::getVelocity() {
+	return velocity;
 }
