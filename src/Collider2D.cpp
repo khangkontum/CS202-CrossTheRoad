@@ -8,15 +8,15 @@ Collider2D::~Collider2D()
 {
 }
 
-//bool Collider2D::PointVsRect(const olc::vf2d& p, const rect* r)
-//{
-//	return (p.x >= r->pos.x && p.y >= r->pos.y && p.x < r->pos.x + r->size.x && p.y < r->pos.y + r->size.y);
-//}
+bool Collider2D::PointVsRect(const olc::vf2d& p, const rect* r)
+{
+	return (p.x >= r->pos.x && p.y >= r->pos.y && p.x < r->pos.x + r->size.x && p.y < r->pos.y + r->size.y);
+}
 
-//bool Collider2D::RectVsRect(const rect* r1, const rect* r2)
-//{
-//	return (r1->pos.x < r2->pos.x + r2->size.x && r1->pos.x + r1->size.x > r2->pos.x && r1->pos.y < r2->pos.y + r2->size.y && r1->pos.y + r1->size.y > r2->pos.y);
-//}
+bool Collider2D::RectVsRect(const rect* r1, const rect* r2)
+{
+	return (r1->pos.x < r2->pos.x + r2->size.x && r1->pos.x + r1->size.x > r2->pos.x && r1->pos.y < r2->pos.y + r2->size.y && r1->pos.y + r1->size.y > r2->pos.y);
+}
 
 bool Collider2D::RayVsRect(const olc::vf2d& ray_origin, const olc::vf2d& ray_dir, const rect* target,
 	olc::vf2d& contact_point, olc::vf2d& contact_normal, float& t_hit_near)
@@ -75,8 +75,8 @@ bool Collider2D::DynamicRectVsRect(const rect* r_dynamic, const float fTimeStep,
 	olc::vf2d& contact_point, olc::vf2d& contact_normal, float& contact_time)
 {
 	// Check if dynamic rectangle is actually moving - we assume rectangles are NOT in collision to start
-	if (r_dynamic->vel.x == 0 && r_dynamic->vel.y == 0)
-		return false;
+	//if (r_dynamic->vel.x == 0 && r_dynamic->vel.y == 0)
+	//	return false;
 
 	// Expand target rectangle by source dimensions
 	rect expanded_target;
@@ -90,20 +90,20 @@ bool Collider2D::DynamicRectVsRect(const rect* r_dynamic, const float fTimeStep,
 }
 
 
-//bool Collider2D::ResolveDynamicRectVsRect(rect* r_dynamic, const float fTimeStep, rect* r_static)
-//{
-//	olc::vf2d contact_point, contact_normal;
-//	float contact_time = 0.0f;
-//	if (DynamicRectVsRect(r_dynamic, fTimeStep, *r_static, contact_point, contact_normal, contact_time))
-//	{
-//		if (contact_normal.y > 0) r_dynamic->contact[0] = r_static; else nullptr;
-//		if (contact_normal.x < 0) r_dynamic->contact[1] = r_static; else nullptr;
-//		if (contact_normal.y < 0) r_dynamic->contact[2] = r_static; else nullptr;
-//		if (contact_normal.x > 0) r_dynamic->contact[3] = r_static; else nullptr;
-//
-//		r_dynamic->vel += contact_normal * olc::vf2d(std::abs(r_dynamic->vel.x), std::abs(r_dynamic->vel.y)) * (1 - contact_time);
-//		return true;
-//	}
-//
-//	return false;
-//}
+bool Collider2D::ResolveDynamicRectVsRect(rect* r_dynamic, const float fTimeStep, rect* r_static)
+{
+	olc::vf2d contact_point, contact_normal;
+	float contact_time = 0.0f;
+	if (DynamicRectVsRect(r_dynamic, fTimeStep, *r_static, contact_point, contact_normal, contact_time))
+	{
+		if (contact_normal.y > 0) r_dynamic->contact[0] = r_static; else nullptr;
+		if (contact_normal.x < 0) r_dynamic->contact[1] = r_static; else nullptr;
+		if (contact_normal.y < 0) r_dynamic->contact[2] = r_static; else nullptr;
+		if (contact_normal.x > 0) r_dynamic->contact[3] = r_static; else nullptr;
+
+		r_dynamic->vel += contact_normal * olc::vf2d(std::abs(r_dynamic->vel.x), std::abs(r_dynamic->vel.y)) * (1 - contact_time);
+		return true;
+	}
+
+	return false;
+}
