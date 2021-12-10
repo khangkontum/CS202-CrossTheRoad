@@ -26,6 +26,7 @@ olc::vf2d CBird::size() {
 
 void CBird::move(float fElapsedTime) {
 	this->position.x += direction * speed * fElapsedTime;
+	this->velocity.x = direction * speed;
 	/*
 	if (this->position.x > pge->ScreenWidth()) {
 		this->position.x = 0;
@@ -56,6 +57,11 @@ CBird* CBird::clone(olc::vf2d pos) {
 
 olc::vf2d CBird::getPosition() {
 	return position;
+}
+
+olc::vf2d CBird::getVelocity()
+{
+	return velocity;
 }
 
 int CBird::getDirection() {
