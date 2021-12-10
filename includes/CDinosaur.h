@@ -12,6 +12,7 @@ public:
 	//void tell();
 	olc::vf2d size();
 	olc::vf2d getPosition();
+	olc::vf2d getVelocity();
 	void Draw();
 	bool isOutScreen();
 	int getDirection();
