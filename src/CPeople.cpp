@@ -55,31 +55,23 @@ bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 	std::vector<rect> vRects;   // vector chứa các bounding box của objects // {pos, size}
 	vRects.push_back({ getPosition(), size() });   // vRects[0] là CPeople
 
-	vRects[0].vel = getVelocity();
+	//vRects[0].vel = getVelocity();
 	//vRects[0].vel.x = 100;
 	//vRects[0].vel.y = 100;
 
 	vRects.push_back({ object->getPosition(), object->size() }); // các vRects tiếp theo là các objects càn kiểm tra va chạm
+	vRects[1].vel.x = object->getVelocity().x;
+	vRects[1].vel.y = -getVelocity().y;
 
 	olc::vf2d cp, cn;
 	float t = 0;
 	for (size_t i = 1; i < vRects.size(); i++)
 	{
-		if (RectVsRect(&vRects[0], &vRects[i]))
+		if (ResolveDynamicRectVsRect(&vRects[i], fElapsedTime, &vRects[0]))  // kiểm tra va chạm
 		{
 			isdead = true;
 			return true;
 		}
-		//if (ResolveDynamicRectVsRect(&vRects[0], fElapsedTime, &vRects[i]))
-		//{
-		//	isdead = true;
-		//	return true;
-		//}
-		//if (DynamicRectVsRect(&vRects[0], fElapsedTime, vRects[i], cp, cn, t))  // kiểm tra va chạm
-		//{
-		//	isdead = true;
-		//	return true;
-		//}
 	}
 	return false;
 }
@@ -95,17 +87,22 @@ bool CPeople::isImpact(CVehicle* object, float fElapsedTime)
 		return false;
 
 
-	std::vector<rect> vRects;
-	vRects.push_back({ getPosition(), size() });
-	vRects[0].vel = getVelocity();
+	std::vector<rect> vRects;   // vector chứa các bounding box của objects // {pos, size}
+	vRects.push_back({ getPosition(), size() });   // vRects[0] là CPeople
 
-	vRects.push_back({ object->getPosition(), object->size() });   // Nên đưa tất cả objects vào đây
+	//vRects[0].vel = getVelocity();
+	//vRects[0].vel.x = 100;
+	//vRects[0].vel.y = 100;
+
+	vRects.push_back({ object->getPosition(), object->size() }); // các vRects tiếp theo là các objects càn kiểm tra va chạm
+	vRects[1].vel.x = object->getVelocity().x;
+	vRects[1].vel.y = -getVelocity().y;
 
 	olc::vf2d cp, cn;
 	float t = 0;
 	for (size_t i = 1; i < vRects.size(); i++)
 	{
-		if (DynamicRectVsRect(&vRects[0], fElapsedTime, vRects[i], cp, cn, t))
+		if (ResolveDynamicRectVsRect(&vRects[i], fElapsedTime, &vRects[0]))  // kiểm tra va chạm
 		{
 			isdead = true;
 			return true;
