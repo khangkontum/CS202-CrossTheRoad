@@ -25,6 +25,8 @@ public:
 	float getGapBetweenObject();
 
 	void setDefaultGap(float gap);
+	
+	void setLevel(int level);
 
 	int currentLevel();
 
