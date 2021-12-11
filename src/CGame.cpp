@@ -77,7 +77,6 @@ bool CGame::OnUserCreate() {
 }
 
 bool CGame::OnUserUpdate(float fElapsedTime) {
-	
 	Level* level = &Level::getInstance();
 	if (resetState) {
 		std::cout << "** Level " << level->currentLevel() << " **\n" << '\n';
@@ -144,9 +143,12 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		fo.close();
 		std::cout << "Saved\n";
 	}
-		
+	
+	bool DEBUG = false;  // BEGUG COLLISION
 	
 	if (!cPeople.get()->isDead()) {
+		if(DEBUG) Clear(olc::CREAM);
+
 		//Handle user input
 		if (GetKey(olc::Key::W).bHeld || GetKey(olc::Key::UP).bHeld)
 			cPeople.get()->Up(fElapsedTime);
@@ -157,6 +159,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		if (GetKey(olc::Key::D).bHeld || GetKey(olc::Key::RIGHT).bHeld)
 			cPeople.get()->Right(fElapsedTime);
 
+		if (DEBUG) DrawRect(cPeople->getPosition(), cPeople->size(), olc::BLUE);
 
 		//Move object
 		birdSpawner.get()->move(fElapsedTime);
@@ -175,21 +178,25 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();    // nếu va chạm, in ra tên object bị va chạm
+			if (DEBUG) DrawRect(obj->getPosition(), obj->size(), olc::YELLOW);
 		}
 		for (auto obj : dinosaurSpawner.get()->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
+			if (DEBUG) DrawRect(obj->getPosition(), obj->size(), olc::GREEN);
 		}
 		for (auto obj : truckSpawner.get()->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
+			if (DEBUG) DrawRect(obj->getPosition(), obj->size(), olc::RED);
 		}
 		for (auto obj : carSpawner.get()->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
+			if (DEBUG) DrawRect(obj->getPosition(), obj->size(), olc::BLUE);
 		}
 	}
 	else {
@@ -199,7 +206,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 
 	
 	//Drawing
-	drawGame();
+	if (!DEBUG) drawGame();
 
 	return true;
 }
