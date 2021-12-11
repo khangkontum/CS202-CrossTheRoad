@@ -28,6 +28,7 @@
     <ClCompile Include="src\CGame.cpp" />
     <ClCompile Include="src\Collider2D.cpp" />
     <ClCompile Include="src\CTruck.cpp" />
+    <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\CPeople.cpp" />
     <ClCompile Include="src\ObjectSpawner.cpp" />

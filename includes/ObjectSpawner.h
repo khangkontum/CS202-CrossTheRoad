@@ -3,12 +3,13 @@
 #define OBJECTSPAWNER_H_
 
 //#include "../Collider2D.h"
+#include "Level.h"
 #include "../lib/olcPixelGameEngine.h"
 
 template<class T>
 class ObjectSpawner{
 public:
-	ObjectSpawner(T defaultObject, olc::vf2d limitSpawn, olc::PixelGameEngine* pge) : defaultObject(defaultObject), pge(pge), limitSpawn(limitSpawn) {}
+	ObjectSpawner(T defaultObject, olc::PixelGameEngine* pge) : defaultObject(defaultObject), pge(pge) {}
 
 	~ObjectSpawner() {
 		for (auto& object : objectList)
@@ -35,6 +36,7 @@ public:
 	}
 
 	void spawn(float fElapsedTime) {
+		Level* level = &Level::getInstance();
 		//Check if able to spawn
 		if (objectList.size()) {
 			T frontObject = objectList.front();
@@ -42,11 +44,11 @@ public:
 			if (position.x < 0 || position.x > pge->ScreenWidth())
 				return;
 			if (frontObject->getDirection() > 0) {
-				if (position.x <= limitSpawn.x)
+				if (position.x <= level->getGapBetweenObject())
 					return;
 			}
 			else {
-				if (pge->ScreenWidth() - position.x <= limitSpawn.x)
+				if (pge->ScreenWidth() - position.x <= level->getGapBetweenObject())
 					return;
 			}
 		}
@@ -83,7 +85,6 @@ public:
 private:
 	std::list<T> objectList;
 	olc::PixelGameEngine* pge;
-	olc::vf2d limitSpawn;
 	T defaultObject;
 };
 

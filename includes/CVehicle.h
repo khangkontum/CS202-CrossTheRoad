@@ -12,6 +12,7 @@ public:
 	virtual int getDirection() = 0;
 	virtual CVehicle* clone(olc::vf2d pos) = 0;
 	virtual void getName() = 0;
+	virtual int getLane() = 0;
 protected:
 	olc::vf2d position;
 	olc::vf2d velocity;

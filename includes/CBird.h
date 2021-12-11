@@ -1,11 +1,13 @@
 #pragma once
 #include "CAnimal.h"
+#include "Level.h"
 
 class CBird : public CAnimal {
 public:
 	CBird(olc::vf2d pos, int direction, olc::PixelGameEngine* pge);
 	CBird(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::shared_ptr<olc::Sprite> sprite, std::shared_ptr<olc::Decal> decal);
 	CBird* clone(olc::vf2d pos);
+	int getLane();
 
 	void move(float fElapsedTime);
 	//void tell();
