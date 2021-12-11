@@ -72,7 +72,7 @@ bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 	float t = 0;
 	for (size_t i = 1; i < vRects.size(); i++)
 	{
-		if (ResolveDynamicRectVsRect(&vRects[i], fElapsedTime, &vRects[0]))  // kiểm tra va chạm
+		if (RectVsRect(&vRects[i], &vRects[0]))  // kiểm tra va chạm
 		{
 			isdead = true;
 			return true;
@@ -105,7 +105,7 @@ bool CPeople::isImpact(CVehicle* object, float fElapsedTime)
 	float t = 0;
 	for (size_t i = 1; i < vRects.size(); i++)
 	{
-		if (ResolveDynamicRectVsRect(&vRects[i], fElapsedTime, &vRects[0]))  // kiểm tra va chạm
+		if (RectVsRect(&vRects[i], &vRects[0]))  // kiểm tra va chạm
 		{
 			isdead = true;
 			return true;
