@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <algorithm>
 
 class Level {
 private:
@@ -10,19 +11,24 @@ private:
 	float _dinosaurSpeed;
 	float _carSpeed;
 	float _truckSpeed;
+	float gap;
 
-	Level() {
-		level = 0;
-	}
+	Level();
+
+	Level(const Level& other) {}
 
 public:
-	Level& getInstance() {
-		if (!instance)
-			instance = new Level();
-		return *instance;
-	}
+	static Level& getInstance();
 
-	float peopleSpeed() {
-		return _peopleSpeed * level * 0.5;
-	}
+	float getSpeed(std::string obj);
+
+	float getGapBetweenObject();
+
+	void setDefaultGap(float gap);
+
+	int currentLevel();
+
+	void levelUp();
 };
+
+

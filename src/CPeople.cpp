@@ -1,7 +1,6 @@
 ﻿#include "../includes/CPeople.h"
 
 CPeople::CPeople(olc::PixelGameEngine* pge) : pge(pge), Collider2D() {
-	speed = 50;
 	position = { float(pge->ScreenWidth() / 2 - 10), float(pge->ScreenHeight() - 30) };
 	sprite = std::make_unique<olc::Sprite>("./assets/grandma.png");
 
@@ -15,6 +14,8 @@ void CPeople::Draw() {
 
 void CPeople::Up(float fElapsedTime) {
 	//std::cout << "Moving Up\n";
+	Level* level = &Level::getInstance();
+	float speed = level->getSpeed("people");
 	position.y -= speed * fElapsedTime;
 	velocity.y = -speed;
 	position.y = std::max(float(0), position.y);
@@ -22,12 +23,16 @@ void CPeople::Up(float fElapsedTime) {
 
 void CPeople::Left(float fElapsedTime) {
 	//std::cout << "Moving Left\n";
+	Level* level = &Level::getInstance();
+	float speed = level->getSpeed("people");
 	position.x -= speed * fElapsedTime;
 	velocity.x = -speed;
 	position.x = std::max(float(0), position.x);
 }
 
 void CPeople::Right(float fElapsedTime) {
+	Level* level = &Level::getInstance();
+	float speed = level->getSpeed("people");
 	//std::cout << "Moving Right\n";
 	position.x += speed * fElapsedTime;
 	velocity.x = speed;
@@ -35,6 +40,8 @@ void CPeople::Right(float fElapsedTime) {
 }
 void CPeople::Down(float fElapsedTime) {
 	//std::cout << "Moving Down\n";
+	Level* level = &Level::getInstance();
+	float speed = level->getSpeed("people");
 	position.y += speed * fElapsedTime;
 	velocity.y = speed;
 	position.y = std::min(float(pge->ScreenHeight() - 30), position.y);
@@ -44,11 +51,9 @@ void CPeople::Down(float fElapsedTime) {
 bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 {
 	//Check if standing in safe area
-	olc::vf2d _size = size();
-	float pos = position.y + _size.y;
-	if (pos > pge->ScreenHeight() * 0.85 || pos < pge->ScreenHeight() * 0.2)
-		return false;
-	if (pos < pge->ScreenHeight() * 0.55 && pos > pge->ScreenHeight() * 0.5)
+	int currentLane = getLane();
+	int objLane = object->getLane();
+	if (currentLane == 0 || currentLane == 3 || currentLane == 6 || objLane != currentLane)
 		return false;
 
 
@@ -79,11 +84,9 @@ bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 bool CPeople::isImpact(CVehicle* object, float fElapsedTime)
 {
 	//Check if standing in safe area
-	olc::vf2d _size = size();
-	float pos = position.y + _size.y;
-	if (pos >= pge->ScreenHeight() * 0.85 || pos < pge->ScreenHeight() * 0.2)
-		return false;
-	if (pos < pge->ScreenHeight() * 0.55 && pos > pge->ScreenHeight() * 0.5)
+	int currentLane = getLane();
+	int objLane = object->getLane();
+	if (currentLane == 0 || currentLane == 3 || currentLane == 6 || currentLane != objLane)
 		return false;
 
 
@@ -142,3 +145,51 @@ olc::vf2d CPeople::getVelocity()
 {
 	return velocity;
 }
+
+void CPeople::reset() {
+	position = { float(pge->ScreenWidth() / 2 - 10), float(pge->ScreenHeight() - 30) };
+	isdead = false;
+}
+
+int CPeople::getLane() {
+	olc::vf2d _size = size();
+	float pos = position.y + _size.y;
+	float height = pge->ScreenHeight();
+	//Finish
+	if (pos <= height * 0.2)
+		return 0;
+	//Lane 1
+	if (pos > 0.2 && pos <= height * 0.35)
+		return 1;
+	//Lane 2
+	if (pos > 0.35 && pos <= height * 0.5)
+		return 2;
+	//Safe area
+	if (pos <= height * 0.55 && pos > height * 0.5)
+		return 3;
+	//Lane 3
+	if (pos > height * 0.55 && pos <= height * 0.7)
+		return 4;
+	//Lane 4
+	if (pos > height > 0.7 && pos <= height * 0.85)
+		return 5;
+	//Start
+	return 6;
+}
+
+/*
+* Start Gap
+* h*0.85->h
+*
+* Road Gap:
+* h*0.2 -> h*0.5 (h*0.15 lane gap)
+* h*0.55->h*0.85
+*
+* lane1: h*0.2->h*0.35
+* lane2: h*0.35->h*0.5
+* lane3: h*0.55->h*0.70
+* lane4: h*0.70->h*0.85
+*
+* End Gap
+* h->h*0.2
+*/

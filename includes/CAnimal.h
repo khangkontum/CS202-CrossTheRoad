@@ -13,6 +13,7 @@ public:
 	virtual int getDirection() = 0;
 	virtual CAnimal* clone(olc::vf2d pos) = 0;
 	virtual void getName() = 0;
+	virtual int getLane() = 0;
 protected:
 	olc::vf2d position;
 	olc::vf2d velocity;
@@ -20,6 +21,4 @@ protected:
 	std::shared_ptr<olc::Sprite> sprite;
 	std::shared_ptr<olc::Decal> decal;
 	int direction;
-	float speed;
-	
 };

@@ -5,6 +5,7 @@
 #include "../lib/olcPixelGameEngine.h"
 #include "Collider2D.h"
 #include "CAnimal.h"
+#include "Level.h"
 #include "CVehicle.h"
 
 class CPeople : public Collider2D {
@@ -16,6 +17,8 @@ public:
 	void Left(float fElapsedTime);
 	void Right(float fElapsedTime);
 	void Down(float fElapsedTime);
+	
+	void reset();
 
 	//template<class T>
 	bool isImpact(CAnimal* object, float fElapsedTime);
@@ -23,6 +26,7 @@ public:
 
 	bool isFinish();
 	bool isDead();
+	int getLane();
 
 	olc::vf2d size();
 	olc::vf2d getPosition();
@@ -34,8 +38,7 @@ private:
 	olc::vf2d position;
 	olc::vf2d velocity;
 	olc::PixelGameEngine* pge;
-	float speed;
-	bool isdead = false;
+	bool isdead;
 };
 
 /*

@@ -5,36 +5,85 @@ CGame::CGame() {
 }
 
 bool CGame::OnUserCreate() {
+	std::cout << "Press H for instruction.\n";
+
+	stop = 0;
 	cPeople = std::make_unique<CPeople>(this);
 	background = std::make_unique<Background>(this);
 
-	olc::vf2d limitSpawn = cPeople->size() * 2;
+	Level* level = &Level::getInstance();
+	level->setDefaultGap(cPeople->size().x);
 
 	std::ifstream fi("./database/game.json");
 	fi >> gameData;
 
 	//Loading default bird
 	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * ScreenHeight() }), 1, this);
-	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, limitSpawn, this);
+	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, this);
 
 	//Loading default dinosaur
 	CDinosaur* dinosaur = new CDinosaur(olc::vf2d({ 0, float(gameData["CDinosaur"]) * ScreenHeight() }), -1, this);
-	dinosaurSpawner = std::make_unique<ObjectSpawner<CDinosaur*>>(dinosaur, limitSpawn, this);
+	dinosaurSpawner = std::make_unique<ObjectSpawner<CDinosaur*>>(dinosaur, this);
 
 	//Loading default car
 	CCar* car = new CCar(olc::vf2d({ 0, float(gameData["CCar"]) * ScreenHeight() }), -1, this);
-	carSpawner = std::make_unique<ObjectSpawner<CCar*>>(car, limitSpawn, this);
+	carSpawner = std::make_unique<ObjectSpawner<CCar*>>(car, this);
 
 	//Loading default truck
 	CTruck* truck = new CTruck(olc::vf2d({ 0, float(gameData["CTruck"]) * ScreenHeight() }), 1, this);
-	truckSpawner = std::make_unique<ObjectSpawner<CTruck*>>(truck, limitSpawn, this);
+	truckSpawner = std::make_unique<ObjectSpawner<CTruck*>>(truck, this);
 
 	return true;
 }
 
 bool CGame::OnUserUpdate(float fElapsedTime) {
-	if (GetKey(olc::Key::Q).bHeld)
+	Level* level = &Level::getInstance();
+	if (GetKey(olc::Key::H).bPressed) {
+		std::cout << "------------------Instruction-----------------\n\n";
+		std::cout << "H               : help\n\n";
+		std::cout << "W - Up arrow    : Moving up\n";
+		std::cout << "S - Down arrow  : Moving down\n";
+		std::cout << "A - Left arrow  : Moving left\n";
+		std::cout << "D - Right arrow : Moving right\n";
+		std::cout << "P               : Pause/Unpause\n";
+		std::cout << "Q               : Quit game (Not saved!! Be careful!)\n";
+		std::cout << "R               : Restart\n";
+		std::cout << "Enter           : Pass level\n";
+		std::cout << "-----------------------------------------------\n";
+	}
+
+	//Pause
+	if (GetKey(olc::Key::P).bPressed) {
+		if (stop)
+			std::cout << "Unpaused" << '\n';
+		else
+			std::cout << "Paused";
+		stop ^= 1;
+	}
+	if (stop) {
+		drawGame();
+		return true;
+	}
+
+	//Passed Level
+	if (GetKey(olc::Key::ENTER).bPressed && cPeople.get()->isFinish()) {
+		std::cout << "Level " << level->currentLevel() << " passed.\n" << '\n';
+		cPeople.get()->reset();
+		level->levelUp();
+	}
+
+	//Reset
+	if (GetKey(olc::Key::R).bPressed) {
+		std::cout << "Restart\n";
+		cPeople.get()->reset();
+	}
+		
+	//Quit
+	if (GetKey(olc::Key::Q).bHeld) {
+		std::cout << "Quit\n";
 		return false;
+	}
+		
 	
 	if (!cPeople.get()->isDead()) {
 		//Handle user input
@@ -54,7 +103,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		truckSpawner.get()->move(fElapsedTime);
 		carSpawner.get()->move(fElapsedTime);
 
-
+		//Spawn object
 		birdSpawner.get()->spawn(fElapsedTime);
 		dinosaurSpawner.get()->spawn(fElapsedTime);
 		truckSpawner.get()->spawn(fElapsedTime);
@@ -85,10 +134,6 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 	else {
 		//Draw output to save game
 
-	}
-	
-	if (cPeople.get()->isFinish()) {
-		
 	}
 
 	

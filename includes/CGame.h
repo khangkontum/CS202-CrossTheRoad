@@ -9,6 +9,7 @@
 #include "CDinosaur.h"
 #include "CTruck.h"
 #include "CCar.h"
+#include "Level.h"
 #include "BackGround.h"
 #include "../lib/json.hpp"
 #include "ObjectSpawner.h"
@@ -46,6 +47,8 @@ private:
 
 	std::unique_ptr<CPeople> cPeople;
 	std::unique_ptr<Background> background;
+
+	int stop;
 	/*
 	CTRUCK* axt;
 	CCAR * axh;

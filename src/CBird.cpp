@@ -3,7 +3,6 @@
 CBird::CBird(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::shared_ptr<olc::Sprite> sprite, std::shared_ptr<olc::Decal> decal) {
 	this->direction = direction;
 	this->pge = pge;
-	this->speed = 10;
 	this->position = pos;
 	this->sprite = sprite;
 	this->decal = decal;
@@ -13,7 +12,6 @@ CBird::CBird(olc::vf2d pos, int direction, olc::PixelGameEngine* pge){
 	this->direction = direction;
 	this->position = pos;
 	this->pge = pge;
-	this->speed = 10;
 	sprite = std::make_unique<olc::Sprite>("./assets/bird1.png");
 	decal = std::make_unique <olc::Decal>(sprite.get());
 }
@@ -25,17 +23,10 @@ olc::vf2d CBird::size() {
 }
 
 void CBird::move(float fElapsedTime) {
+	Level* level = &Level::getInstance();
+	float speed = level->getSpeed("bird");
 	this->position.x += direction * speed * fElapsedTime;
 	this->velocity.x = direction * speed;
-	/*
-	if (this->position.x > pge->ScreenWidth()) {
-		this->position.x = 0;
-	}
-
-	if (this->position.x < 0) {
-		this->position.x = pge->ScreenWidth();
-	}
-	*/
 }
 
 void CBird::Draw() {
@@ -66,4 +57,8 @@ olc::vf2d CBird::getVelocity()
 
 int CBird::getDirection() {
 	return direction;
+}
+
+int CBird::getLane() {
+	return 1;
 }
