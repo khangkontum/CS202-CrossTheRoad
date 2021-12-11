@@ -15,7 +15,31 @@ bool Collider2D::PointVsRect(const olc::vf2d& p, const rect* r)
 
 bool Collider2D::RectVsRect(const rect* r1, const rect* r2)
 {
-	return (r1->pos.x < r2->pos.x + r2->size.x && r1->pos.x + r1->size.x > r2->pos.x && r1->pos.y < r2->pos.y + r2->size.y && r1->pos.y + r1->size.y > r2->pos.y);
+	int r1_xmin = r1->pos.x;
+	int r1_ymin = r1->pos.y;
+	int r1_xmax = r1->pos.x + r1->size.x;
+	int r1_ymax = r1->pos.y + r1->size.y;
+
+	int r2_xmin = r2->pos.x;
+	int r2_ymin = r2->pos.y;
+	int r2_xmax = r2->pos.x + r2->size.x;
+	int r2_ymax = r2->pos.y + r2->size.y;
+
+	if (r1_xmin == r1_xmax || r1_ymin == r1_ymax || r2_xmin == r2_xmax || r2_ymin == r2_ymax) {
+		return false;
+	}
+
+	// If one rectangle is on left side of other
+	if (r1_xmin >= r2_xmax || r2_xmin >= r1_xmax)
+		return false;
+
+	// If one rectangle is above other
+	if (r1_ymax <= r2_ymin || r2_ymax <= r1_ymin)
+		return false;
+
+	return true;
+
+	//return (r1->pos.x < r2->pos.x + r2->size.x && r1->pos.x + r1->size.x > r2->pos.x && r1->pos.y < r2->pos.y + r2->size.y && r1->pos.y + r1->size.y > r2->pos.y);
 }
 
 bool Collider2D::RayVsRect(const olc::vf2d& ray_origin, const olc::vf2d& ray_dir, const rect* target,
