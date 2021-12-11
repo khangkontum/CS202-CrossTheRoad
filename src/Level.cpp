@@ -49,3 +49,7 @@ Level& Level::getInstance() {
 		instance = new Level;
 	return *instance;
 }
+
+void Level::setLevel(int level) {
+	this->level = level;
+}

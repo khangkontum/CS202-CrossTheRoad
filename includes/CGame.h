@@ -40,6 +40,8 @@ public:
 
 private:
 	json gameData;
+	json gameConfig;
+	std::string configPath;
 	std::unique_ptr<ObjectSpawner<CBird*>> birdSpawner;
 	std::unique_ptr<ObjectSpawner<CDinosaur*>> dinosaurSpawner;
 	std::unique_ptr<ObjectSpawner<CCar*>> carSpawner;
@@ -49,6 +51,7 @@ private:
 	std::unique_ptr<Background> background;
 
 	int stop;
+	bool resetState;
 	/*
 	CTRUCK* axt;
 	CCAR * axh;

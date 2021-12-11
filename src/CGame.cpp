@@ -6,6 +6,45 @@ CGame::CGame() {
 
 bool CGame::OnUserCreate() {
 	std::cout << "Press H for instruction.\n";
+	
+	int option;
+	resetState = true;
+	bool ok = true;
+	do {
+		
+		std::cout << "1. New game.\n";
+		std::cout << "2. Load game.\n";
+		std::cout << "3. Settings.\n";
+		std::cout << "Input: ";
+		std::cin >> option;
+		ok = false;
+		switch (option) {
+		case 1: 
+		{
+			gameConfig["level"] = 1;
+			configPath = "null";
+			break;
+		}
+		case 2:
+		{
+			std::cout << "Path to saved game: ";
+			std::cin >> configPath;
+			std::ifstream fi(configPath);
+			if (!fi) {
+				std::cout << "File does not exsist. Please try again.\n";
+				ok = true;
+				break;
+			}
+			fi >> gameConfig;
+			fi.close();
+			break;
+		}
+		default:
+			std::cout << "Wrong option. Please choose again.\n";
+			ok = true;
+			break;
+		}
+	} while (ok);
 
 	stop = 0;
 	cPeople = std::make_unique<CPeople>(this);
@@ -13,6 +52,7 @@ bool CGame::OnUserCreate() {
 
 	Level* level = &Level::getInstance();
 	level->setDefaultGap(cPeople->size().x);
+	level->setLevel(gameConfig["level"]);
 
 	std::ifstream fi("./database/game.json");
 	fi >> gameData;
@@ -37,7 +77,13 @@ bool CGame::OnUserCreate() {
 }
 
 bool CGame::OnUserUpdate(float fElapsedTime) {
+	
 	Level* level = &Level::getInstance();
+	if (resetState) {
+		std::cout << "** Level " << level->currentLevel() << " **\n" << '\n';
+		resetState = false;
+	}
+
 	if (GetKey(olc::Key::H).bPressed) {
 		std::cout << "------------------Instruction-----------------\n\n";
 		std::cout << "H               : help\n\n";
@@ -48,6 +94,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		std::cout << "P               : Pause/Unpause\n";
 		std::cout << "Q               : Quit game (Not saved!! Be careful!)\n";
 		std::cout << "R               : Restart\n";
+		std::cout << "L               : Save game\n";
 		std::cout << "Enter           : Pass level\n";
 		std::cout << "-----------------------------------------------\n";
 	}
@@ -67,21 +114,35 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 
 	//Passed Level
 	if (GetKey(olc::Key::ENTER).bPressed && cPeople.get()->isFinish()) {
-		std::cout << "Level " << level->currentLevel() << " passed.\n" << '\n';
 		cPeople.get()->reset();
 		level->levelUp();
+		resetState = true;
 	}
 
 	//Reset
 	if (GetKey(olc::Key::R).bPressed) {
 		std::cout << "Restart\n";
 		cPeople.get()->reset();
+		resetState = true;
 	}
 		
 	//Quit
 	if (GetKey(olc::Key::Q).bHeld) {
 		std::cout << "Quit\n";
 		return false;
+	}
+
+	//Save game
+	if (GetKey(olc::Key::L).bPressed) {
+		while (configPath == "null") {
+			std::cout << "Path to save game: ";
+			std::cin >> configPath;
+		}
+		std::ofstream fo(configPath);
+		gameConfig["level"] = level->currentLevel();
+		fo << gameConfig.dump();
+		fo.close();
+		std::cout << "Saved\n";
 	}
 		
 	
@@ -137,9 +198,6 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 	}
 
 	
-
-	
-
 	//Drawing
 	drawGame();
 
