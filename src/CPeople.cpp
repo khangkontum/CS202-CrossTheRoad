@@ -47,32 +47,25 @@ void CPeople::Down(float fElapsedTime) {
 	position.y = std::min(float(pge->ScreenHeight() - 30), position.y);
 }
 
-// template<class T>   // t không thể dùng template  // tìm cách khắc phục giúp t
 bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 {
 	//Check if standing in safe area
 	int currentLane = getLane();
 	int objLane = object->getLane();
-	if (currentLane == 0 || currentLane == 3 || currentLane == 6 || objLane != currentLane)
+	if (currentLane == 0 || currentLane == 3 || currentLane == 6 || abs(currentLane - objLane) > 1) // test case 1: nếu người đang ở làn thứ 4 va chạm với obj ở làn thứ 2 thì bỏ qua 
 		return false;
 
 
 	std::vector<rect> vRects;   // vector chứa các bounding box của objects // {pos, size}
-	vRects.push_back({ getPosition(), size() });   // vRects[0] là CPeople
+	vRects.push_back({ getPosition(), size(), getVelocity()});   // vRects[0] là CPeople
 
-	//vRects[0].vel = getVelocity();
-	//vRects[0].vel.x = 100;
-	//vRects[0].vel.y = 100;
-
-	vRects.push_back({ object->getPosition(), object->size() }); // các vRects tiếp theo là các objects càn kiểm tra va chạm
-	vRects[1].vel.x = object->getVelocity().x;
-	vRects[1].vel.y = -getVelocity().y;
+	vRects.push_back({ object->getPosition(), object->size(), {object->getVelocity().x, -getVelocity().y} }); // các vRects tiếp theo là các objects càn kiểm tra va chạm
 
 	olc::vf2d cp, cn;
 	float t = 0;
 	for (size_t i = 1; i < vRects.size(); i++)
 	{
-		if (RectVsRect(&vRects[i], &vRects[0]))  // kiểm tra va chạm
+		if (RectVsRect(&vRects[0], &vRects[1]))  // kiểm tra va chạm
 		{
 			isdead = true;
 			return true;
@@ -86,26 +79,20 @@ bool CPeople::isImpact(CVehicle* object, float fElapsedTime)
 	//Check if standing in safe area
 	int currentLane = getLane();
 	int objLane = object->getLane();
-	if (currentLane == 0 || currentLane == 3 || currentLane == 6 || currentLane != objLane)
+	if (currentLane == 0 || currentLane == 3 || currentLane == 6 || abs(currentLane - objLane) > 1) // test case 1: nếu người đang ở làn thứ 4 va chạm với obj ở làn thứ 2 thì bỏ qua 
 		return false;
 
 
 	std::vector<rect> vRects;   // vector chứa các bounding box của objects // {pos, size}
-	vRects.push_back({ getPosition(), size() });   // vRects[0] là CPeople
+	vRects.push_back({ getPosition(), size(), getVelocity() });   // vRects[0] là CPeople
 
-	//vRects[0].vel = getVelocity();
-	//vRects[0].vel.x = 100;
-	//vRects[0].vel.y = 100;
-
-	vRects.push_back({ object->getPosition(), object->size() }); // các vRects tiếp theo là các objects càn kiểm tra va chạm
-	vRects[1].vel.x = object->getVelocity().x;
-	vRects[1].vel.y = -getVelocity().y;
+	vRects.push_back({ object->getPosition(), object->size(), {object->getVelocity().x, -getVelocity().y} }); // các vRects tiếp theo là các objects càn kiểm tra va chạm
 
 	olc::vf2d cp, cn;
 	float t = 0;
 	for (size_t i = 1; i < vRects.size(); i++)
 	{
-		if (RectVsRect(&vRects[i], &vRects[0]))  // kiểm tra va chạm
+		if (RectVsRect(&vRects[0], &vRects[1]))  // kiểm tra va chạm
 		{
 			isdead = true;
 			return true;
@@ -159,19 +146,19 @@ int CPeople::getLane() {
 	if (pos <= height * 0.2)
 		return 0;
 	//Lane 1
-	if (pos > 0.2 && pos <= height * 0.35)
+	else if (pos > 0.2 && pos <= height * 0.35)
 		return 1;
 	//Lane 2
-	if (pos > 0.35 && pos <= height * 0.5)
+	else if (pos > 0.35 && pos <= height * 0.5)
 		return 2;
 	//Safe area
-	if (pos <= height * 0.55 && pos > height * 0.5)
+	else if (pos > height * 0.5 && pos <= height * 0.55 )
 		return 3;
 	//Lane 3
-	if (pos > height * 0.55 && pos <= height * 0.7)
+	else if (pos > height * 0.55 && pos <= height * 0.7)
 		return 4;
 	//Lane 4
-	if (pos > height > 0.7 && pos <= height * 0.85)
+	else if (pos > height * 0.7 && pos <= height * 0.85)
 		return 5;
 	//Start
 	return 6;
