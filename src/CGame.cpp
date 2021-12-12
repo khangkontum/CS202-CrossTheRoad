@@ -144,7 +144,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		std::cout << "Saved\n";
 	}
 	
-	bool DEBUG = false;  // BEGUG COLLISION
+	bool DEBUG = false;  // DEBUG COLLISION
 	
 	if (!cPeople.get()->isDead()) {
 		if(DEBUG) Clear(olc::CREAM);
