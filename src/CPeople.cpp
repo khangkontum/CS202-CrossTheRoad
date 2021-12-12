@@ -61,8 +61,8 @@ bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 
 	vRects.push_back({ object->getPosition(), object->size(), {object->getVelocity().x, -getVelocity().y} }); // các vRects tiếp theo là các objects càn kiểm tra va chạm
 
-	olc::vf2d cp, cn;
-	float t = 0;
+	//olc::vf2d cp, cn;
+	//float t = 0;
 	for (size_t i = 1; i < vRects.size(); i++)
 	{
 		if (RectVsRect(&vRects[0], &vRects[1]))  // kiểm tra va chạm
