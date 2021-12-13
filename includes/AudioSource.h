@@ -4,7 +4,8 @@
 class AudioSource
 {
 public:
-
+	AudioSource();
+	~AudioSource();
 private:
 };
 
