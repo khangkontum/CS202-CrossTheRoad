@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioSource.cpp" />
     <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Background.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="src\ObjectSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioSource.h" />
     <ClInclude Include="includes\BackGround.h" />
     <ClInclude Include="includes\CAnimal.h" />
     <ClInclude Include="includes\CBird.h" />
