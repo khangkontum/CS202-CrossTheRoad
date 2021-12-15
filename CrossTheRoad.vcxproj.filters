@@ -54,7 +54,7 @@
     <ClCompile Include="src\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AudioSource.cpp">
+    <ClCompile Include="src\AudioSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,7 +104,10 @@
     <ClInclude Include="includes\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AudioSource.h">
+    <ClInclude Include="includes\AudioSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tqdm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -126,5 +129,10 @@
     <None Include="doc\Final Project.pdf">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\banner.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

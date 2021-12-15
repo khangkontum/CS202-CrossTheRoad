@@ -13,6 +13,7 @@
 #include "BackGround.h"
 #include "../lib/json.hpp"
 #include "ObjectSpawner.h"
+#include "Menu.h"
 
 using json = nlohmann::json;
 
@@ -36,12 +37,9 @@ public:
 	void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
 	void updatePosAnimal();//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 	*/
-
+	
 
 private:
-	json gameData;
-	json gameConfig;
-	std::string configPath;
 	std::unique_ptr<ObjectSpawner<CBird*>> birdSpawner;
 	std::unique_ptr<ObjectSpawner<CDinosaur*>> dinosaurSpawner;
 	std::unique_ptr<ObjectSpawner<CCar*>> carSpawner;
@@ -50,8 +48,17 @@ private:
 	std::unique_ptr<CPeople> cPeople;
 	std::unique_ptr<Background> background;
 
-	int stop;
+	json gameData;
+	json gameConfig;
+	std::string configPath;
+	bool isIngame;
+	bool stop;
 	bool resetState;
+	Menu* menu;
+	Level* level;
+
+
+	void loadingDefault();
 	/*
 	CTRUCK* axt;
 	CCAR * axh;

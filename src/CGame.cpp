@@ -9,6 +9,9 @@ bool CGame::OnUserCreate() {
 	
 	int option;
 	resetState = true;
+	configPath = "null";
+	
+	/*
 	bool ok = true;
 	do {
 		
@@ -45,70 +48,45 @@ bool CGame::OnUserCreate() {
 			break;
 		}
 	} while (ok);
+	*/
+	
 
-	stop = 0;
+	stop = false;
+	isIngame = false;
+	menu = &Menu::getInstance();
+	menu->init(this, &gameConfig, &configPath);
 	cPeople = std::make_unique<CPeople>(this);
 	background = std::make_unique<Background>(this);
 
-	Level* level = &Level::getInstance();
+	level = &Level::getInstance();
 	level->setDefaultGap(cPeople->size().x);
-	level->setLevel(gameConfig["level"]);
+	
 
-	std::ifstream fi("./database/game.json");
-	fi >> gameData;
-
-	//Loading default bird
-	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * ScreenHeight() }), 1, this);
-	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, this);
-
-	//Loading default dinosaur
-	CDinosaur* dinosaur = new CDinosaur(olc::vf2d({ 0, float(gameData["CDinosaur"]) * ScreenHeight() }), -1, this);
-	dinosaurSpawner = std::make_unique<ObjectSpawner<CDinosaur*>>(dinosaur, this);
-
-	//Loading default car
-	CCar* car = new CCar(olc::vf2d({ 0, float(gameData["CCar"]) * ScreenHeight() }), -1, this);
-	carSpawner = std::make_unique<ObjectSpawner<CCar*>>(car, this);
-
-	//Loading default truck
-	CTruck* truck = new CTruck(olc::vf2d({ 0, float(gameData["CTruck"]) * ScreenHeight() }), 1, this);
-	truckSpawner = std::make_unique<ObjectSpawner<CTruck*>>(truck, this);
+	//loading 
+	loadingDefault();
 
 	return true;
 }
 
 bool CGame::OnUserUpdate(float fElapsedTime) {
-	Level* level = &Level::getInstance();
+	if (!isIngame) {
+		return menu->interact(isIngame, stop);
+	}
 	if (resetState) {
 		std::cout << "** Level " << level->currentLevel() << " **\n" << '\n';
 		resetState = false;
-	}
-
-	if (GetKey(olc::Key::H).bPressed) {
-		std::cout << "------------------Instruction-----------------\n\n";
-		std::cout << "H               : help\n\n";
-		std::cout << "W - Up arrow    : Moving up\n";
-		std::cout << "S - Down arrow  : Moving down\n";
-		std::cout << "A - Left arrow  : Moving left\n";
-		std::cout << "D - Right arrow : Moving right\n";
-		std::cout << "P               : Pause/Unpause\n";
-		std::cout << "Q               : Quit game (Not saved!! Be careful!)\n";
-		std::cout << "R               : Restart\n";
-		std::cout << "L               : Save game\n";
-		std::cout << "Enter           : Pass level\n";
-		std::cout << "-----------------------------------------------\n";
-	}
+	}                                                                                                                        
 
 	//Pause
-	if (GetKey(olc::Key::P).bPressed) {
+	if (GetKey(olc::Key::ESCAPE).bPressed) {
 		if (stop)
-			std::cout << "Unpaused" << '\n';
+			std::cout << "Unpaused\n";
 		else
-			std::cout << "Paused";
-		stop ^= 1;
+			std::cout << "Paused\n";
+		stop = true;
 	}
 	if (stop) {
-		drawGame();
-		return true;
+		return menu->interact(isIngame, stop);
 	}
 
 	//Passed Level
@@ -123,12 +101,6 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		std::cout << "Restart\n";
 		cPeople.get()->reset();
 		resetState = true;
-	}
-		
-	//Quit
-	if (GetKey(olc::Key::Q).bHeld) {
-		std::cout << "Quit\n";
-		return false;
 	}
 
 	//Save game
@@ -204,16 +176,15 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 
 	}
 
-	
 	//Drawing
 	if (!DEBUG) drawGame();
+
+	
 
 	return true;
 }
 
 void CGame::drawGame() {
-	Clear(olc::CREAM);
-
 	background->Draw();
 
 	birdSpawner.get()->Draw();
@@ -223,4 +194,25 @@ void CGame::drawGame() {
 	cPeople->Draw();
 
 	truckSpawner.get()->Draw();
+}
+
+void CGame::loadingDefault() {
+	std::ifstream fi("./database/game.json");
+	fi >> gameData;
+
+	//Loading default bird
+	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * ScreenHeight() }), 1, this);
+	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, this);
+
+	//Loading default dinosaur
+	CDinosaur* dinosaur = new CDinosaur(olc::vf2d({ 0, float(gameData["CDinosaur"]) * ScreenHeight() }), -1, this);
+	dinosaurSpawner = std::make_unique<ObjectSpawner<CDinosaur*>>(dinosaur, this);
+
+	//Loading default car
+	CCar* car = new CCar(olc::vf2d({ 0, float(gameData["CCar"]) * ScreenHeight() }), -1, this);
+	carSpawner = std::make_unique<ObjectSpawner<CCar*>>(car, this);
+
+	//Loading default truck
+	CTruck* truck = new CTruck(olc::vf2d({ 0, float(gameData["CTruck"]) * ScreenHeight() }), 1, this);
+	truckSpawner = std::make_unique<ObjectSpawner<CTruck*>>(truck, this);
 }
