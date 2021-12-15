@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\olcPGEX_Sound.cpp" />
     <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\AudioSource.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="includes\Menu.h" />
     <ClInclude Include="includes\ObjectSpawner.h" />
     <ClInclude Include="lib\json.hpp" />
+    <ClInclude Include="lib\olcPGEX_Sound.h" />
     <ClInclude Include="lib\olcPixelGameEngine.h" />
     <ClInclude Include="lib\tqdm.h" />
   </ItemGroup>
