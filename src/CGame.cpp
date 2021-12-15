@@ -7,6 +7,14 @@ CGame::CGame() {
 bool CGame::OnUserCreate() {
 	std::cout << "Press H for instruction.\n";
 	
+	if (!olc::SOUND::InitialiseAudio()) {
+		std::cerr << "Cannot init audio" << std::endl;
+	}
+
+	int id = olc::SOUND::LoadAudioSample("./assets/sound/heavy-robotic-stomp-3.wav");
+	std::cout << "LOADED AUDIO : " << id << std::endl;
+	if (id > 0) olc::SOUND::PlaySample(id);
+
 	int option;
 	resetState = true;
 	configPath = "null";
