@@ -3,6 +3,8 @@
 #define CGAME_H_
 
 #include "../lib/olcPixelGameEngine.h"
+#include "../lib/olcPGEX_Sound.h"
+
 #include "CPeople.h"
 #include "CAnimal.h"
 #include "CBird.h"
