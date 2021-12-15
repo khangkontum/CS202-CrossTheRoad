@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AudioSource.cpp" />
     <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\AudioSource.cpp" />
     <ClCompile Include="src\Background.cpp" />
     <ClCompile Include="src\CBird.cpp" />
     <ClCompile Include="src\CCar.cpp" />
@@ -35,7 +35,7 @@
     <ClCompile Include="src\ObjectSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioSource.h" />
+    <ClInclude Include="includes\AudioSource.h" />
     <ClInclude Include="includes\BackGround.h" />
     <ClInclude Include="includes\CAnimal.h" />
     <ClInclude Include="includes\CBird.h" />
@@ -51,6 +51,7 @@
     <ClInclude Include="includes\ObjectSpawner.h" />
     <ClInclude Include="lib\json.hpp" />
     <ClInclude Include="lib\olcPixelGameEngine.h" />
+    <ClInclude Include="lib\tqdm.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\car.png" />
@@ -60,6 +61,9 @@
   <ItemGroup>
     <None Include="database\game.json" />
     <None Include="doc\Final Project.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\banner.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
