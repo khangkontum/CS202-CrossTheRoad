@@ -22,6 +22,7 @@
     <ClCompile Include="lib\olcPGEX_Sound.cpp" />
     <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SaveData.cpp" />
     <ClCompile Include="src\AudioSource.cpp" />
     <ClCompile Include="src\Background.cpp" />
     <ClCompile Include="src\CBird.cpp" />
