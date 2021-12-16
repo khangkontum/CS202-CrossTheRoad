@@ -18,6 +18,8 @@
 #include "Menu.h"
 #include "AudioManager.h"
 
+#include "para.h"
+
 using json = nlohmann::json;
 
 class CGame : public olc::PixelGameEngine {
@@ -60,6 +62,7 @@ private:
 	bool resetState;
 	Menu* menu;
 	Level* level;
+	para* para = para->getPara();
 	AudioManager* AudioManager = AudioManager->getAudioManager();
 
 	void loadingDefault();
