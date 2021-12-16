@@ -7,13 +7,13 @@ AudioManager::AudioManager()
 
 	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["PEOPLE"]["MOVE"], 1);
 	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample(para::MUSIC["PEOPLE"]["IMPACT"], 1);
-	//listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
-	//listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
+	listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample(para::MUSIC["PEOPLE"]["DEAD"], 1);
+	listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample(para::MUSIC["PEOPLE"]["FINSH"], 1);
 
-	//listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
-	//listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
-	//listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
-	//listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
+	listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["CAR"]["MOVE"], 1);
+	listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["BIRD"]["MOVE"], 1);
+	listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["DINOSAUR"]["MOVE"], 1);
+	listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["TRUCK"]["MOVE"], 1);
 
 	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::MUSIC["BACKGROUND"], 0.2);
 
@@ -58,7 +58,8 @@ void AudioManager::stopBackground(bool _isMute)
 	{
 		stop("BACKGROUND", "");
 		isPlayingBackground = false;
-	}else if (!isPlayingBackground)
+	}
+	else if (!isPlayingBackground)
 	{
 		play("BACKGROUND", "", true);
 		isPlayingBackground = true;
