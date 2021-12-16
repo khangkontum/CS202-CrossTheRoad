@@ -11,6 +11,7 @@ void readData(int& curentLevel, bool& themeSound, bool& gamePlaySound) {
 		gamePlaySound = 0;
 		fout << curentLevel << themeSound << gamePlaySound;
 		fout.close();
+		return;
 	}
 	fin >> curentLevel >> themeSound >> gamePlaySound;
 	fin.close();
