@@ -23,7 +23,6 @@ private:
 	{
 		std::ifstream fi("./configs/config.json");
 		fi >> gameConfig;
-		std::cout << "CONFIG MUSIC : " << gameConfig["MUSIC"] << std::endl;
 		MUSIC = gameConfig["MUSIC"];
 	}
 	~para() {};
