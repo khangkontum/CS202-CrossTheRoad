@@ -3,6 +3,7 @@
 
 #include "../lib/olcPGEX_Sound.h"
 #include <map>
+#include "para.h"
 
 struct audio
 {
