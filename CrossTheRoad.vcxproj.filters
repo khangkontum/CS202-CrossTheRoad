@@ -54,13 +54,13 @@
     <ClCompile Include="src\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AudioManage.cpp">
+    <ClCompile Include="src\AudioSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lib\olcPGEX_Sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="includes\AudioManager.cpp">
+    <ClCompile Include="SaveData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,16 +110,13 @@
     <ClInclude Include="includes\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes\AudioManager.h">
+    <ClInclude Include="includes\AudioSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\tqdm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\olcPGEX_Sound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -141,6 +138,7 @@
     <None Include="doc\Final Project.pdf">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\banner.txt">
