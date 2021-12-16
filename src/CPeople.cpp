@@ -19,6 +19,7 @@ void CPeople::Up(float fElapsedTime) {
 	position.y -= speed * fElapsedTime;
 	velocity.y = -speed;
 	position.y = std::max(float(0), position.y);
+	AudioManager->play("PEOPLE", "MOVE", false);
 }
 
 void CPeople::Left(float fElapsedTime) {
@@ -28,6 +29,7 @@ void CPeople::Left(float fElapsedTime) {
 	position.x -= speed * fElapsedTime;
 	velocity.x = -speed;
 	position.x = std::max(float(0), position.x);
+	AudioManager->play("PEOPLE", "MOVE", false);
 }
 
 void CPeople::Right(float fElapsedTime) {
@@ -37,6 +39,7 @@ void CPeople::Right(float fElapsedTime) {
 	position.x += speed * fElapsedTime;
 	velocity.x = speed;
 	position.x = std::min(float(pge->ScreenWidth() - 20), position.x);
+	AudioManager->play("PEOPLE", "MOVE", false);
 }
 void CPeople::Down(float fElapsedTime) {
 	//std::cout << "Moving Down\n";
@@ -45,6 +48,7 @@ void CPeople::Down(float fElapsedTime) {
 	position.y += speed * fElapsedTime;
 	velocity.y = speed;
 	position.y = std::min(float(pge->ScreenHeight() - 30), position.y);
+	AudioManager->play("PEOPLE", "MOVE", false);
 }
 
 bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
@@ -68,6 +72,7 @@ bool CPeople::isImpact(CAnimal* object, float fElapsedTime)
 		if (RectVsRect(&vRects[0], &vRects[1]))  // kiểm tra va chạm
 		{
 			isdead = true;
+			AudioManager->play("PEOPLE", "IMPACT", false);
 			return true;
 		}
 	}
