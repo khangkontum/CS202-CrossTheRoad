@@ -1,1 +1,8 @@
 https://www.xconvert.com/convert-mp3-to-wav
+
+
+yêu cầu:
+định dạng: 		16-bit WAV
+Bitrate:		6k
+SampleRate: 	4100Hz
+AUDIO CHANNEL:	Mono
