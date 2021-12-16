@@ -5,24 +5,23 @@ CGame::CGame() {
 }
 
 bool CGame::OnUserCreate() {
-	std::cout << "Press H for instruction.\n";
-	
 	if (!olc::SOUND::InitialiseAudio()) {
 		std::cerr << "Cannot init audio" << std::endl;
+		return false;
 	}
+	std::cout << "Press H for instruction.\n";
 
-	int id = olc::SOUND::LoadAudioSample("./assets/sound/heavy-robotic-stomp-3.wav");
-	std::cout << "LOADED AUDIO : " << id << std::endl;
-	if (id > 0) olc::SOUND::PlaySample(id);
+	AudioManager->mute(false);   // Tắt tất cả âm thanh
+	AudioManager->stopBackground(false); // Tắt âm thanh background
 
 	int option;
 	resetState = true;
 	configPath = "null";
-	
+
 	/*
 	bool ok = true;
 	do {
-		
+
 		std::cout << "1. New game.\n";
 		std::cout << "2. Load game.\n";
 		std::cout << "3. Settings.\n";
@@ -30,7 +29,7 @@ bool CGame::OnUserCreate() {
 		std::cin >> option;
 		ok = false;
 		switch (option) {
-		case 1: 
+		case 1:
 		{
 			gameConfig["level"] = 1;
 			configPath = "null";
@@ -57,7 +56,7 @@ bool CGame::OnUserCreate() {
 		}
 	} while (ok);
 	*/
-	
+
 
 	stop = false;
 	isIngame = false;
@@ -68,7 +67,7 @@ bool CGame::OnUserCreate() {
 
 	level = &Level::getInstance();
 	level->setDefaultGap(cPeople->size().x);
-	
+
 
 	//loading 
 	loadingDefault();
@@ -83,7 +82,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 	if (resetState) {
 		std::cout << "** Level " << level->currentLevel() << " **\n" << '\n';
 		resetState = false;
-	}                                                                                                                        
+	}
 
 	//Pause
 	if (GetKey(olc::Key::ESCAPE).bPressed) {
@@ -123,11 +122,11 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		fo.close();
 		std::cout << "Saved\n";
 	}
-	
+
 	bool DEBUG = false;  // DEBUG COLLISION
-	
+
 	if (!cPeople.get()->isDead()) {
-		if(DEBUG) Clear(olc::CREAM);
+		if (DEBUG) Clear(olc::CREAM);
 
 		//Handle user input
 		if (GetKey(olc::Key::W).bHeld || GetKey(olc::Key::UP).bHeld)
@@ -187,7 +186,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 	//Drawing
 	if (!DEBUG) drawGame();
 
-	
+
 
 	return true;
 }
