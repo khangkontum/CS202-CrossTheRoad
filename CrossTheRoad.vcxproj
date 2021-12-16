@@ -35,6 +35,7 @@
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\CPeople.cpp" />
     <ClCompile Include="src\ObjectSpawner.cpp" />
+    <ClCompile Include="src\para.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\AudioManager.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="includes\Level.h" />
     <ClInclude Include="includes\Menu.h" />
     <ClInclude Include="includes\ObjectSpawner.h" />
+    <ClInclude Include="includes\para.h" />
     <ClInclude Include="lib\json.hpp" />
     <ClInclude Include="lib\olcPGEX_Sound.h" />
     <ClInclude Include="lib\olcPixelGameEngine.h" />
