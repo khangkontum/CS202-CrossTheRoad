@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="includes\AudioManager.cpp" />
     <ClCompile Include="lib\olcPGEX_Sound.cpp" />
     <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\AudioSource.cpp" />
+    <ClCompile Include="src\AudioManage.cpp" />
     <ClCompile Include="src\Background.cpp" />
     <ClCompile Include="src\CBird.cpp" />
     <ClCompile Include="src\CCar.cpp" />
@@ -36,12 +37,13 @@
     <ClCompile Include="src\ObjectSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="includes\AudioSource.h" />
+    <ClInclude Include="includes\AudioManager.h" />
     <ClInclude Include="includes\BackGround.h" />
     <ClInclude Include="includes\CAnimal.h" />
     <ClInclude Include="includes\CBird.h" />
     <ClInclude Include="includes\CCar.h" />
     <ClInclude Include="includes\CDinosaur.h" />
+    <ClInclude Include="includes\Clock.h" />
     <ClInclude Include="includes\Collider2D.h" />
     <ClInclude Include="includes\CPeople.h" />
     <ClInclude Include="includes\CGame.h" />

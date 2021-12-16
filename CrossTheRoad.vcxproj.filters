@@ -54,10 +54,13 @@
     <ClCompile Include="src\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AudioSource.cpp">
+    <ClCompile Include="src\AudioManage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lib\olcPGEX_Sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="includes\AudioManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,13 +110,16 @@
     <ClInclude Include="includes\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes\AudioSource.h">
+    <ClInclude Include="includes\AudioManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\tqdm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\olcPGEX_Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

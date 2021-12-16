@@ -16,6 +16,7 @@
 #include "../lib/json.hpp"
 #include "ObjectSpawner.h"
 #include "Menu.h"
+#include "AudioManager.h"
 
 using json = nlohmann::json;
 
@@ -58,7 +59,7 @@ private:
 	bool resetState;
 	Menu* menu;
 	Level* level;
-
+	AudioManager* AudioManager = AudioManager->getAudioManager();
 
 	void loadingDefault();
 	/*
