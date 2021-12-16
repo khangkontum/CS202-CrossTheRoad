@@ -7,6 +7,7 @@
 #include "CAnimal.h"
 #include "Level.h"
 #include "CVehicle.h"
+#include "AudioManager.h"
 
 class CPeople : public Collider2D {
 public:
@@ -38,6 +39,7 @@ private:
 	olc::vf2d position;
 	olc::vf2d velocity;
 	olc::PixelGameEngine* pge;
+	AudioManager* AudioManager = AudioManager->getAudioManager();
 	bool isdead;
 };
 
