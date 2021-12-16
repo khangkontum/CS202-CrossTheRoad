@@ -1,5 +1,4 @@
 ﻿#include "includes/CGame.h"
-
 int main()
 {
 	CGame demo;

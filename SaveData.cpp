@@ -10,6 +10,7 @@ void readData(int& curentLevel, bool& themeSound, bool& gamePlaySound) {
 		themeSound = 0;
 		gamePlaySound = 0;
 		fout << curentLevel << themeSound << gamePlaySound;
+		fout.close();
 	}
 	fin >> curentLevel >> themeSound >> gamePlaySound;
 	fin.close();
