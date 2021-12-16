@@ -5,12 +5,12 @@ namespace olc
 	SOUND::AudioSample::AudioSample()
 	{	}
 
-	SOUND::AudioSample::AudioSample(std::string sWavFile, int percent, olc::ResourcePack* pack)
+	SOUND::AudioSample::AudioSample(std::string sWavFile, float percent, olc::ResourcePack* pack)
 	{
 		LoadFromFile(sWavFile, percent, pack);
 	}
 
-	olc::rcode SOUND::AudioSample::LoadFromFile(std::string sWavFile, int percent, olc::ResourcePack* pack)
+	olc::rcode SOUND::AudioSample::LoadFromFile(std::string sWavFile, float percent, olc::ResourcePack* pack)
 	{
 		auto ReadWave = [&](std::istream& is)
 		{
@@ -63,8 +63,7 @@ namespace olc
 					if (!is.eof())
 					{
 						is.read((char*)&s, sizeof(short));
-
-						s -= (float)s * (float)((100 - percent) / 100);
+						s *= percent;
 						*pSample = (float)s / (float)(SHRT_MAX);
 						pSample++;
 					}
@@ -114,7 +113,7 @@ namespace olc
 
 	// Load a 16-bit WAVE file @ 44100Hz ONLY into memory. A sample ID
 	// number is returned if successful, otherwise -1
-	int SOUND::LoadAudioSample(std::string sWavFile, int volume, olc::ResourcePack* pack)
+	int SOUND::LoadAudioSample(std::string sWavFile, float volume = 1, olc::ResourcePack* pack)
 	{
 
 		olc::SOUND::AudioSample a(sWavFile, volume, pack);

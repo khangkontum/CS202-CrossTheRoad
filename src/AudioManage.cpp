@@ -5,17 +5,17 @@ AudioManager::AudioManager()
 {
 	// cần chuyển âm thanh về định dạng 16 bit, sample rate 44100
 
-	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/sfx_step_grass_l.wav", 100);
-	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample("./assets/sound/Hitting_Wall.wav", 100);
-	//listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
-	//listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
+	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/sfx_step_grass_l.wav", 1);
+	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample("./assets/sound/Hitting_Wall.wav", 1);
+	//listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
+	//listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
 
-	//listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
-	//listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
-	//listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
-	//listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
+	//listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
+	//listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
+	//listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
+	//listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav", 1);
 
-	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample("./assets/sound/Background_Music.wav", 80);
+	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample("./assets/sound/Background_Music.wav", 0.2);
 
 	_fElapsedTime = 0;
 }
