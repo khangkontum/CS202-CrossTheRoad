@@ -138,6 +138,7 @@
     <None Include="doc\Final Project.pdf">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\banner.txt">
