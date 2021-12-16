@@ -131,8 +131,8 @@ namespace olc
 		{
 		public:
 			AudioSample();
-			AudioSample(std::string sWavFile, olc::ResourcePack* pack = nullptr);
-			olc::rcode LoadFromFile(std::string sWavFile, olc::ResourcePack* pack = nullptr);
+			AudioSample(std::string sWavFile, int percent, olc::ResourcePack* pack = nullptr);
+			olc::rcode LoadFromFile(std::string sWavFile, int percent, olc::ResourcePack* pack = nullptr);
 
 		public:
 			OLC_WAVEFORMATEX wavHeader;
@@ -160,7 +160,7 @@ namespace olc
 		static void SetUserFilterFunction(std::function<float(int, float, float)> func);
 
 	public:
-		static int LoadAudioSample(std::string sWavFile, olc::ResourcePack* pack = nullptr);
+		static int LoadAudioSample(std::string sWavFile, int volume, olc::ResourcePack* pack = nullptr);
 		static void PlaySample(int id, bool bLoop = false);
 		static void StopSample(int id);
 		static void StopAll();
