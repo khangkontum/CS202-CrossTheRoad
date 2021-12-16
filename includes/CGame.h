@@ -23,6 +23,7 @@ using json = nlohmann::json;
 class CGame : public olc::PixelGameEngine {
 public:
 	CGame();
+	~CGame();
 	void drawGame();
 
 	/*

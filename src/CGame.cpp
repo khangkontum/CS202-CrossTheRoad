@@ -4,6 +4,12 @@ CGame::CGame() {
 	sAppName = "Road Crossing";
 }
 
+CGame::~CGame()
+{
+	olc::SOUND::StopAll();
+	olc::SOUND::DestroyAudio();
+}
+
 bool CGame::OnUserCreate() {
 	if (!olc::SOUND::InitialiseAudio()) {
 		std::cerr << "Cannot init audio" << std::endl;
