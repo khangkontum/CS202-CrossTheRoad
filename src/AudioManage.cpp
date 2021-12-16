@@ -5,8 +5,8 @@ AudioManager::AudioManager()
 {
 	// cần chuyển âm thanh về định dạng 16 bit, sample rate 44100
 
-	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/sfx_step_grass_l.wav");
-	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample("./assets/sound/Hitting_Wall.wav");
+	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/sfx_step_grass_l.wav", 100);
+	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample("./assets/sound/Hitting_Wall.wav", 100);
 	//listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
 	//listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
 
@@ -15,7 +15,7 @@ AudioManager::AudioManager()
 	//listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
 	//listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample("./assets/sound/***.wav");
 
-	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample("./assets/sound/Background_Music.wav");
+	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample("./assets/sound/Background_Music.wav", 80);
 
 	_fElapsedTime = 0;
 }
