@@ -1,41 +1,63 @@
-{
-    "MUSIC" :
+{   
+    "ASSETS" :
     {
         "PEOPLE" :
         {
-            "MOVE" : "./assets/sound/sfx_step_grass_l.wav",
-            "IMPACT" : "./assets/sound/Hitting_Wall.wav",
-            "DEAD" : "./assets/sound/***.wav",
-            "FINSH" : "./assets/sound/***.wav"
+            "SPRITE" : "",
+            "SOUND":
+            {
+                "MOVE" : "./assets/sound/sfx_step_grass_l.wav",
+                "IMPACT" : "./assets/sound/Hitting_Wall.wav",
+                "DEAD" : "./assets/sound/***.wav",
+                "FINSH" : "./assets/sound/***.wav"
+            }
         },
         "CAR" :
         {
-            "MOVE" : "./assets/sound/***.wav",
-            "IMPACT" : "./assets/sound/***.wav",
-            "DEAD" : "./assets/sound/***.wav",
-            "FINSH" : "./assets/sound/***.wav"
+            "SPRITE" : "",
+            "SOUND":
+            {
+                "MOVE" : "./assets/sound/***.wav",
+                "IMPACT" : "./assets/sound/***.wav",
+                "DEAD" : "./assets/sound/***.wav",
+                "FINSH" : "./assets/sound/***.wav"
+            }
         },
         "BIRD" :
-        {
-            "MOVE" : "./assets/sound/***.wav",
-            "IMPACT" : "./assets/sound/***.wav",
-            "DEAD" : "./assets/sound/***.wav",
-            "FINSH" : "./assets/sound/***.wav"
+        { "SPRITE" : "",
+            "SOUND":
+            {
+                "MOVE" : "./assets/sound/***.wav",
+                "IMPACT" : "./assets/sound/***.wav",
+                "DEAD" : "./assets/sound/***.wav",
+                "FINSH" : "./assets/sound/***.wav"
+            }
         },
         "DINOSAUR" :
         {
-            "MOVE" : "./assets/sound/***.wav",
-            "IMPACT" : "./assets/sound/***.wav",
-            "DEAD" : "./assets/sound/***.wav",
-            "FINSH" : "./assets/sound/***.wav"
+            "SPRITE" : "",
+            "SOUND":
+            {
+                "MOVE" : "./assets/sound/***.wav",
+                "IMPACT" : "./assets/sound/***.wav",
+                "DEAD" : "./assets/sound/***.wav",
+                "FINSH" : "./assets/sound/***.wav"
+            }
         },
         "TRUCK" :
         {
-            "MOVE" : "./assets/sound/***.wav",
-            "IMPACT" : "./assets/sound/***.wav",
-            "DEAD" : "./assets/sound/***.wav",
-            "FINSH" : "./assets/sound/***.wav"
+            "SPRITE" : "",
+            "SOUND":
+            {
+                "MOVE" : "./assets/sound/***.wav",
+                "IMPACT" : "./assets/sound/***.wav",
+                "DEAD" : "./assets/sound/***.wav",
+                "FINSH" : "./assets/sound/***.wav"
+            }
         },
-        "BACKGROUND" : "./assets/sound/Background_Music.wav"
+        "BACKGROUND" : {
+                "SPRITE" : "",
+                "SOUND": "./assets/sound/Background_Music.wav"
+        }
     }
 }
