@@ -12,7 +12,7 @@ CBird::CBird(olc::vf2d pos, int direction, olc::PixelGameEngine* pge){
 	this->direction = direction;
 	this->position = pos;
 	this->pge = pge;
-	sprite = std::make_unique<olc::Sprite>("./assets/bird1.png");
+	sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["BIRD"]["SPRITE"]));
 	decal = std::make_unique <olc::Decal>(sprite.get());
 }
 
