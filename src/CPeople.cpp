@@ -2,7 +2,7 @@
 
 CPeople::CPeople(olc::PixelGameEngine* pge) : pge(pge), Collider2D() {
 	position = { float(pge->ScreenWidth() / 2 - 10), float(pge->ScreenHeight() - 30) };
-	sprite = std::make_unique<olc::Sprite>("./assets/grandma.png");
+	sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["PEOPLE"]["SPRITE"]));
 
 	decal = std::make_unique <olc::Decal>(sprite.get());
 	isdead = false;
