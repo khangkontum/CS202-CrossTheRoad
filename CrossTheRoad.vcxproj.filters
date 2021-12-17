@@ -57,13 +57,13 @@
     <ClCompile Include="lib\olcPGEX_Sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SaveData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\AudioManage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\para.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SaveData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
