@@ -5,17 +5,17 @@ AudioManager::AudioManager()
 {
 	// cần chuyển âm thanh về định dạng 16 bit, sample rate 44100
 
-	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["PEOPLE"]["MOVE"], 1);
-	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample(para::MUSIC["PEOPLE"]["IMPACT"], 1);
-	listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample(para::MUSIC["PEOPLE"]["DEAD"], 1);
-	listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample(para::MUSIC["PEOPLE"]["FINSH"], 1);
+	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["MOVE"], 1);
+	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["IMPACT"], 1);
+	listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["DEAD"], 1);
+	listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["FINSH"], 1);
 
-	listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["CAR"]["MOVE"], 1);
-	listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["BIRD"]["MOVE"], 1);
-	listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["DINOSAUR"]["MOVE"], 1);
-	listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample(para::MUSIC["TRUCK"]["MOVE"], 1);
+	listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["CAR"]["SOUND"]["MOVE"], 1);
+	listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["BIRD"]["SOUND"]["MOVE"], 1);
+	listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["DINOSAUR"]["SOUND"]["MOVE"], 1);
+	listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["TRUCK"]["SOUND"]["MOVE"], 1);
 
-	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::MUSIC["BACKGROUND"], 0.2);
+	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::ASSETS["BACKGROUND"]["SOUND"], 0.2);
 
 	_fElapsedTime = 0;
 }
