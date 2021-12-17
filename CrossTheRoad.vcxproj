@@ -64,7 +64,6 @@
     <Image Include="assets\grass.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="database\game.json" />
     <None Include="doc\Final Project.pdf" />
   </ItemGroup>
