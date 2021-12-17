@@ -6,8 +6,7 @@ CGame::CGame() {
 
 CGame::~CGame()
 {
-	olc::SOUND::StopAll();
-	olc::SOUND::DestroyAudio();
+	AudioManager->DestroyAudio();
 }
 
 bool CGame::OnUserCreate() {
