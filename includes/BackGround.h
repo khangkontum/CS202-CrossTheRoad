@@ -1,5 +1,6 @@
 #pragma once
 #include "../lib/olcPixelGameEngine.h"
+#include "para.h"
 
 class Background {
 public:

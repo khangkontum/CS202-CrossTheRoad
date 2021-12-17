@@ -2,7 +2,7 @@
 
 Background::Background(olc::PixelGameEngine* pge) : pge(pge) {
 	//Loading assets
-	sprite = std::make_unique<olc::Sprite>("./assets/grass.png");
+	sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["BACKGROUND"]["SPRITE"]));
 	grassDecal = std::make_unique<olc::Decal>(sprite.get());
 }
 
