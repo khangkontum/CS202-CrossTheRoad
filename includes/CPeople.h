@@ -8,6 +8,7 @@
 #include "Level.h"
 #include "CVehicle.h"
 #include "AudioManager.h"
+#include "para.h"
 
 class CPeople : public Collider2D {
 public:
