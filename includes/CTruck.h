@@ -1,6 +1,7 @@
 #pragma once
 #include "CVehicle.h"
 #include "Level.h"
+#include "para.h"
 
 class CTruck : public CVehicle {
 public:
