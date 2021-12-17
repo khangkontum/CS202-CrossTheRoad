@@ -3,7 +3,7 @@
     {
         "PEOPLE" :
         {
-            "SPRITE" : "",
+            "SPRITE" : "./assets/grandma.png",
             "SOUND":
             {
                 "MOVE" : "./assets/sound/sfx_step_grass_l.wav",
@@ -14,7 +14,7 @@
         },
         "CAR" :
         {
-            "SPRITE" : "",
+            "SPRITE" : "./assets/car.png",
             "SOUND":
             {
                 "MOVE" : "./assets/sound/***.wav",
@@ -24,7 +24,8 @@
             }
         },
         "BIRD" :
-        { "SPRITE" : "",
+        { 
+            "SPRITE" : "./assets/bird1.png",
             "SOUND":
             {
                 "MOVE" : "./assets/sound/***.wav",
@@ -35,7 +36,7 @@
         },
         "DINOSAUR" :
         {
-            "SPRITE" : "",
+            "SPRITE" :"./assets/dinosaur4.png",
             "SOUND":
             {
                 "MOVE" : "./assets/sound/***.wav",
@@ -46,7 +47,7 @@
         },
         "TRUCK" :
         {
-            "SPRITE" : "",
+            "SPRITE" : "./assets/truck.png",
             "SOUND":
             {
                 "MOVE" : "./assets/sound/***.wav",
@@ -56,7 +57,7 @@
             }
         },
         "BACKGROUND" : {
-                "SPRITE" : "",
+                "SPRITE" : "./assets/grass.png",
                 "SOUND": "./assets/sound/Background_Music.wav"
         }
     }
