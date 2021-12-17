@@ -22,7 +22,6 @@
     <ClCompile Include="lib\olcPGEX_Sound.cpp" />
     <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SaveData.cpp" />
     <ClCompile Include="src\AudioManage.cpp" />
     <ClCompile Include="src\Background.cpp" />
     <ClCompile Include="src\CBird.cpp" />
@@ -36,6 +35,7 @@
     <ClCompile Include="src\CPeople.cpp" />
     <ClCompile Include="src\ObjectSpawner.cpp" />
     <ClCompile Include="src\para.cpp" />
+    <ClCompile Include="src\SaveData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\AudioManager.h" />
