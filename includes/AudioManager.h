@@ -28,7 +28,13 @@ public:
             m_instanceAudioManager = new AudioManager :
             m_instanceAudioManager;
     }
-
+    static void DestroyAudio()
+    {
+        olc::SOUND::StopAll();
+        olc::SOUND::DestroyAudio();
+        delete m_instanceAudioManager;
+        m_instanceAudioManager = nullptr;
+    }
 public:
 	void mute(bool _isMute);
 	void play(std::string name_obj, std::string action, bool isLoop);
