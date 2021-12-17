@@ -1,6 +1,7 @@
 #pragma once
 #include "CAnimal.h"
 #include "Level.h"
+#include "para.h"
 
 class CDinosaur : public CAnimal {
 public:
