@@ -4,12 +4,19 @@
 
 //#include "../Collider2D.h"
 #include "Level.h"
+#include <queue>
 #include "../lib/olcPixelGameEngine.h"
 
 template<class T>
 class ObjectSpawner{
 public:
-	ObjectSpawner(T defaultObject, olc::PixelGameEngine* pge) : defaultObject(defaultObject), pge(pge) {}
+	ObjectSpawner(T defaultObject, olc::PixelGameEngine* pge) : defaultObject(defaultObject), pge(pge) {
+		//Spawn list object to reuse
+		for (int i = 0; i < 20; i++) {
+			T newObject = defaultObject->clone(defaultObject->getPosition());
+			defaultList.push(newObject);
+		}
+	}
 
 	~ObjectSpawner() {
 		for (auto& object : objectList)
@@ -27,10 +34,11 @@ public:
 		for (auto object : objectList) {
 			object->move(fElapsedTime);
 		}
-		while (objectList.size() && objectList.back()->isOutScreen())	//Delete object out of screen
+		//Delete object out of screen (push back to default list)
+		while (objectList.size() && objectList.back()->isOutScreen())	
 		{
 			T object = objectList.back();
-			delete object;
+			defaultList.push(object);
 			objectList.pop_back();
 		}
 	}
@@ -58,7 +66,8 @@ public:
 		int numberSpawn = rand() % 5;
 		int previousX = 0;
 		for (int i = 0; i < numberSpawn; i++) {
-			T newObject;
+			T newObject = defaultList.front();
+			defaultList.pop();
 			olc::vf2d position = { 0, defaultObject->getPosition().y };
 			if (defaultObject->getDirection() > 0) {
 				position.x = previousX - defaultObject->size().x;
@@ -72,18 +81,20 @@ public:
 				}
 			}
 			previousX = position.x;
-			newObject = defaultObject->clone(position);
+			newObject->setPosition(position);
+			//newObject = defaultObject->clone(position);
 			objectList.push_front(newObject);
 		}
 	}
 
-	std::list<T> listObjectSpawner()
+	std::list<T>& listObjectSpawner()
 	{
 		return objectList;
 	}
 
 private:
 	std::list<T> objectList;
+	std::queue<T> defaultList;
 	olc::PixelGameEngine* pge;
 	T defaultObject;
 };

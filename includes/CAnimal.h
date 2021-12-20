@@ -14,7 +14,9 @@ public:
 	virtual CAnimal* clone(olc::vf2d pos) = 0;
 	virtual void getName() = 0;
 	virtual int getLane() = 0;
+	virtual void setPosition(olc::vf2d position) = 0;
 protected:
+	olc::vf2d initPosition;
 	olc::vf2d position;
 	olc::vf2d velocity;
 	olc::PixelGameEngine* pge;

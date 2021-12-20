@@ -39,9 +39,6 @@
     <ClCompile Include="src\CDinosaur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ObjectSpawner.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\CCar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
