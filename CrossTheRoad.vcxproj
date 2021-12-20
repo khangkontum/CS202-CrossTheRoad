@@ -37,6 +37,7 @@
     <ClCompile Include="src\CPeople.cpp" />
     <ClCompile Include="src\para.cpp" />
     <ClCompile Include="src\SaveData.cpp" />
+    <ClCompile Include="src\TrafficLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\AudioManager.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="includes\Menu.h" />
     <ClInclude Include="includes\ObjectSpawner.h" />
     <ClInclude Include="includes\para.h" />
+    <ClInclude Include="includes\TrafficLight.h" />
     <ClInclude Include="lib\json.hpp" />
     <ClInclude Include="lib\olcPGEX_Sound.h" />
     <ClInclude Include="lib\olcPixelGameEngine.h" />
@@ -67,6 +69,7 @@
     <Image Include="assets\grass.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="configs\config.json" />
     <None Include="database\game.json" />
     <None Include="doc\Final Project.pdf" />
   </ItemGroup>

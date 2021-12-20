@@ -16,87 +16,53 @@ Menu::Menu() {
 
 
 	//Ingame Menu
-	menu["main"].SetTable(1, 4);
-	menu["main"]["New Game"].SetID(0);
-	menu["main"]["Load Game"].SetID(2);
-	menu["main"]["Settings"].SetID(3);
-	menu["main"]["Exit"].SetID(100);
+	menu["main"]["Loading"].SetTable(1, 4);
+	menu["main"]["Loading"]["New Game"].SetID(0);
+	menu["main"]["Loading"]["Load Game"].SetID(2);
+	menu["main"]["Loading"]["Settings"].SetID(3);
+	menu["main"]["Loading"]["Exit"].SetID(100);
 
-	menuIngame["main"].SetTable(1, 5);
-	menuIngame["main"]["Continue"].SetID(5);
-	menuIngame["main"]["Save Game"].SetID(6);
-	menuIngame["main"]["Settings"].SetID(3);
-	menuIngame["main"]["Help"].SetID(4);
-	menuIngame["main"]["Exit"].SetID(100);
+	menu["main"]["Ingame"].SetTable(1, 5);
+	menu["main"]["Ingame"]["Continue"].SetID(5);
+	menu["main"]["Ingame"]["Save Game"].SetID(6);
+	menu["main"]["Ingame"]["Settings"].SetID(3);
+	menu["main"]["Ingame"]["Help"].SetID(4);
+	menu["main"]["Ingame"]["Exit"].SetID(100);
 
 	menu.Build();
-	menuIngame.Build();
-
-	manager.Open(&menu["main"]);
-	managerIngame.Open(&menuIngame["main"]);
-
-	/*
-	menu["main"].SetTable(1, 4);
-	menu["main"]["Attack"].SetID(101);
-
-	menu["main"]["Magic"].SetTable(1, 2);
-
-	menu["main"]["Magic"]["White"].SetTable(3, 6);
-	auto& menuWhiteMagic = menu["main"]["Magic"]["White"];
-	menuWhiteMagic["Cure"].SetID(401);
-	menuWhiteMagic["Cura"].SetID(402);
-	menuWhiteMagic["Curaga"].SetID(403);
-	menuWhiteMagic["Esuna"].SetID(404);
-
-	menu["main"]["Magic"]["Black"].SetTable(3, 4);
-	auto& menuBlackMagic = menu["main"]["Magic"]["Black"];
-	menuBlackMagic["Fire"].SetID(201);
-	menuBlackMagic["Fira"].SetID(202);
-	menuBlackMagic["Firaga"].SetID(203);
-	menuBlackMagic["Blizzara"].SetID(205).Enable(false);
-	menuBlackMagic["Blizzaga"].SetID(206).Enable(false);
-	menuBlackMagic["Blizzard"].SetID(204);
-	menuBlackMagic["Thunder"].SetID(207);
-	menuBlackMagic["Thundara"].SetID(208);
-	menuBlackMagic["Thundaga"].SetID(209);
-	menuBlackMagic["Quake"].SetID(210);
-	menuBlackMagic["Quake2"].SetID(211);
-	menuBlackMagic["Quake3"].SetID(212);
-	menuBlackMagic["Bio"].SetID(213);
-	menuBlackMagic["Bio1"].SetID(214);
-	menuBlackMagic["Bio2"].SetID(215);
-	menuBlackMagic["Demi"].SetID(216);
-	menuBlackMagic["Demi1"].SetID(217);
-	menuBlackMagic["Demi2"].SetID(218);
-
-	menu["main"]["Defend"].SetID(102);
-
-	menu["main"]["Items"].SetTable(2, 4).Enable(false);
-	menu["main"]["Items"]["Potion"].SetID(301);
-	menu["main"]["Items"]["Ether"].SetID(302);
-	menu["main"]["Items"]["Elixir"].SetID(303);
-
-	//menu["main"]["Escape"].SetID(103);
-	*/
 }
 
 bool Menu::interact(bool& isIngame, bool& stop) {
-	menumanager* manager;
+	menumanager* manager = &this->manager;
 	if (isIngame) {
-		manager = &this->managerIngame;
+		manager->Open(&menu["main"]["Ingame"]);
 	}
 	else {
-		manager = &this->manager;
+		manager->Open(&menu["main"]["Loading"]);
 	}
 	menuobject* command = nullptr;
-	std::string sLastAction;
-	if (pge->GetKey(olc::Key::M).bPressed)    manager->Open(&menu["main"]), AudioManager->play("MENU", "MOVE", false);;
+	std::string sLastAction = "null";
 
-	if (pge->GetKey(olc::Key::UP).bPressed)    manager->OnUp(), AudioManager->play("MENU", "PRESS", false);
-	if (pge->GetKey(olc::Key::DOWN).bPressed)  manager->OnDown(), AudioManager->play("MENU", "PRESS", false);;
-	if (pge->GetKey(olc::Key::LEFT).bPressed)  manager->OnLeft(), AudioManager->play("MENU", "PRESS", false);;
-	if (pge->GetKey(olc::Key::RIGHT).bPressed) manager->OnRight(), AudioManager->play("MENU", "PRESS", false);;
-	if (pge->GetKey(olc::Key::ENTER).bPressed) command = manager->OnConfirm(), AudioManager->play("MENU", "ENTER", false);
+	if (pge->GetKey(olc::Key::UP).bPressed) {
+		sLastAction = "PRESS";
+		manager->OnUp();
+	}
+	if (pge->GetKey(olc::Key::DOWN).bPressed) {
+		sLastAction = "PRESS";
+		manager->OnDown();
+	}
+	if (pge->GetKey(olc::Key::LEFT).bPressed) {
+		sLastAction = "PRESS";
+		manager->OnLeft();
+	}
+	if (pge->GetKey(olc::Key::RIGHT).bPressed) {
+		sLastAction = "PRESS";
+		manager->OnRight();
+	}
+	if (pge->GetKey(olc::Key::ENTER).bPressed) {
+		sLastAction = "ENTER";
+		command = manager->OnConfirm();
+	}
 	if (pge->GetKey(olc::Key::Z).bPressed)     manager->OnBack();
 
 	if (command != nullptr)
@@ -178,6 +144,8 @@ bool Menu::interact(bool& isIngame, bool& stop) {
 	
 
 	pge->Clear(olc::CREAM);
+	if (sLastAction != "null")
+		AudioManager->play("MENU", sLastAction, false);
 	manager->Draw(*pge, sprite, {30,30});
 	pge->DrawString(10, 200, sLastAction);
 	return true;
@@ -189,9 +157,6 @@ void Menu::init(olc::PixelGameEngine* pge, json* gameConfig, std::string* config
 	this->configPath = configPath;
 }
 
-void Menu::draw() {
-	manager.Draw(*pge, sprite, {30, 30});
-}
 
 bool Menu::execute(int command, bool& isIngame) {
 	

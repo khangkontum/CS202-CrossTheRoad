@@ -67,6 +67,7 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Loading.cpp">
+    <ClCompile Include="src\TrafficLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -132,6 +133,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\GameState.h">
+    <ClInclude Include="includes\TrafficLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -151,6 +153,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="doc\Final Project.pdf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="configs\config.json">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

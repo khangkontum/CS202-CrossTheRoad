@@ -17,7 +17,7 @@
 #include "ObjectSpawner.h"
 #include "Menu.h"
 #include "AudioManager.h"
-
+#include "TrafficLight.h"
 #include "para.h"
 #include "GameState.h"
 
@@ -67,6 +67,7 @@ private:
 	Level* level;
 	para* para = para->getPara();
 	AudioManager* AudioManager = AudioManager->getAudioManager();
+	TrafficLightManager* trafficLightManager;
 
 	void loadingDefault();
 	/*
