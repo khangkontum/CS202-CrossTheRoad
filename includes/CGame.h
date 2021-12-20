@@ -19,12 +19,13 @@
 #include "AudioManager.h"
 
 #include "para.h"
+#include "GameState.h"
 
 using json = nlohmann::json;
 
-class CGame : public olc::PixelGameEngine {
+class CGame {
 public:
-	CGame();
+	CGame(olc::PixelGameEngine* pge);
 	~CGame();
 	void drawGame();
 
@@ -54,6 +55,8 @@ private:
 	std::unique_ptr<CPeople> cPeople;
 	std::unique_ptr<Background> background;
 
+	olc::PixelGameEngine* pge;
+
 	json gameData;
 	json gameConfig;
 	std::string configPath;
@@ -78,4 +81,85 @@ public:
 	bool OnUserCreate();
 	bool OnUserUpdate(float fElapsedTime);
 };
+
+class Loading {
+public:
+	Loading(olc::PixelGameEngine* pge): pge(pge)
+	{	
+		std::cout << "LOADING" << std::endl;
+		sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["BACKGROUND"]["SPRITE"]));
+		grassDecal = std::make_unique<olc::Decal>(sprite.get());
+	}
+
+	void Draw()
+	{
+		//Draw grass
+		int h = pge->ScreenHeight();
+		int w = pge->ScreenWidth();
+		float grassH = sprite.get()->height * 0.05f;
+		float grassW = sprite.get()->width * 0.05f;
+		for (float j = 0; j < w; j += grassW) {
+			for (float i = float(0); i < float(h); i += grassH) {
+				pge->DrawDecal(olc::vf2d({ float(j), float(i) }), grassDecal.get(), { 0.05f, 0.05f });
+			}
+		}
+	}
+
+private:
+	std::unique_ptr<olc::Sprite> sprite;
+	std::unique_ptr<olc::Decal> grassDecal;
+	olc::PixelGameEngine* pge;
+};
+
+class Game : public olc::PixelGameEngine
+{
+public:
+	Game()
+	{
+		sAppName = "Road Crossing";
+	}
+	~Game()
+	{
+		delete CGameState;
+		CGameState = nullptr;
+		delete LoadingState;
+		LoadingState = nullptr;
+	}
+
+	bool OnUserCreate()
+	{
+		CGameState = new CGame(this);
+		LoadingState = new Loading(this);
+
+		//currentState_ = CGameState;
+		return true;
+	}
+
+	bool OnUserUpdate(float fElapsedTime)
+	{
+		if (!isLoadedCGame && init < 60)
+		{
+			LoadingState->Draw();
+			init++;
+			return true;
+		}
+
+		// Load Game
+		if (!isLoadedCGame)
+			CGameState->OnUserCreate(), 
+			isLoadedCGame = true;
+		else 
+			return CGameState->OnUserUpdate(fElapsedTime);
+		return true;
+	}
+
+private:
+	CGame* CGameState = nullptr;
+	Loading* LoadingState = nullptr;
+
+	bool isLoadedCGame = false;
+	int init = 0;
+	//GameState* currentState_;
+};
+
 #endif

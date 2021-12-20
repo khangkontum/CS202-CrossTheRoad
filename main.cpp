@@ -1,7 +1,7 @@
 ﻿#include "includes/CGame.h"
 int main()
 {
-	CGame demo;
+	Game demo;
 	int32_t width = 150;  
 	int32_t height = 200;
 	int32_t pixel_w = 4;
