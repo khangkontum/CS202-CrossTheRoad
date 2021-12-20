@@ -6,14 +6,20 @@ CBird::CBird(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::share
 	this->position = pos;
 	this->sprite = sprite;
 	this->decal = decal;
+	this->initPosition = pos;
 }
 
 CBird::CBird(olc::vf2d pos, int direction, olc::PixelGameEngine* pge){
 	this->direction = direction;
 	this->position = pos;
 	this->pge = pge;
+	this->initPosition = pos;
 	sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["BIRD"]["SPRITE"]));
 	decal = std::make_unique <olc::Decal>(sprite.get());
+}
+
+void CBird::setPosition(olc::vf2d position) {
+	this->position = position;
 }
 
 olc::vf2d CBird::size() {

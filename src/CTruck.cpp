@@ -5,6 +5,7 @@ CTruck::CTruck(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::sha
 	this->pge = pge;
 	this->position = pos;
 	this->sprite = sprite;
+	this->initPosition = pos;
 	this->decal = decal;
 }
 
@@ -12,8 +13,13 @@ CTruck::CTruck(olc::vf2d pos, int direction, olc::PixelGameEngine* pge) {
 	this->direction = direction;
 	this->position = pos;
 	this->pge = pge;
+	this->initPosition = pos;
 	sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["TRUCK"]["SPRITE"]));
 	decal = std::make_unique <olc::Decal>(sprite.get());
+}
+
+void CTruck::setPosition(olc::vf2d position) {
+	this->position = position;
 }
 
 olc::vf2d CTruck::size() {

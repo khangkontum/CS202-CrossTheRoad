@@ -19,4 +19,5 @@ public:
 	bool isOutScreen();
 	int getDirection();
 	void getName() { std::cout << "CDinosaur" << std::endl; }
+	void setPosition(olc::vf2d position);
 };

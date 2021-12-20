@@ -1,6 +1,4 @@
 ﻿#pragma once
-#ifndef CPEOPLE_H_
-#define CPEOPLE_H_
 
 #include "../lib/olcPixelGameEngine.h"
 #include "Collider2D.h"
@@ -60,5 +58,3 @@ bool isFinish();
 bool isDead();
 }
 */
-
-#endif

@@ -33,7 +33,6 @@
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\CPeople.cpp" />
-    <ClCompile Include="src\ObjectSpawner.cpp" />
     <ClCompile Include="src\para.cpp" />
     <ClCompile Include="src\SaveData.cpp" />
   </ItemGroup>

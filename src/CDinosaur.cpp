@@ -6,14 +6,20 @@ CDinosaur::CDinosaur(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, st
 	this->position = pos;
 	this->sprite = sprite;
 	this->decal = decal;
+	this->initPosition = pos;
 }
 
 CDinosaur::CDinosaur(olc::vf2d pos, int direction, olc::PixelGameEngine* pge) {
 	this->direction = direction;
 	this->position = pos;
 	this->pge = pge;
+	this->initPosition = pos;
 	sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["DINOSAUR"]["SPRITE"]));
 	decal = std::make_unique <olc::Decal>(sprite.get());
+}
+
+void CDinosaur::setPosition(olc::vf2d position) {
+	this->position = position;
 }
 
 olc::vf2d CDinosaur::size() {
