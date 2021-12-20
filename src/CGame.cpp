@@ -1,7 +1,8 @@
 ﻿#include "../includes/CGame.h"
 
-CGame::CGame() {
-	sAppName = "Road Crossing";
+CGame::CGame(olc::PixelGameEngine* pge) {
+	this->pge = pge;
+	//sAppName = "Road Crossing";
 }
 
 CGame::~CGame()
@@ -26,11 +27,11 @@ bool CGame::OnUserCreate() {
 	stop = false;
 	isIngame = false;
 	menu = &Menu::getInstance();
-	menu->init(this, &gameConfig, &configPath);
-	cPeople = std::make_unique<CPeople>(this);
-	background = std::make_unique<Background>(this);
+	menu->init(pge, &gameConfig, &configPath);
+	cPeople = std::make_unique<CPeople>(pge);
+	background = std::make_unique<Background>(pge);
 	trafficLightManager = &TrafficLightManager::getInstance();
-	trafficLightManager->init(this);
+	trafficLightManager->init(pge);
 
 	level = &Level::getInstance();
 	level->setDefaultGap(cPeople->size().x);
@@ -54,7 +55,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 	}
 
 	//Pause
-	if (GetKey(olc::Key::ESCAPE).bPressed) {
+	if (pge->GetKey(olc::Key::ESCAPE).bPressed) {
 		if (stop)
 			std::cout << "Unpaused\n";
 		else
@@ -66,21 +67,21 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 	}
 
 	//Passed Level
-	if (GetKey(olc::Key::ENTER).bPressed && cPeople.get()->isFinish()) {
+	if (pge->GetKey(olc::Key::ENTER).bPressed && cPeople.get()->isFinish()) {
 		cPeople.get()->reset();
 		level->levelUp();
 		resetState = true;
 	}
 
 	//Reset
-	if (GetKey(olc::Key::R).bPressed) {
+	if (pge->GetKey(olc::Key::R).bPressed) {
 		std::cout << "Restart\n";
 		cPeople.get()->reset();
 		resetState = true;
 	}
 
 	//Save game
-	if (GetKey(olc::Key::L).bPressed) {
+	if (pge->GetKey(olc::Key::L).bPressed) {
 		while (configPath == "null") {
 			std::cout << "Path to save game: ";
 			std::cin >> configPath;
@@ -95,19 +96,19 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 	bool DEBUG = false;  // DEBUG COLLISION
 
 	if (!cPeople.get()->isDead()) {
-		if (DEBUG) Clear(olc::CREAM);
+		if (DEBUG) pge->Clear(olc::CREAM);
 
 		//Handle user input
-		if (GetKey(olc::Key::W).bHeld || GetKey(olc::Key::UP).bHeld)
+		if (pge->GetKey(olc::Key::W).bHeld || pge->GetKey(olc::Key::UP).bHeld)
 			cPeople.get()->Up(fElapsedTime);
-		if (GetKey(olc::Key::S).bHeld || GetKey(olc::Key::DOWN).bHeld)
+		if (pge->GetKey(olc::Key::S).bHeld || pge->GetKey(olc::Key::DOWN).bHeld)
 			cPeople.get()->Down(fElapsedTime);
-		if (GetKey(olc::Key::A).bHeld || GetKey(olc::Key::LEFT).bHeld)
+		if (pge->GetKey(olc::Key::A).bHeld || pge->GetKey(olc::Key::LEFT).bHeld)
 			cPeople.get()->Left(fElapsedTime);
-		if (GetKey(olc::Key::D).bHeld || GetKey(olc::Key::RIGHT).bHeld)
+		if (pge->GetKey(olc::Key::D).bHeld || pge->GetKey(olc::Key::RIGHT).bHeld)
 			cPeople.get()->Right(fElapsedTime);
 
-		if (DEBUG) DrawRect(cPeople->getPosition(), cPeople->size(), olc::BLUE);
+		if (DEBUG) pge->DrawRect(cPeople->getPosition(), cPeople->size(), olc::BLUE);
 
 		//Move object
 		birdSpawner.get()->move(fElapsedTime);
@@ -126,25 +127,25 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();    // nếu va chạm, in ra tên object bị va chạm
-			if (DEBUG) DrawRect(obj->getPosition(), obj->size(), olc::YELLOW);
+			if (DEBUG) pge->DrawRect(obj->getPosition(), obj->size(), olc::YELLOW);
 		}
 		for (auto obj : dinosaurSpawner.get()->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
-			if (DEBUG) DrawRect(obj->getPosition(), obj->size(), olc::GREEN);
+			if (DEBUG) pge->DrawRect(obj->getPosition(), obj->size(), olc::GREEN);
 		}
 		for (auto obj : truckSpawner.get()->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
-			if (DEBUG) DrawRect(obj->getPosition(), obj->size(), olc::RED);
+			if (DEBUG) pge->DrawRect(obj->getPosition(), obj->size(), olc::RED);
 		}
 		for (auto obj : carSpawner.get()->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
-			if (DEBUG) DrawRect(obj->getPosition(), obj->size(), olc::BLUE);
+			if (DEBUG) pge->DrawRect(obj->getPosition(), obj->size(), olc::BLUE);
 		}
 	}
 	else {
@@ -179,18 +180,18 @@ void CGame::loadingDefault() {
 	fi >> gameData;
 
 	//Loading default bird
-	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * ScreenHeight() }), 1, this);
-	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, this);
+	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * pge->ScreenHeight() }), 1, pge);
+	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, pge);
 
 	//Loading default dinosaur
-	CDinosaur* dinosaur = new CDinosaur(olc::vf2d({ 0, float(gameData["CDinosaur"]) * ScreenHeight() }), -1, this);
-	dinosaurSpawner = std::make_unique<ObjectSpawner<CDinosaur*>>(dinosaur, this);
+	CDinosaur* dinosaur = new CDinosaur(olc::vf2d({ 0, float(gameData["CDinosaur"]) * pge->ScreenHeight() }), -1, pge);
+	dinosaurSpawner = std::make_unique<ObjectSpawner<CDinosaur*>>(dinosaur, pge);
 
 	//Loading default car
-	CCar* car = new CCar(olc::vf2d({ 0, float(gameData["CCar"]) * ScreenHeight() }), -1, this);
-	carSpawner = std::make_unique<ObjectSpawner<CCar*>>(car, this);
+	CCar* car = new CCar(olc::vf2d({ 0, float(gameData["CCar"]) * pge->ScreenHeight() }), -1, pge);
+	carSpawner = std::make_unique<ObjectSpawner<CCar*>>(car, pge);
 
 	//Loading default truck
-	CTruck* truck = new CTruck(olc::vf2d({ 0, float(gameData["CTruck"]) * ScreenHeight() }), 1, this);
-	truckSpawner = std::make_unique<ObjectSpawner<CTruck*>>(truck, this);
+	CTruck* truck = new CTruck(olc::vf2d({ 0, float(gameData["CTruck"]) * pge->ScreenHeight() }), 1, pge);
+	truckSpawner = std::make_unique<ObjectSpawner<CTruck*>>(truck, pge);
 }
