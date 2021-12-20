@@ -26,13 +26,13 @@ void Level::setDefaultGap(float gap) {
 }
 
 float Level::getGapBetweenObject() {
-	return std::max(gap * 1.25, double(gap * (7 - level + 1)));
+	return std::max(gap * 1.75, double(gap * (7 - level + 1)));
 }
 
 float Level::getSpeed(std::string obj) {
 	float speed = 0;
 	if (obj == "people")
-		speed = _peopleSpeed;
+		speed = _peopleSpeed+1;
 	if (obj == "bird")
 		speed = _birdSpeed;
 	if (obj == "car")
