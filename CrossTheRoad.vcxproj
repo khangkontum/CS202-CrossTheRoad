@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="includes\Loading.h" />
     <ClCompile Include="lib\olcPGEX_Sound.cpp" />
     <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="src\Collider2D.cpp" />
     <ClCompile Include="src\CTruck.cpp" />
     <ClCompile Include="src\Level.cpp" />
+    <ClCompile Include="src\Loading.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\CPeople.cpp" />
     <ClCompile Include="src\para.cpp" />
@@ -48,6 +50,8 @@
     <ClInclude Include="includes\CGame.h" />
     <ClInclude Include="includes\CTruck.h" />
     <ClInclude Include="includes\CVehicle.h" />
+    <ClInclude Include="includes\Game.h" />
+    <ClInclude Include="includes\GameState.h" />
     <ClInclude Include="includes\Level.h" />
     <ClInclude Include="includes\Menu.h" />
     <ClInclude Include="includes\ObjectSpawner.h" />
