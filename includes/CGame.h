@@ -138,6 +138,14 @@ public:
 
 	bool OnUserUpdate(float fElapsedTime)
 	{
+		// State Pattern
+		// Hiện tại đang dùng if ... else ┌( ಠ_ಠ)┘
+		// 
+		// Đợi khoảng 1s để màn hình nó hiện lên
+		// Sau khi hiện lên hình thì mới bắt đầu load game
+		// 
+		// Hiện tại đang bug xí ¯\_(ツ)_/¯
+		// Fix xong bug và tối ưu lại rồi chia file
 		if (!isLoadedCGame && init < 60)
 		{
 			LoadingState->Draw();
