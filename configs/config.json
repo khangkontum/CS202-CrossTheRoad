@@ -59,6 +59,13 @@
         "BACKGROUND" : {
                 "SPRITE" : "./assets/grass.png",
                 "SOUND": "./assets/sound/Background_Music.wav"
+        },
+        "MENU" : {
+            "SOUND" : {
+                "MOVE" : "./assets/sound/Menu_Selection.wav",
+                "ENTER" : "./assets/sound/Menu_Game_Button_Click.wav",
+                "OPEN" : "./assets/sound/Menu_Game_Button_Click.wav"
+            }
         }
     }
 }
