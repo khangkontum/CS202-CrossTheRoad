@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="includes\Loading.h" />
     <ClCompile Include="lib\olcPGEX_Sound.cpp" />
     <ClCompile Include="lib\olcPixelGameEngine.cpp" />
     <ClCompile Include="main.cpp" />
@@ -54,6 +53,7 @@
     <ClInclude Include="includes\Game.h" />
     <ClInclude Include="includes\GameState.h" />
     <ClInclude Include="includes\Level.h" />
+    <ClInclude Include="includes\Loading.h" />
     <ClInclude Include="includes\Menu.h" />
     <ClInclude Include="includes\ObjectSpawner.h" />
     <ClInclude Include="includes\para.h" />
@@ -69,7 +69,6 @@
     <Image Include="assets\grass.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="configs\config.json" />
     <None Include="database\game.json" />
     <None Include="doc\Final Project.pdf" />
   </ItemGroup>
