@@ -3,7 +3,7 @@
 #include "../lib/olcPixelGameEngine.h"
 #include "../lib/json.hpp"
 #include <unordered_map>
-
+#include "AudioManager.h"
 
 constexpr int32_t nPatch = 8;
 
@@ -369,4 +369,5 @@ private:
 	menuobject menu;
 	menumanager managerIngame;
 	menuobject menuIngame;
+	AudioManager* AudioManager = AudioManager->getAudioManager();
 };

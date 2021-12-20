@@ -15,6 +15,10 @@ AudioManager::AudioManager()
 	listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["DINOSAUR"]["SOUND"]["MOVE"], 1);
 	listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["TRUCK"]["SOUND"]["MOVE"], 1);
 
+	listSound[{"MENU", "PRESS"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["MOVE"], 1);
+	listSound[{"MENU", "ENTER"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["ENTER"], 1);
+	listSound[{"MENU", "OPEN"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["OPEN"], 1);
+
 	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::ASSETS["BACKGROUND"]["SOUND"], 0.2);
 
 	_fElapsedTime = 0;
@@ -36,9 +40,9 @@ void AudioManager::play(std::string name_obj, std::string action, bool isLoop)
 
 	float lastUsed = (float)(clock() - listSound[{name_obj, action}].lastUsed) / CLOCKS_PER_SEC;
 
-	// sau 0.5s thì mới cho phép gọi lại âm thanh
+	// sau 0.2s thì mới cho phép gọi lại âm thanh
 	// tránh trường hợp gọi liên tục, trùng âm thanh
-	if (lastUsed > 0.5f) {
+	if (lastUsed > 0.2f) {
 		olc::SOUND::PlaySample(id, isLoop);
 		listSound[{name_obj, action}].lastUsed = clock();
 	}

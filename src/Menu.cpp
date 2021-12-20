@@ -90,13 +90,13 @@ bool Menu::interact(bool& isIngame, bool& stop) {
 	}
 	menuobject* command = nullptr;
 	std::string sLastAction;
-	if (pge->GetKey(olc::Key::M).bPressed)    manager->Open(&menu["main"]);
+	if (pge->GetKey(olc::Key::M).bPressed)    manager->Open(&menu["main"]), AudioManager->play("MENU", "MOVE", false);;
 
-	if (pge->GetKey(olc::Key::UP).bPressed)    manager->OnUp();
-	if (pge->GetKey(olc::Key::DOWN).bPressed)  manager->OnDown();
-	if (pge->GetKey(olc::Key::LEFT).bPressed)  manager->OnLeft();
-	if (pge->GetKey(olc::Key::RIGHT).bPressed) manager->OnRight();
-	if (pge->GetKey(olc::Key::ENTER).bPressed) command = manager->OnConfirm();
+	if (pge->GetKey(olc::Key::UP).bPressed)    manager->OnUp(), AudioManager->play("MENU", "PRESS", false);
+	if (pge->GetKey(olc::Key::DOWN).bPressed)  manager->OnDown(), AudioManager->play("MENU", "PRESS", false);;
+	if (pge->GetKey(olc::Key::LEFT).bPressed)  manager->OnLeft(), AudioManager->play("MENU", "PRESS", false);;
+	if (pge->GetKey(olc::Key::RIGHT).bPressed) manager->OnRight(), AudioManager->play("MENU", "PRESS", false);;
+	if (pge->GetKey(olc::Key::ENTER).bPressed) command = manager->OnConfirm(), AudioManager->play("MENU", "ENTER", false);
 	if (pge->GetKey(olc::Key::Z).bPressed)     manager->OnBack();
 
 	if (command != nullptr)
