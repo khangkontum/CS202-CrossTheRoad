@@ -23,52 +23,14 @@ bool CGame::OnUserCreate() {
 	resetState = true;
 	configPath = "null";
 
-	/*
-	bool ok = true;
-	do {
-
-		std::cout << "1. New game.\n";
-		std::cout << "2. Load game.\n";
-		std::cout << "3. Settings.\n";
-		std::cout << "Input: ";
-		std::cin >> option;
-		ok = false;
-		switch (option) {
-		case 1:
-		{
-			gameConfig["level"] = 1;
-			configPath = "null";
-			break;
-		}
-		case 2:
-		{
-			std::cout << "Path to saved game: ";
-			std::cin >> configPath;
-			std::ifstream fi(configPath);
-			if (!fi) {
-				std::cout << "File does not exsist. Please try again.\n";
-				ok = true;
-				break;
-			}
-			fi >> gameConfig;
-			fi.close();
-			break;
-		}
-		default:
-			std::cout << "Wrong option. Please choose again.\n";
-			ok = true;
-			break;
-		}
-	} while (ok);
-	*/
-
-
 	stop = false;
 	isIngame = false;
 	menu = &Menu::getInstance();
 	menu->init(this, &gameConfig, &configPath);
 	cPeople = std::make_unique<CPeople>(this);
 	background = std::make_unique<Background>(this);
+	trafficLightManager = &TrafficLightManager::getInstance();
+	trafficLightManager->init(this);
 
 	level = &Level::getInstance();
 	level->setDefaultGap(cPeople->size().x);
@@ -81,6 +43,8 @@ bool CGame::OnUserCreate() {
 }
 
 bool CGame::OnUserUpdate(float fElapsedTime) {
+	std::cout << trafficLightManager->getState(0) << '\n';
+	std::cout << trafficLightManager->getState(1) << '\n';
 	if (!isIngame) {
 		return menu->interact(isIngame, stop);
 	}
@@ -206,6 +170,8 @@ void CGame::drawGame() {
 	cPeople->Draw();
 
 	truckSpawner.get()->Draw();
+
+	trafficLightManager->Draw();
 }
 
 void CGame::loadingDefault() {

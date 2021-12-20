@@ -17,7 +17,7 @@
 #include "ObjectSpawner.h"
 #include "Menu.h"
 #include "AudioManager.h"
-
+#include "TrafficLight.h"
 #include "para.h"
 
 using json = nlohmann::json;
@@ -64,6 +64,7 @@ private:
 	Level* level;
 	para* para = para->getPara();
 	AudioManager* AudioManager = AudioManager->getAudioManager();
+	TrafficLightManager* trafficLightManager;
 
 	void loadingDefault();
 	/*

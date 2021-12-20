@@ -63,6 +63,9 @@
     <ClCompile Include="src\SaveData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\TrafficLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\CGame.h">
@@ -122,6 +125,9 @@
     <ClInclude Include="includes\para.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="includes\TrafficLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\grandma.png">
@@ -139,6 +145,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="doc\Final Project.pdf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="configs\config.json">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -323,9 +323,11 @@ public:
 	}
 
 	void Draw(olc::PixelGameEngine& pge, olc::Sprite* sprGFX, olc::vi2d vScreenOffset)
-	{
+	{ 
 		if (panels.empty()) return;
 
+
+		//AudioManager->play("MENU", Sound, false);
 		// Draw Visible Menu System
 		for (auto& p : panels)
 		{
@@ -367,7 +369,5 @@ private:
 	std::string* configPath;
 	menumanager manager;
 	menuobject menu;
-	menumanager managerIngame;
-	menuobject menuIngame;
 	AudioManager* AudioManager = AudioManager->getAudioManager();
 };
