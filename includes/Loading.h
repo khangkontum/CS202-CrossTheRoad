@@ -2,12 +2,13 @@
 
 #include "../lib/olcPixelGameEngine.h"
 #include "para.h"
+#include "GameState.h"
 
-class Loading {
+class Loading : public GameState {
 public:
-	Loading(olc::PixelGameEngine* pge)
+	Loading(olc::PixelGameEngine* pge) : pge(pge)
 	{
-		this->pge = pge;
+		std::cout << "LOADING" << std::endl;
 		sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["BACKGROUND"]["SPRITE"]));
 		grassDecal = std::make_unique<olc::Decal>(sprite.get());
 	}
@@ -24,6 +25,17 @@ public:
 				pge->DrawDecal(olc::vf2d({ float(j), float(i) }), grassDecal.get(), { 0.05f, 0.05f });
 			}
 		}
+	}
+
+public:
+	bool OnUserCreate()
+	{
+		return true;
+	}
+	bool OnUserUpdate(float fElapsedTime)
+	{
+		Draw();
+		return true;
 	}
 
 private:

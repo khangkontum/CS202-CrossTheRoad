@@ -1,6 +1,4 @@
-﻿//#pragma once
-#ifndef CGAME_H_
-#define CGAME_H_
+﻿#pragma once
 
 #include "../lib/olcPixelGameEngine.h"
 #include "../lib/olcPGEX_Sound.h"
@@ -23,7 +21,7 @@
 
 using json = nlohmann::json;
 
-class CGame {
+class CGame : public GameState {
 public:
 	CGame(olc::PixelGameEngine* pge);
 	~CGame();
@@ -82,93 +80,3 @@ public:
 	bool OnUserCreate();
 	bool OnUserUpdate(float fElapsedTime);
 };
-
-class Loading {
-public:
-	Loading(olc::PixelGameEngine* pge): pge(pge)
-	{	
-		std::cout << "LOADING" << std::endl;
-		sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["BACKGROUND"]["SPRITE"]));
-		grassDecal = std::make_unique<olc::Decal>(sprite.get());
-	}
-
-	void Draw()
-	{
-		//Draw grass
-		int h = pge->ScreenHeight();
-		int w = pge->ScreenWidth();
-		float grassH = sprite.get()->height * 0.05f;
-		float grassW = sprite.get()->width * 0.05f;
-		for (float j = 0; j < w; j += grassW) {
-			for (float i = float(0); i < float(h); i += grassH) {
-				pge->DrawDecal(olc::vf2d({ float(j), float(i) }), grassDecal.get(), { 0.05f, 0.05f });
-			}
-		}
-	}
-
-private:
-	std::unique_ptr<olc::Sprite> sprite;
-	std::unique_ptr<olc::Decal> grassDecal;
-	olc::PixelGameEngine* pge;
-};
-
-class Game : public olc::PixelGameEngine
-{
-public:
-	Game()
-	{
-		sAppName = "Road Crossing";
-	}
-	~Game()
-	{
-		delete CGameState;
-		CGameState = nullptr;
-		delete LoadingState;
-		LoadingState = nullptr;
-	}
-
-	bool OnUserCreate()
-	{
-		CGameState = new CGame(this);
-		LoadingState = new Loading(this);
-
-		//currentState_ = CGameState;
-		return true;
-	}
-
-	bool OnUserUpdate(float fElapsedTime)
-	{
-		// State Pattern
-		// Hiện tại đang dùng if ... else ┌( ಠ_ಠ)┘
-		// 
-		// Đợi khoảng 1s để màn hình nó hiện lên
-		// Sau khi hiện lên hình thì mới bắt đầu load game
-		// 
-		// Hiện tại đang bug xí ¯\_(ツ)_/¯
-		// Fix xong bug và tối ưu lại rồi chia file
-		if (!isLoadedCGame && init < 60)
-		{
-			LoadingState->Draw();
-			init++;
-			return true;
-		}
-
-		// Load Game
-		if (!isLoadedCGame)
-			CGameState->OnUserCreate(), 
-			isLoadedCGame = true;
-		else 
-			return CGameState->OnUserUpdate(fElapsedTime);
-		return true;
-	}
-
-private:
-	CGame* CGameState = nullptr;
-	Loading* LoadingState = nullptr;
-
-	bool isLoadedCGame = false;
-	int init = 0;
-	//GameState* currentState_;
-};
-
-#endif
