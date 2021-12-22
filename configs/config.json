@@ -58,7 +58,7 @@
         },
         "BACKGROUND" : {
                 "SPRITE" : "./assets/grass.png",
-                "SOUND": ["./assets/sound/bgm.wav", 1]
+                "SOUND": ["./assets/sound/bgm.wav", 0.05]
         },
         "MENU": {
           "SOUND": {
