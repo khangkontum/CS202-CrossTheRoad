@@ -29,7 +29,9 @@ void AudioManager::mute(bool _isMute)
 	if (_isMute)
 		olc::SOUND::StopAll();
 	isMute = _isMute;
-	//stopBackgound(_isMute);
+	isPlayingBackground = false;
+	if(!isMuteBackground)
+		stopBackground(_isMute);
 }
 
 void AudioManager::play(std::string name_obj, std::string action, bool isLoop)
@@ -61,7 +63,7 @@ void AudioManager::stop(std::string name_obj, std::string action)
 
 void AudioManager::stopBackground(bool _isMute)
 {
-	if (_isMute || isMute || isMuteBackground)
+	if (_isMute || isMute)
 	{
 		stop("BACKGROUND", "");
 		isPlayingBackground = false;

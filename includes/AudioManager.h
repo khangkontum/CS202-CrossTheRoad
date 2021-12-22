@@ -37,6 +37,8 @@ public:
     }
 public:
 	void mute(bool _isMute);
+    bool is_Mute() { return isMute; };
+    bool is_MuteBackground() { return isMuteBackground; };
 	void play(std::string name_obj, std::string action, bool isLoop);
     void stop(std::string name_obj, std::string action);
     void stopBackground(bool _isMute);

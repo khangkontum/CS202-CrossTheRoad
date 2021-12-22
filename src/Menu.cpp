@@ -29,16 +29,26 @@ Menu::Menu() {
 	menu["main"]["Ingame"]["Help"].SetID(4);
 	menu["main"]["Ingame"]["Exit"].SetID(100);
 
+	menu["main"]["Settings"].SetTable(1, 3);
+	menu["main"]["Settings"]["Mute"].SetID(30);
+	menu["main"]["Settings"]["Off Music"].SetID(31);
+	menu["main"]["Settings"]["Back"].SetID(101);
+
 	menu.Build();
 }
 
-bool Menu::interact(bool& isIngame, bool& stop) {
+bool Menu::interact(int& isIngame, bool& stop) {
 	menumanager* manager = &this->manager;
-	if (isIngame) {
+	if (isIngame == 0) {
+		manager->Open(&menu["main"]["Loading"]);
+	}
+	else if (isIngame == 1)
+	{
 		manager->Open(&menu["main"]["Ingame"]);
 	}
-	else {
-		manager->Open(&menu["main"]["Loading"]);
+	else if (isIngame == 2)
+	{
+		manager->Open(&menu["main"]["Settings"]);
 	}
 	menuobject* command = nullptr;
 	std::string sLastAction = "null";
@@ -79,8 +89,8 @@ bool Menu::interact(bool& isIngame, bool& stop) {
 			break;
 		}
 		case 1:
-			if (!isIngame)
-				isIngame = true;
+			if (isIngame == 0)
+				isIngame = 1;
 			break;
 		case 2:
 		{
@@ -98,8 +108,8 @@ bool Menu::interact(bool& isIngame, bool& stop) {
 			break;
 		}
 		case 3:
-			if (!isIngame)
-				isIngame = true;
+			if (isIngame != 2)
+				isIngame = 2;
 			break;
 		case 4:
 		{
@@ -133,6 +143,15 @@ bool Menu::interact(bool& isIngame, bool& stop) {
 			std::cout << "Saved\n";
 			break;
 		}
+		case 30:
+			AudioManager->mute(!AudioManager->is_Mute());
+			break;
+		case 31:
+			AudioManager->stopBackground(!AudioManager->is_MuteBackground());
+			break;
+		case 101:
+			isIngame = 1;
+			break;
 		case 100:
 			return false;
 		default:

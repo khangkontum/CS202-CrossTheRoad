@@ -353,7 +353,7 @@ using json = nlohmann::json;
 class Menu {
 public:
 	void draw();
-	bool interact(bool& isIngame, bool& stop);
+	bool interact(int& isIngame, bool& stop);
 	void init(olc::PixelGameEngine* pge, json* gameConfig, std::string* configPath);
 	static Menu& getInstance();
 	
