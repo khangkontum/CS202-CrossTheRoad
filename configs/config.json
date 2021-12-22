@@ -7,8 +7,8 @@
             "SOUND":
             {
                 "MOVE" : "./assets/sound/sfx_step_grass_l.wav",
-                "IMPACT" : "./assets/sound/Hitting_Wall.wav",
-                "DEAD" : "./assets/sound/***.wav",
+                "IMPACT" : "./assets/sound/crash.wav",
+                "DEAD" : "./assets/sound/wahwahwah.wav",
                 "FINSH" : "./assets/sound/***.wav"
             }
         },
@@ -17,7 +17,7 @@
             "SPRITE" : "./assets/car.png",
             "SOUND":
             {
-                "MOVE" : "./assets/sound/***.wav",
+                "MOVE" : "./assets/sound/car.wav",
                 "IMPACT" : "./assets/sound/***.wav",
                 "DEAD" : "./assets/sound/***.wav",
                 "FINSH" : "./assets/sound/***.wav"
@@ -58,13 +58,13 @@
         },
         "BACKGROUND" : {
                 "SPRITE" : "./assets/grass.png",
-                "SOUND": "./assets/sound/Background_Music.wav"
+                "SOUND": "./assets/sound/bgm.wav"
         },
         "MENU": {
           "SOUND": {
-            "MOVE": "./assets/sound/Menu_Selection.wav",
-            "ENTER": "./assets/sound/Menu_Game_Button_Click.wav",
-            "OPEN": "./assets/sound/Menu_Game_Button_Click.wav"
+            "MOVE": "./assets/sound/menu-hover.wav",
+            "ENTER": "./assets/sound/menu-start.wav",
+            "OPEN": "./assets/sound/menu-expand.wav"
           }
         },
         "TRAFFIC": {
