@@ -118,7 +118,7 @@
             "SPRITE": "./assets/grass.png",
             "SOUND": [
                 "./assets/sound/bgm.wav",
-                0.05
+                0.1
             ]
         },
         "MENU": {
