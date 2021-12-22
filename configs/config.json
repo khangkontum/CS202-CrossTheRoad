@@ -1,83 +1,148 @@
-{   
-    "ASSETS" :
-    {
-        "PEOPLE" :
-        {
-            "SPRITE" : "./assets/grandma.png",
-            "SOUND":
-            {
-                "MOVE" : ["./assets/sound/sfx_step_grass_l.wav", 1],
-                "IMPACT" : ["./assets/sound/crash.wav", 1],
-                "DEAD" : ["./assets/sound/wahwahwah.wav", 1],
-                "FINSH" : ["./assets/sound/***.wav", 1]
+{
+    "CONFIG": {
+        "TRAFFIC": {
+            "TIME": {
+                "RED": 5,
+                "YELLOW": 2,
+                "GREEN": 6
+            }
+        }
+    },
+    "ASSETS": {
+        "PEOPLE": {
+            "SPRITE": "./assets/grandma.png",
+            "SOUND": {
+                "MOVE": [
+                    "./assets/sound/sfx_step_grass_l.wav",
+                    1
+                ],
+                "IMPACT": [
+                    "./assets/sound/crash.wav",
+                    1
+                ],
+                "DEAD": [
+                    "./assets/sound/wahwahwah.wav",
+                    1
+                ],
+                "FINSH": [
+                    "./assets/sound/***.wav",
+                    1
+                ]
             }
         },
-        "CAR" :
-        {
-            "SPRITE" : "./assets/car.png",
-            "SOUND":
-            {
-                "MOVE" : ["./assets/sound/car.wav", 1],
-                "IMPACT" : ["./assets/sound/***.wav", 1],
-                "DEAD" : ["./assets/sound/***.wav", 1],
-                "FINSH" : ["./assets/sound/***.wav", 1]
+        "CAR": {
+            "SPRITE": "./assets/car.png",
+            "SOUND": {
+                "MOVE": [
+                    "./assets/sound/car.wav",
+                    1
+                ],
+                "IMPACT": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "DEAD": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "FINSH": [
+                    "./assets/sound/***.wav",
+                    1
+                ]
             }
         },
-        "BIRD" :
-        { 
-            "SPRITE" : "./assets/bird1.png",
-            "SOUND":
-            {
-                "MOVE" : ["./assets/sound/***.wav", 1],
-                "IMPACT" : ["./assets/sound/***.wav", 1],
-                "DEAD" : ["./assets/sound/***.wav", 1],
-                "FINSH" : ["./assets/sound/***.wav", 1]
+        "BIRD": {
+            "SPRITE": "./assets/bird1.png",
+            "SOUND": {
+                "MOVE": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "IMPACT": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "DEAD": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "FINSH": [
+                    "./assets/sound/***.wav",
+                    1
+                ]
             }
         },
-        "DINOSAUR" :
-        {
-            "SPRITE" :"./assets/dinosaur4.png",
-            "SOUND":
-            {
-                "MOVE" : ["./assets/sound/***.wav", 1],
-                "IMPACT" : ["./assets/sound/***.wav", 1],
-                "DEAD" : ["./assets/sound/***.wav", 1],
-                "FINSH" : ["./assets/sound/***.wav", 1]
+        "DINOSAUR": {
+            "SPRITE": "./assets/dinosaur4.png",
+            "SOUND": {
+                "MOVE": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "IMPACT": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "DEAD": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "FINSH": [
+                    "./assets/sound/***.wav",
+                    1
+                ]
             }
         },
-        "TRUCK" :
-        {
-            "SPRITE" : "./assets/truck.png",
-            "SOUND":
-            {
-                "MOVE" : ["./assets/sound/***.wav", 1],
-                "IMPACT" : ["./assets/sound/***.wav", 1],
-                "DEAD" : ["./assets/sound/***.wav", 1],
-                "FINSH" : ["./assets/sound/***.wav", 1]
+        "TRUCK": {
+            "SPRITE": "./assets/truck.png",
+            "SOUND": {
+                "MOVE": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "IMPACT": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "DEAD": [
+                    "./assets/sound/***.wav",
+                    1
+                ],
+                "FINSH": [
+                    "./assets/sound/***.wav",
+                    1
+                ]
             }
         },
-        "BACKGROUND" : {
-                "SPRITE" : "./assets/grass.png",
-                "SOUND": ["./assets/sound/bgm.wav", 0.05]
+        "BACKGROUND": {
+            "SPRITE": "./assets/grass.png",
+            "SOUND": [
+                "./assets/sound/bgm.wav",
+                0.05
+            ]
         },
         "MENU": {
-          "SOUND": {
-            "MOVE": ["./assets/sound/menu-hover.wav", 1],
-            "ENTER": ["./assets/sound/menu-start.wav", 1],
-            "OPEN": ["./assets/sound/menu-expand.wav", 1]
-          }
+            "SOUND": {
+                "MOVE": [
+                    "./assets/sound/menu-hover.wav",
+                    1
+                ],
+                "ENTER": [
+                    "./assets/sound/menu-start.wav",
+                    1
+                ],
+                "OPEN": [
+                    "./assets/sound/menu-expand.wav",
+                    1
+                ]
+            }
         },
         "TRAFFIC": {
-          "SPRITE": {
-            "RED": "./assets/traffic_light/red.png",
-            "YELLOW": "./assets/traffic_light/yellow.png",
-            "GREEN": "./assets/traffic_light/green.png"
-          },
-          "TIME": {
-            "RED": 5,
-            "YELLOW": 2,
-            "GREEN": 6
-          }
+            "SPRITE": {
+                "RED": "./assets/traffic_light/red.png",
+                "YELLOW": "./assets/traffic_light/yellow.png",
+                "GREEN": "./assets/traffic_light/green.png"
+            }
         }
     }
 }

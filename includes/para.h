@@ -24,6 +24,7 @@ private:
 		std::ifstream fi("./configs/config.json");
 		fi >> gameConfig;
 		ASSETS = gameConfig["ASSETS"];
+		CONFIG = gameConfig["CONFIG"];
 	}
 	~para() {};
 	static para* m_instancePara;
@@ -33,5 +34,6 @@ private:
 
 public:
 	static json ASSETS;
+	static json CONFIG;
 };
 #endif
