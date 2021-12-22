@@ -72,6 +72,7 @@
 #define OLC_PGEX_SOUND_H
 
 #include "olcPixelGameEngine.h"
+#include "json.hpp"
 
 #include <istream>
 #include <cstring>
@@ -120,6 +121,8 @@ typedef struct {
 } OLC_WAVEFORMATEX;
 #pragma pack(pop)
 
+using json = nlohmann::json;
+
 namespace olc
 {
 	// Container class for Advanced 2D Drawing functions
@@ -160,7 +163,7 @@ namespace olc
 		static void SetUserFilterFunction(std::function<float(int, float, float)> func);
 
 	public:
-		static int LoadAudioSample(std::string sWavFile, float volume, olc::ResourcePack* pack = nullptr);
+		static int LoadAudioSample(json sWavFile, olc::ResourcePack* pack = nullptr);
 		static void PlaySample(int id, bool bLoop = false);
 		static void StopSample(int id);
 		static void StopAll();

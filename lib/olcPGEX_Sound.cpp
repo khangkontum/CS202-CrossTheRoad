@@ -113,10 +113,10 @@ namespace olc
 
 	// Load a 16-bit WAVE file @ 44100Hz ONLY into memory. A sample ID
 	// number is returned if successful, otherwise -1
-	int SOUND::LoadAudioSample(std::string sWavFile, float volume = 1, olc::ResourcePack* pack)
+	int SOUND::LoadAudioSample(json sWavFile, olc::ResourcePack* pack)
 	{
 
-		olc::SOUND::AudioSample a(sWavFile, volume, pack);
+		olc::SOUND::AudioSample a(sWavFile[0], float(sWavFile[1]), pack);
 		if (a.bSampleValid)
 		{
 			vecAudioSamples.push_back(a);

@@ -5,21 +5,21 @@ AudioManager::AudioManager()
 {
 	// cần chuyển âm thanh về định dạng 16 bit, sample rate 44100
 
-	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["MOVE"], 1);
-	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["IMPACT"], 1);
-	listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["DEAD"], 1);
-	listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["FINSH"], 1);
+	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["MOVE"]);
+	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["IMPACT"]);
+	listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["DEAD"]);
+	listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["FINSH"]);
 
-	listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["CAR"]["SOUND"]["MOVE"], 1);
-	listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["BIRD"]["SOUND"]["MOVE"], 1);
-	listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["DINOSAUR"]["SOUND"]["MOVE"], 1);
-	listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["TRUCK"]["SOUND"]["MOVE"], 1);
+	listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["CAR"]["SOUND"]["MOVE"]);
+	listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["BIRD"]["SOUND"]["MOVE"]);
+	listSound[{"DINOSAUR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["DINOSAUR"]["SOUND"]["MOVE"]);
+	listSound[{"TRUCK", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["TRUCK"]["SOUND"]["MOVE"]);
 
-	listSound[{"MENU", "PRESS"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["MOVE"], 1);
-	listSound[{"MENU", "ENTER"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["ENTER"], 1);
-	listSound[{"MENU", "OPEN"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["OPEN"], 1);
+	listSound[{"MENU", "PRESS"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["MOVE"]);
+	listSound[{"MENU", "ENTER"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["ENTER"]);
+	listSound[{"MENU", "OPEN"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["OPEN"]);
 
-	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::ASSETS["BACKGROUND"]["SOUND"], 0.05);
+	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::ASSETS["BACKGROUND"]["SOUND"]);
 
 	_fElapsedTime = 0;
 }

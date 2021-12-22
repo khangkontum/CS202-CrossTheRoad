@@ -6,10 +6,10 @@
             "SPRITE" : "./assets/grandma.png",
             "SOUND":
             {
-                "MOVE" : "./assets/sound/sfx_step_grass_l.wav",
-                "IMPACT" : "./assets/sound/crash.wav",
-                "DEAD" : "./assets/sound/wahwahwah.wav",
-                "FINSH" : "./assets/sound/***.wav"
+                "MOVE" : ["./assets/sound/sfx_step_grass_l.wav", 1],
+                "IMPACT" : ["./assets/sound/crash.wav", 1],
+                "DEAD" : ["./assets/sound/wahwahwah.wav", 1],
+                "FINSH" : ["./assets/sound/***.wav", 1]
             }
         },
         "CAR" :
@@ -17,10 +17,10 @@
             "SPRITE" : "./assets/car.png",
             "SOUND":
             {
-                "MOVE" : "./assets/sound/car.wav",
-                "IMPACT" : "./assets/sound/***.wav",
-                "DEAD" : "./assets/sound/***.wav",
-                "FINSH" : "./assets/sound/***.wav"
+                "MOVE" : ["./assets/sound/car.wav", 1],
+                "IMPACT" : ["./assets/sound/***.wav", 1],
+                "DEAD" : ["./assets/sound/***.wav", 1],
+                "FINSH" : ["./assets/sound/***.wav", 1]
             }
         },
         "BIRD" :
@@ -28,10 +28,10 @@
             "SPRITE" : "./assets/bird1.png",
             "SOUND":
             {
-                "MOVE" : "./assets/sound/***.wav",
-                "IMPACT" : "./assets/sound/***.wav",
-                "DEAD" : "./assets/sound/***.wav",
-                "FINSH" : "./assets/sound/***.wav"
+                "MOVE" : ["./assets/sound/***.wav", 1],
+                "IMPACT" : ["./assets/sound/***.wav", 1],
+                "DEAD" : ["./assets/sound/***.wav", 1],
+                "FINSH" : ["./assets/sound/***.wav", 1]
             }
         },
         "DINOSAUR" :
@@ -39,10 +39,10 @@
             "SPRITE" :"./assets/dinosaur4.png",
             "SOUND":
             {
-                "MOVE" : "./assets/sound/***.wav",
-                "IMPACT" : "./assets/sound/***.wav",
-                "DEAD" : "./assets/sound/***.wav",
-                "FINSH" : "./assets/sound/***.wav"
+                "MOVE" : ["./assets/sound/***.wav", 1],
+                "IMPACT" : ["./assets/sound/***.wav", 1],
+                "DEAD" : ["./assets/sound/***.wav", 1],
+                "FINSH" : ["./assets/sound/***.wav", 1]
             }
         },
         "TRUCK" :
@@ -50,21 +50,21 @@
             "SPRITE" : "./assets/truck.png",
             "SOUND":
             {
-                "MOVE" : "./assets/sound/***.wav",
-                "IMPACT" : "./assets/sound/***.wav",
-                "DEAD" : "./assets/sound/***.wav",
-                "FINSH" : "./assets/sound/***.wav"
+                "MOVE" : ["./assets/sound/***.wav", 1],
+                "IMPACT" : ["./assets/sound/***.wav", 1],
+                "DEAD" : ["./assets/sound/***.wav", 1],
+                "FINSH" : ["./assets/sound/***.wav", 1]
             }
         },
         "BACKGROUND" : {
                 "SPRITE" : "./assets/grass.png",
-                "SOUND": "./assets/sound/bgm.wav"
+                "SOUND": ["./assets/sound/bgm.wav", 1]
         },
         "MENU": {
           "SOUND": {
-            "MOVE": "./assets/sound/menu-hover.wav",
-            "ENTER": "./assets/sound/menu-start.wav",
-            "OPEN": "./assets/sound/menu-expand.wav"
+            "MOVE": ["./assets/sound/menu-hover.wav", 1],
+            "ENTER": ["./assets/sound/menu-start.wav", 1],
+            "OPEN": ["./assets/sound/menu-expand.wav", 1]
           }
         },
         "TRAFFIC": {
