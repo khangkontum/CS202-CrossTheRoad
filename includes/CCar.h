@@ -19,4 +19,5 @@ public:
 	int getDirection();
 	void getName() { std::cout << "CCar" << std::endl; }
 	void setPosition(olc::vf2d position);
+	bool isImpact(std::unique_ptr<ObjectSpawner<CCar*>> Spawner);
 };

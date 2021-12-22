@@ -1,7 +1,10 @@
 #pragma once
 #include "../lib/olcPixelGameEngine.h"
+#include "TrafficLight.h"
+#include "Collider2D.h"
+#include "ObjectSpawner.h"
 
-class CVehicle {
+class CVehicle : public Collider2D {
 public:
 	virtual void move(float fElapsedTime) = 0;
 	virtual void Draw() = 0;
@@ -14,6 +17,7 @@ public:
 	virtual void getName() = 0;
 	virtual int getLane() = 0;
 	virtual void setPosition(olc::vf2d position) = 0;
+
 protected:
 	olc::vf2d position;
 	olc::vf2d initPosition;
@@ -23,5 +27,6 @@ protected:
 	std::shared_ptr<olc::Decal> decal;
 	int direction;
 	float speed;
-
+	bool isStop;
+	TrafficLightManager* trafficLightManager = &TrafficLightManager::getInstance();
 };
