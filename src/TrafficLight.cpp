@@ -8,8 +8,8 @@ void TrafficLightManager::Draw() {
 	}
 }
 
-int TrafficLightManager::getState(int lane) {
-	return this->arr[lane].state;
+olc::vf2d TrafficLightManager::getState(int lane) {
+	return olc::vf2d(this->arr[lane].state, this->arr[lane].getPostion().x);
 }
 
 TrafficLightManager& TrafficLightManager::getInstance() {
@@ -50,6 +50,11 @@ void TrafficLight::setDuration(double red, double yellow, double green) {
 	duration[0] = red;
 	duration[1] = yellow;
 	duration[2] = green;
+}
+
+olc::vf2d TrafficLight::getPostion()
+{
+	return { this->position.x * pge->ScreenWidth(), this->position.y * pge->ScreenHeight() };
 }
 
 TrafficLight::TrafficLight(olc::PixelGameEngine* pge, olc::vf2d position, double red, double yellow, double green, std::vector<olc::Sprite*>& spriteList, std::vector<olc::Decal*>& decalList) {

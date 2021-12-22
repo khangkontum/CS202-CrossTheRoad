@@ -7,7 +7,7 @@ public:
 	TrafficLight(olc::PixelGameEngine* pge, olc::vf2d position, double red, double yellow, double green, std::vector<olc::Sprite*>& spriteList, std::vector<olc::Decal*>& decalList);
 	void Draw();
 	void setDuration(double red, double yellow, double green);
-
+	olc::vf2d getPostion();
 	int state;	//0: red, 1: yellow, 2: green
 
 private:
@@ -37,7 +37,7 @@ public:
 		}
 	};
 	
-	int getState(int lane); //0: red, 1: yellow, 2: green
+	olc::vf2d getState(int lane); //0: red, 1: yellow, 2: green
 private:
 	olc::PixelGameEngine* pge;
 	std::vector<olc::Sprite*> spriteList;

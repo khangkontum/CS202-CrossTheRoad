@@ -1,4 +1,4 @@
-#include "../includes/CCar.h"
+﻿#include "../includes/CCar.h"
 
 CCar::CCar(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::shared_ptr<olc::Sprite> sprite, std::shared_ptr<olc::Decal> decal) {
 	this->direction = direction;
@@ -7,6 +7,7 @@ CCar::CCar(olc::vf2d pos, int direction, olc::PixelGameEngine* pge, std::shared_
 	this->sprite = sprite;
 	this->initPosition = pos;
 	this->decal = decal;
+	this->isStop = false;
 }
 
 CCar::CCar(olc::vf2d pos, int direction, olc::PixelGameEngine* pge) {
@@ -14,6 +15,7 @@ CCar::CCar(olc::vf2d pos, int direction, olc::PixelGameEngine* pge) {
 	this->position = pos;
 	this->pge = pge;
 	this->initPosition = pos;
+	this->isStop = false;
 	sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["CAR"]["SPRITE"]));
 	decal = std::make_unique <olc::Decal>(sprite.get());
 }
@@ -31,6 +33,9 @@ olc::vf2d CCar::size() {
 void CCar::move(float fElapsedTime) {
 	Level *level = &Level::getInstance();
 	float speed = level->getSpeed("car");
+	olc::vf2d stateLight = trafficLightManager->getState(0);
+	if (stateLight.x == 0 || isStop)
+		speed = 0;
 	this->position.x += direction * speed * fElapsedTime;
 	this->velocity.x = direction * speed;
 }
@@ -67,4 +72,26 @@ int CCar::getDirection() {
 
 int CCar::getLane() {
 	return 5;
+}
+
+bool CCar::isImpact(std::unique_ptr<ObjectSpawner<CCar*>> Spawner)
+{
+	for (auto obj : Spawner.get()->listObjectSpawner())
+	{
+		std::vector<rect> vRects;   // vector chứa các bounding box của objects // {pos, size}
+		vRects.push_back({ getPosition(), size(), getVelocity() });
+
+		vRects.push_back({ obj->getPosition(), obj->size(), {obj->getVelocity().x, -getVelocity().y} });
+
+		for (size_t i = 1; i < vRects.size(); i++)
+		{
+			if (RectVsRect(&vRects[0], &vRects[1]))
+			{
+				this->isStop = true;
+				return true;
+			}
+		}
+	}
+	this->isStop = false;
+	return false;
 }
