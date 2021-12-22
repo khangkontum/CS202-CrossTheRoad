@@ -44,8 +44,8 @@ bool CGame::OnUserCreate() {
 }
 
 bool CGame::OnUserUpdate(float fElapsedTime) {
-	std::cout << trafficLightManager->getState(0) << '\n';
-	std::cout << trafficLightManager->getState(1) << '\n';
+	//std::cout << trafficLightManager->getState(0) << '\n';
+	//std::cout << trafficLightManager->getState(1) << '\n';
 	if (!isIngame) {
 		return menu->interact(isIngame, stop);
 	}

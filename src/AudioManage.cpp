@@ -19,7 +19,7 @@ AudioManager::AudioManager()
 	listSound[{"MENU", "ENTER"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["ENTER"], 1);
 	listSound[{"MENU", "OPEN"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["OPEN"], 1);
 
-	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::ASSETS["BACKGROUND"]["SOUND"], 0.2);
+	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::ASSETS["BACKGROUND"]["SOUND"], 0.05);
 
 	_fElapsedTime = 0;
 }
@@ -36,7 +36,10 @@ void AudioManager::play(std::string name_obj, std::string action, bool isLoop)
 {
 	int id = listSound[{name_obj, action}].id;
 	if (isMute || id == -1)
+	{
+		std::cout << "[ERROR] CANNOT PLAY SOUND " << name_obj << " " << action << std::endl;
 		return;
+	}
 
 	float lastUsed = (float)(clock() - listSound[{name_obj, action}].lastUsed) / CLOCKS_PER_SEC;
 

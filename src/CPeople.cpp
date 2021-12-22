@@ -100,6 +100,7 @@ bool CPeople::isImpact(CVehicle* object, float fElapsedTime)
 		if (RectVsRect(&vRects[0], &vRects[1]))  // kiểm tra va chạm
 		{
 			isdead = true;
+			AudioManager->play("PEOPLE", "IMPACT", false);
 			return true;
 		}
 	}
