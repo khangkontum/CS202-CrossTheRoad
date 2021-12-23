@@ -27,11 +27,10 @@ AudioManager::AudioManager()
 void AudioManager::mute(bool _isMute)
 {
 	if (_isMute)
-		olc::SOUND::StopAll();
+		olc::SOUND::StopAll(),
+		isPlayingBackground = false;
 	isMute = _isMute;
-	isPlayingBackground = false;
-	if(!isMuteBackground)
-		stopBackground(_isMute);
+	stopBackground(_isMute);
 }
 
 void AudioManager::play(std::string name_obj, std::string action, bool isLoop)
@@ -39,7 +38,7 @@ void AudioManager::play(std::string name_obj, std::string action, bool isLoop)
 	int id = listSound[{name_obj, action}].id;
 	if (isMute || id == -1)
 	{
-		std::cout << "[ERROR] CANNOT PLAY SOUND " << name_obj << " " << action << std::endl;
+		if(!isMute) std::cout << "[ERROR] CANNOT PLAY SOUND " << name_obj << " " << action << std::endl;
 		return;
 	}
 
