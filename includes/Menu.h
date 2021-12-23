@@ -4,6 +4,7 @@
 #include "../lib/json.hpp"
 #include <unordered_map>
 #include "AudioManager.h"
+#include "para.h"
 
 constexpr int32_t nPatch = 8;
 
@@ -351,15 +352,48 @@ private:
 using json = nlohmann::json;
 
 class Menu {
+private:
+	class MenuState
+	{
+	public:
+		virtual void build(menuobject& menu) = 0;
+		virtual menuobject& open(menuobject& menu) = 0;
+		virtual int interact(int key, menumanager* manager, bool& stop, json* gameConfig, std::string* configPath, Level* level) = 0;
+	protected: 
+		AudioManager* AudioManager = AudioManager->getAudioManager();
+	};
+	class Loading : public Menu::MenuState
+	{
+	public:
+		void build(menuobject& menu);
+		int interact(int key, menumanager* manager, bool& stop, json* gameConfig, std::string* configPath, Level* level);
+		menuobject& open(menuobject& menu);
+	};
+	class Ingame : public Menu::MenuState
+	{
+	public:
+		void build(menuobject& menu);
+		int interact(int key, menumanager* manager, bool& stop, json* gameConfig, std::string* configPath, Level* level);
+		menuobject& open(menuobject& menu);
+	};
+	class Settings : public Menu::MenuState
+	{
+	public:
+		void build(menuobject& menu);
+		int interact(int key, menumanager* manager, bool& stop, json* gameConfig, std::string* configPath, Level* level);
+		menuobject& open(menuobject& menu);
+	};
+
 public:
 	void draw();
-	bool interact(int& isIngame, bool& stop);
+	int interact(bool& isIngame, bool& stop);
 	void init(olc::PixelGameEngine* pge, json* gameConfig, std::string* configPath);
 	static Menu& getInstance();
 	
 
 private:
 	Menu();
+	~Menu();
 	Menu(const Menu& other) {}
 	static Menu* instance;
 	bool execute(int command, bool& isIngame);
@@ -370,4 +404,9 @@ private:
 	menumanager manager;
 	menuobject menu;
 	AudioManager* AudioManager = AudioManager->getAudioManager();
+
+	static MenuState* MenuLoading;
+	static MenuState* MenuSettings;
+	static MenuState* MenuIngame;
+	static MenuState* MenuCurrent;
 };

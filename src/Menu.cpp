@@ -1,6 +1,10 @@
 #include "../includes/Menu.h"
 
 Menu* Menu::instance = nullptr;
+Menu::MenuState* Menu::MenuLoading = nullptr;
+Menu::MenuState* Menu::MenuSettings = nullptr;
+Menu::MenuState* Menu::MenuIngame = nullptr;
+Menu::MenuState* Menu::MenuCurrent = nullptr;
 
 Menu& Menu::getInstance() {
 	if (!instance)
@@ -14,42 +18,183 @@ Menu::Menu() {
 	pge = nullptr;
 	sprite = new olc::Sprite("./assets/RetroMenu.png");
 
-
-	//Ingame Menu
-	menu["main"]["Loading"].SetTable(1, 4);
-	menu["main"]["Loading"]["New Game"].SetID(0);
-	menu["main"]["Loading"]["Load Game"].SetID(2);
-	menu["main"]["Loading"]["Settings"].SetID(3);
-	menu["main"]["Loading"]["Exit"].SetID(100);
-
-	menu["main"]["Ingame"].SetTable(1, 5);
-	menu["main"]["Ingame"]["Continue"].SetID(5);
-	menu["main"]["Ingame"]["Save Game"].SetID(6);
-	menu["main"]["Ingame"]["Settings"].SetID(3);
-	menu["main"]["Ingame"]["Help"].SetID(4);
-	menu["main"]["Ingame"]["Exit"].SetID(100);
-
-	menu["main"]["Settings"].SetTable(1, 3);
-	menu["main"]["Settings"]["Mute"].SetID(30);
-	menu["main"]["Settings"]["Off Music"].SetID(31);
-	menu["main"]["Settings"]["Back"].SetID(101);
-
-	menu.Build();
+	MenuIngame = new Menu::Ingame();
+	MenuLoading = new Menu::Loading();
+	MenuSettings = new Menu::Settings();
+	MenuCurrent = MenuLoading;
+	
+	MenuIngame->build(menu);
+	MenuLoading->build(menu);
+	MenuSettings->build(menu);
+}
+Menu::~Menu()
+{
+	delete MenuIngame;
+	delete MenuLoading;
+	delete MenuSettings;
+	delete MenuCurrent;
+	MenuIngame = nullptr;
+	MenuLoading = nullptr;
+	MenuSettings = nullptr;
+	MenuCurrent = nullptr;
 }
 
-bool Menu::interact(int& isIngame, bool& stop) {
+void Menu::Loading::build(menuobject& menu)
+{
+	menu["main"]["Loading"].SetTable(1, 4);
+	menu["main"]["Loading"]["New Game"].SetID(NEWGAME);
+	menu["main"]["Loading"]["Load Game"].SetID(LOADGAME);
+	menu["main"]["Loading"]["Settings"].SetID(SETTING);
+	menu["main"]["Loading"]["Exit"].SetID(EXIT);
+	menu.Build();
+}
+menuobject& Menu::Loading::open(menuobject& menu)
+{
+	return menu["main"]["Loading"];
+}
+int Menu::Loading::interact(int key, menumanager* manager, bool& stop, json* gameConfig, std::string* configPath, Level* level)
+{
+	switch (key) {
+	case NEWGAME:
+	{
+		gameConfig->operator[]("level") = 1;
+		*configPath = "null";
+		level->setLevel(1);
+		MenuCurrent = MenuIngame;
+		MenuLoading = MenuIngame;
+		return START;
+		break;
+	}
+	case LOADGAME:
+	{
+		std::cout << "Path to game file: ";
+		std::cin >> *configPath;
+		std::ifstream fi(*configPath);
+		if (!fi) {
+			std::cout << "File does not exsist. Please try again.\n";
+			break;
+		}
+		fi >> *gameConfig;
+		fi.close();
+		level->setLevel(gameConfig->operator[]("level"));
+		break;
+	}
+	case SETTING:
+		MenuCurrent = MenuSettings;
+		break;
+	case EXIT:
+		return FALSE;
+	default:
+		std::cout << "[BUG] wrong command id\n";
+		break;
+	}
+	return DEFAULT;
+}
+
+void Menu::Ingame::build(menuobject &menu)
+{
+	//Ingame Menu
+	menu["main"]["Ingame"].SetTable(1, 5);
+	menu["main"]["Ingame"]["Continue"].SetID(CONTINUE);
+	menu["main"]["Ingame"]["Save Game"].SetID(SAVEGAME);
+	menu["main"]["Ingame"]["Settings"].SetID(SETTING);
+	menu["main"]["Ingame"]["Help"].SetID(HELP);
+	menu["main"]["Ingame"]["Exit"].SetID(EXIT);
+	menu.Build();
+}
+menuobject& Menu::Ingame::open(menuobject& menu)
+{
+	return menu["main"]["Ingame"];
+}
+int Menu::Ingame::interact(int key, menumanager* manager, bool& stop, json* gameConfig, std::string* configPath, Level* level)
+{
+	switch (key) {
+	case SETTING:
+		MenuCurrent = MenuSettings;
+		break;
+	case HELP:
+	{
+		std::cout << "W - Up arrow    : Moving up\n";
+		std::cout << "S - Down arrow  : Moving down\n";
+		std::cout << "A - Left arrow  : Moving left\n";
+		std::cout << "D - Right arrow : Moving right\n";
+		std::cout << "P               : Pause\n";
+		std::cout << "R               : Restart\n";
+		std::cout << "L               : Save game\n";
+		std::cout << "Enter           : Pass level\n";
+		break;
+	}
+	case CONTINUE:
+	{
+		manager->Reset();
+		stop = false;
+		return TRUE;
+	}
+	case SAVEGAME:
+	{
+		std::ofstream fo;
+		if (*configPath == "null" || !fo) {
+			std::cout << "Path to save game: ";
+			std::cin >> *configPath;
+			fo.open(*configPath);
+		}
+		gameConfig->operator[]("level") = level->currentLevel();
+		fo << gameConfig->dump();
+		fo.close();
+		std::cout << "Saved\n";
+		break;
+	}
+	case EXIT:
+		return FALSE;
+	default:
+		std::cout << "[BUG] wrong command id\n";
+		break;
+	}
+	return DEFAULT;
+}
+
+void Menu::Settings::build(menuobject& menu)
+{
+	menu["main"]["Settings"].SetTable(1, 3);
+	if(AudioManager->is_Mute())
+		menu["main"]["Settings"]["Unmute"].SetID(MUTE);
+	else
+		menu["main"]["Settings"]["Mute"].SetID(MUTE);
+	if(AudioManager->is_MuteBackground())
+		menu["main"]["Settings"]["On Music"].SetID(STOPMUSIC);
+	else
+		menu["main"]["Settings"]["Off Music"].SetID(STOPMUSIC);
+	menu["main"]["Settings"]["Back"].SetID(BACK);
+	menu.Build();
+}
+menuobject& Menu::Settings::open(menuobject& menu)
+{
+	//build();
+	return menu["main"]["Settings"];
+}
+int Menu::Settings::interact(int key, menumanager* manager, bool& stop, json* gameConfig, std::string* configPath, Level* level)
+{
+	switch (key) {
+	case MUTE:
+		AudioManager->mute(!AudioManager->is_Mute());
+		break;
+	case STOPMUSIC:
+		AudioManager->stopBackground(!AudioManager->is_MuteBackground());
+		break;
+	case BACK:
+		MenuCurrent = MenuLoading;
+		break;
+	default:
+		std::cout << "[BUG] wrong command id\n";
+		break;
+	}
+	return DEFAULT;
+}
+
+int Menu::interact(bool& isIngame, bool& stop) {
 	menumanager* manager = &this->manager;
-	if (isIngame == 0) {
-		manager->Open(&menu["main"]["Loading"]);
-	}
-	else if (isIngame == 1)
-	{
-		manager->Open(&menu["main"]["Ingame"]);
-	}
-	else if (isIngame == 2)
-	{
-		manager->Open(&menu["main"]["Settings"]);
-	}
+	manager->Open(&MenuCurrent->open(menu));
+
 	menuobject* command = nullptr;
 	std::string sLastAction = "null";
 
@@ -79,7 +224,15 @@ bool Menu::interact(int& isIngame, bool& stop) {
 	{
 		sLastAction = "Selected: " + command->GetName() + " ID: " + std::to_string(command->GetID());
 		Level* level = &Level::getInstance();
-		switch (command->GetID()) {
+
+		int res = MenuCurrent->interact(command->GetID(), manager, stop, gameConfig, configPath, level);
+		if (res == FALSE)
+			return false;
+		else if (res == TRUE)
+			return true;
+		else if (res == START)
+			isIngame = true;
+		/*switch (command->GetID()) {
 		case 0:
 		{
 			isIngame = true;
@@ -108,8 +261,7 @@ bool Menu::interact(int& isIngame, bool& stop) {
 			break;
 		}
 		case 3:
-			if (isIngame != 2)
-				isIngame = 2;
+			MenuCurrent = MenuSettings;
 			break;
 		case 4:
 		{
@@ -157,7 +309,7 @@ bool Menu::interact(int& isIngame, bool& stop) {
 		default:
 			std::cout << "[BUG] wrong command id\n";
 			break;
-		}
+		}*/
 		manager->Reset();
 	}
 	
