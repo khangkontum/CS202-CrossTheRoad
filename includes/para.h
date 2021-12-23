@@ -7,6 +7,22 @@
 
 using json = nlohmann::json;
 
+enum MenuController
+{
+	START = 2,
+	NEWGAME,
+	LOADGAME,
+	CONTINUE,
+	SETTING,
+	SAVEGAME,
+	MUTE,
+	STOPMUSIC,
+	HELP,
+	BACK,
+	EXIT,
+	DEFAULT
+};
+
 class para
 {
 public:
