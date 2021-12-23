@@ -25,7 +25,7 @@ bool CGame::OnUserCreate() {
 	configPath = "null";
 
 	stop = false;
-	isIngame = 0;
+	isIngame = false;
 	menu = &Menu::getInstance();
 	menu->init(pge, &gameConfig, &configPath);
 	cPeople = std::make_unique<CPeople>(pge);
@@ -46,7 +46,7 @@ bool CGame::OnUserCreate() {
 bool CGame::OnUserUpdate(float fElapsedTime) {
 	//std::cout << trafficLightManager->getState(0) << '\n';
 	//std::cout << trafficLightManager->getState(1) << '\n';
-	if (isIngame == 0) {
+	if (!isIngame) {
 		return menu->interact(isIngame, stop);
 	}
 	if (resetState) {

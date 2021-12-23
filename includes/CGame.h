@@ -58,7 +58,7 @@ private:
 	json gameData;
 	json gameConfig;
 	std::string configPath;
-	int isIngame;
+	bool isIngame;
 	bool stop;
 	bool resetState;
 	Menu* menu;
