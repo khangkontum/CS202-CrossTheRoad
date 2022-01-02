@@ -56,6 +56,23 @@ void Background::Draw() {
 
 }
 
+void Background::DrawLoading(int loaded, int total) {
+	//Draw grass
+	int h = pge->ScreenHeight();
+	int w = pge->ScreenWidth();
+	float grassH = sprite.get()->height * 0.05f;
+	float grassW = sprite.get()->width * 0.05f;
+	for (float j = 0; j < w; j += grassW) {
+		for (float i = float(0); i < float(h); i += grassH) {
+			pge->DrawDecal(olc::vf2d({ float(j), float(i) }), grassDecal.get(), { 0.05f, 0.05f });
+		}
+	}
+
+	//Draw Loading bar
+	pge->FillRectDecal(olc::vf2d({ float(h / 2), float(0) }), olc::vf2d({ 10.0, 100.0 }));
+	std::cout << loaded << ' ' << total << '\n';
+}
+
 void Background::DrawBreakLine(int x1, int y1, int x2, int y2) {
 	float gap = (x1 + x2) / 10;
 	for (float i = x1 + 10; i < x2; i += gap * 2) {

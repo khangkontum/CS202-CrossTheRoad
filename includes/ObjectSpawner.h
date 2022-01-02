@@ -1,6 +1,4 @@
-//#pragma once
-#ifndef OBJECTSPAWNER_H_
-#define OBJECTSPAWNER_H_
+#pragma once
 
 //#include "../Collider2D.h"
 #include "Level.h"
@@ -92,6 +90,8 @@ public:
 		return objectList;
 	}
 
+	
+
 private:
 	std::list<T> objectList;
 	std::queue<T> defaultList;
@@ -99,4 +99,4 @@ private:
 	T defaultObject;
 };
 
-#endif
+

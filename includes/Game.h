@@ -9,10 +9,12 @@ class Game : public olc::PixelGameEngine
 public:
 	Game()
 	{
+		gameState = 0;
 		sAppName = "Road Crossing";
 	}
 	~Game()
 	{
+
 		delete CGameState;
 		CGameState = nullptr;
 		delete LoadingState;
@@ -21,8 +23,8 @@ public:
 
 	bool OnUserCreate()
 	{
-		CGameState = new CGame(this);
-		LoadingState = new Loading(this);
+		CGameState = new CGame(this, &gameState);
+		LoadingState = new Loading(this, &gameState);
 
 		//currentState_ = CGameState;
 		return true;
@@ -30,26 +32,16 @@ public:
 
 	bool OnUserUpdate(float fElapsedTime)
 	{
-		// State Pattern
-		// Hiện tại đang dùng if ... else ┌( ಠ_ಠ)┘
-		// 
-		// Đợi khoảng 1s để màn hình nó hiện lên
-		// Sau khi hiện lên hình thì mới bắt đầu load game
-		if (!isLoadedCGame && init < 60)
-		{
-			LoadingState->OnUserUpdate(fElapsedTime);
-			init++;
-			return true;
-		}
-
-		// Load Game
-		if (!isLoadedCGame)
-			CGameState->OnUserCreate(),
-			isLoadedCGame = true;
-		else
+		switch (gameState) {
+		case 0:
+			return LoadingState->OnUserUpdate(fElapsedTime);
+		case 1:
+			return CGameState->OnUserCreate();
+		case 2:
 			return CGameState->OnUserUpdate(fElapsedTime);
-		return true;
+		}
 	}
+	
 
 private:
 	GameState* CGameState = nullptr;
@@ -57,5 +49,9 @@ private:
 
 	bool isLoadedCGame = false;
 	int init = 0;
+	int gameState; // 0 -> loading, 1-> create cgame, 2-> game playing
+	
+
 	//GameState* currentState_;
 };
+

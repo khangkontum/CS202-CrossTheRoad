@@ -1,7 +1,8 @@
 ﻿#include "../includes/CGame.h"
 
-CGame::CGame(olc::PixelGameEngine* pge) {
+CGame::CGame(olc::PixelGameEngine* pge, int* gameState) {
 	this->pge = pge;
+	this->gameState = gameState;
 	//sAppName = "Road Crossing";
 }
 
@@ -11,6 +12,7 @@ CGame::~CGame()
 }
 
 bool CGame::OnUserCreate() {
+	*gameState = *gameState + 1;
 	if (!olc::SOUND::InitialiseAudio()) {
 		std::cerr << "Cannot init audio" << std::endl;
 		return false;
@@ -38,7 +40,7 @@ bool CGame::OnUserCreate() {
 
 
 	//loading 
-	loadingDefault();
+	//loadingDefault();
 
 	return true;
 }
@@ -111,37 +113,37 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		if (DEBUG) pge->DrawRect(cPeople->getPosition(), cPeople->size(), olc::BLUE);
 
 		//Move object
-		birdSpawner.get()->move(fElapsedTime);
-		dinosaurSpawner.get()->move(fElapsedTime);
-		truckSpawner.get()->move(fElapsedTime);
-		carSpawner.get()->move(fElapsedTime);
+		ObjectFactory::birdSpawner->move(fElapsedTime);
+		ObjectFactory::dinosaurSpawner->move(fElapsedTime);
+		ObjectFactory::truckSpawner->move(fElapsedTime);
+		ObjectFactory::carSpawner->move(fElapsedTime);
 
 		//Spawn object
-		birdSpawner.get()->spawn(fElapsedTime);
-		dinosaurSpawner.get()->spawn(fElapsedTime);
-		truckSpawner.get()->spawn(fElapsedTime);
-		carSpawner.get()->spawn(fElapsedTime);
+		ObjectFactory::birdSpawner->spawn(fElapsedTime);
+		ObjectFactory::dinosaurSpawner->spawn(fElapsedTime);
+		ObjectFactory::truckSpawner->spawn(fElapsedTime);
+		ObjectFactory::carSpawner->spawn(fElapsedTime);
 
 		// Kiểm tra cPeople có va chạm với các object hay không
-		for (auto obj : birdSpawner.get()->listObjectSpawner())
+		for (auto obj : ObjectFactory::birdSpawner->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();    // nếu va chạm, in ra tên object bị va chạm
 			if (DEBUG) pge->DrawRect(obj->getPosition(), obj->size(), olc::YELLOW);
 		}
-		for (auto obj : dinosaurSpawner.get()->listObjectSpawner())
+		for (auto obj : ObjectFactory::dinosaurSpawner->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
 			if (DEBUG) pge->DrawRect(obj->getPosition(), obj->size(), olc::GREEN);
 		}
-		for (auto obj : truckSpawner.get()->listObjectSpawner())
+		for (auto obj : ObjectFactory::truckSpawner->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
 			if (DEBUG) pge->DrawRect(obj->getPosition(), obj->size(), olc::RED);
 		}
-		for (auto obj : carSpawner.get()->listObjectSpawner())
+		for (auto obj : ObjectFactory::carSpawner->listObjectSpawner())
 		{
 			if (cPeople.get()->isImpact(obj, fElapsedTime))
 				obj->getName();
@@ -164,16 +166,18 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 void CGame::drawGame() {
 	background->Draw();
 
-	birdSpawner.get()->Draw();
-	dinosaurSpawner.get()->Draw();
-	carSpawner.get()->Draw();
+	ObjectFactory::birdSpawner->Draw();
+	ObjectFactory::dinosaurSpawner->Draw();
+	ObjectFactory::carSpawner->Draw();
 
 	cPeople->Draw();
 
-	truckSpawner.get()->Draw();
+	ObjectFactory::truckSpawner->Draw();
 
 	trafficLightManager->Draw();
 }
+
+
 
 void CGame::loadingDefault() {
 	std::ifstream fi("./database/game.json");
@@ -181,17 +185,17 @@ void CGame::loadingDefault() {
 
 	//Loading default bird
 	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * pge->ScreenHeight() }), 1, pge);
-	birdSpawner = std::make_unique<ObjectSpawner<CBird*>>(bird, pge);
+	ObjectFactory::birdSpawner = new ObjectSpawner<CBird*>(bird, pge);
 
 	//Loading default dinosaur
 	CDinosaur* dinosaur = new CDinosaur(olc::vf2d({ 0, float(gameData["CDinosaur"]) * pge->ScreenHeight() }), -1, pge);
-	dinosaurSpawner = std::make_unique<ObjectSpawner<CDinosaur*>>(dinosaur, pge);
+	ObjectFactory::dinosaurSpawner = new ObjectSpawner<CDinosaur*>(dinosaur, pge);
 
 	//Loading default car
 	CCar* car = new CCar(olc::vf2d({ 0, float(gameData["CCar"]) * pge->ScreenHeight() }), -1, pge);
-	carSpawner = std::make_unique<ObjectSpawner<CCar*>>(car, pge);
+	ObjectFactory::carSpawner = new ObjectSpawner<CCar*>(car, pge);
 
 	//Loading default truck
 	CTruck* truck = new CTruck(olc::vf2d({ 0, float(gameData["CTruck"]) * pge->ScreenHeight() }), 1, pge);
-	truckSpawner = std::make_unique<ObjectSpawner<CTruck*>>(truck, pge);
+	ObjectFactory::truckSpawner = new ObjectSpawner<CTruck*>(truck, pge);
 }
