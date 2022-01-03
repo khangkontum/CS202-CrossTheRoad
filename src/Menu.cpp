@@ -77,6 +77,8 @@ int Menu::Loading::interact(int key, menumanager* manager, bool& stop, json* gam
 		fi >> *gameConfig;
 		fi.close();
 		level->setLevel(gameConfig->operator[]("level"));
+		//std::cout << "[DEBUG] LEVEL : " << gameConfig->operator[]("level") << std::endl;
+		return START;
 		break;
 	}
 	case SETTING:
@@ -315,8 +317,8 @@ int Menu::interact(bool& isIngame, bool& stop) {
 	
 
 	pge->Clear(olc::SOFT_GREEN);
-	if (sLastAction != "null")
-		AudioManager->play("MENU", sLastAction, false);
+	//if (sLastAction != "null")
+	//	AudioManager->play("MENU", sLastAction, false);
 	manager->Draw(*pge, sprite, {30,30});
 	pge->DrawString(10, 200, sLastAction);
 	return true;
