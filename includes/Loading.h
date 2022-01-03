@@ -4,6 +4,7 @@
 #include "../lib/json.hpp"
 #include "para.h"
 #include "ObjectFactory.h"
+#include "BackGround.h"
 #include "GameState.h"
 
 using json = nlohmann::json;
@@ -15,6 +16,7 @@ public:
 		std::cout << "LOADING" << std::endl;
 		sprite = std::make_unique<olc::Sprite>(std::string(para::ASSETS["BACKGROUND"]["SPRITE"]));
 		grassDecal = std::make_unique<olc::Decal>(sprite.get());
+		background = std::make_unique<Background>(pge);
 		loadingState = 0;
 	}
 
@@ -49,18 +51,7 @@ public:
 
 	void Draw()
 	{
-		//Draw grass
-		int h = pge->ScreenHeight();
-		int w = pge->ScreenWidth();
-		float grassH = sprite.get()->height * 0.05f;
-		float grassW = sprite.get()->width * 0.05f;
-		for (float j = 0; j < w; j += grassW) {
-			for (float i = float(0); i < float(h); i += grassH) {
-				pge->DrawDecal(olc::vf2d({ float(j), float(i) }), grassDecal.get(), { 0.05f, 0.05f });
-			}
-		}
-
-		
+		background.get()->DrawLoading(loadingState + 1, 5);
 		loadingState++;
 	}
 
@@ -71,9 +62,6 @@ public:
 	}
 	bool OnUserUpdate(float fElapsedTime)
 	{
-		std::cout << loadingState << '\n';
-		std::cout << double(clock()) / CLOCKS_PER_SEC << ' ';
-
 		switch (loadingState) {
 		case 0:
 			loadGameData();
@@ -92,9 +80,8 @@ public:
 			break;
 		default:
 			*gameState = *gameState + 1;
-			break;
+			return true;
 		}
-		std::cout << double(clock()) / CLOCKS_PER_SEC << "\nGame State: " << *gameState << '\n';
 		Draw();
 		return true;
 	}
@@ -105,5 +92,6 @@ private:
 	json gameData;
 	int* gameState;
 	int loadingState;
+	std::unique_ptr<Background> background;
 	olc::PixelGameEngine* pge;
 };

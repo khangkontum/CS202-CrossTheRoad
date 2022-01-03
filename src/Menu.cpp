@@ -314,7 +314,7 @@ int Menu::interact(bool& isIngame, bool& stop) {
 	}
 	
 
-	pge->Clear(olc::CREAM);
+	pge->Clear(olc::SOFT_GREEN);
 	if (sLastAction != "null")
 		AudioManager->play("MENU", sLastAction, false);
 	manager->Draw(*pge, sprite, {30,30});

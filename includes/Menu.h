@@ -109,7 +109,7 @@ public:
 		// === Draw Panel
 
 		// Record current pixel mode user is using
-		pge.Clear(olc::CREAM);
+		pge.Clear(olc::SOFT_GREEN);
 		olc::Pixel::Mode currentPixelMode = pge.GetPixelMode();
 		pge.SetPixelMode(olc::Pixel::MASK);
 

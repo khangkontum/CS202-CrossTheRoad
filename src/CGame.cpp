@@ -101,14 +101,28 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		if (DEBUG) pge->Clear(olc::CREAM);
 
 		//Handle user input
-		if (pge->GetKey(olc::Key::W).bHeld || pge->GetKey(olc::Key::UP).bHeld)
-			cPeople.get()->Up(fElapsedTime);
-		if (pge->GetKey(olc::Key::S).bHeld || pge->GetKey(olc::Key::DOWN).bHeld)
-			cPeople.get()->Down(fElapsedTime);
-		if (pge->GetKey(olc::Key::A).bHeld || pge->GetKey(olc::Key::LEFT).bHeld)
-			cPeople.get()->Left(fElapsedTime);
-		if (pge->GetKey(olc::Key::D).bHeld || pge->GetKey(olc::Key::RIGHT).bHeld)
-			cPeople.get()->Right(fElapsedTime);
+		while (true) {
+			if (pge->GetKey(olc::Key::W).bHeld || pge->GetKey(olc::Key::UP).bHeld) {
+				cPeople.get()->Up(fElapsedTime);
+				break;
+			}
+			if (pge->GetKey(olc::Key::S).bHeld || pge->GetKey(olc::Key::DOWN).bHeld) {
+				cPeople.get()->Down(fElapsedTime);
+				break;
+			}
+				
+			if (pge->GetKey(olc::Key::A).bHeld || pge->GetKey(olc::Key::LEFT).bHeld) {
+				cPeople.get()->Left(fElapsedTime);
+				break;
+			}
+				
+			if (pge->GetKey(olc::Key::D).bHeld || pge->GetKey(olc::Key::RIGHT).bHeld) {
+				cPeople.get()->Right(fElapsedTime);
+				break;
+			}	
+			break;
+		}
+		
 
 		if (DEBUG) pge->DrawRect(cPeople->getPosition(), cPeople->size(), olc::BLUE);
 

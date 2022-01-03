@@ -57,20 +57,17 @@ void Background::Draw() {
 }
 
 void Background::DrawLoading(int loaded, int total) {
-	//Draw grass
-	int h = pge->ScreenHeight();
-	int w = pge->ScreenWidth();
-	float grassH = sprite.get()->height * 0.05f;
-	float grassW = sprite.get()->width * 0.05f;
-	for (float j = 0; j < w; j += grassW) {
-		for (float i = float(0); i < float(h); i += grassH) {
-			pge->DrawDecal(olc::vf2d({ float(j), float(i) }), grassDecal.get(), { 0.05f, 0.05f });
-		}
-	}
+	pge->Clear(olc::SOFT_GREEN);
 
 	//Draw Loading bar
-	pge->FillRectDecal(olc::vf2d({ float(h / 2), float(0) }), olc::vf2d({ 10.0, 100.0 }));
-	std::cout << loaded << ' ' << total << '\n';
+	int h = pge->ScreenHeight();
+	int w = pge->ScreenWidth();
+	float w6 = float(w / 6);
+	float h20 = float(h / 20);
+	pge->FillRectDecal(olc::vf2d({ w6 - 1, float(h / 2) - 1}), olc::vf2d({ 4 * w6 + 2, h20 + 2}));
+
+	pge->FillRectDecal(olc::vf2d({ w6, float(h / 2) }), olc::vf2d({ float(float(loaded) / float(total)) * 4 * w6, h20 }), olc::DARK_GREEN);
+	std::cout << loaded << ' ' << total << float(float(loaded) / float(total)) << '\n';
 }
 
 void Background::DrawBreakLine(int x1, int y1, int x2, int y2) {
