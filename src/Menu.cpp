@@ -199,6 +199,7 @@ int Menu::interact(bool& isIngame, bool& stop) {
 
 	menuobject* command = nullptr;
 	std::string sLastAction = "null";
+	int ID = DEFAULT;
 
 	if (pge->GetKey(olc::Key::UP).bPressed) {
 		sLastAction = "PRESS";
@@ -221,13 +222,15 @@ int Menu::interact(bool& isIngame, bool& stop) {
 		command = manager->OnConfirm();
 	}
 	if (pge->GetKey(olc::Key::Z).bPressed)     manager->OnBack();
+	if (pge->GetKey(olc::Key::T).bPressed)	   ID = LOADGAME, command = manager->OnConfirm();
 
 	if (command != nullptr)
 	{
 		sLastAction = "Selected: " + command->GetName() + " ID: " + std::to_string(command->GetID());
 		Level* level = &Level::getInstance();
-
-		int res = MenuCurrent->interact(command->GetID(), manager, stop, gameConfig, configPath, level);
+		ID = ID == DEFAULT ? command->GetID() : ID;
+		
+		int res = MenuCurrent->interact(ID, manager, stop, gameConfig, configPath, level);
 		if (res == FALSE)
 			return false;
 		else if (res == TRUE)
