@@ -48,6 +48,8 @@ void loadGame(std::string* configPath)
 		std::cout << "Path to load game: ";
 		std::cin >> *configPath;
 	}
-		readData(*configPath);
-	std::cout << "Loaded\n";
+	if (readData(*configPath))
+		std::cout << "Loaded\n";
+	else
+		std::cout << "No such file or directory" << std::endl;
 }
