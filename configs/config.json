@@ -10,7 +10,15 @@
         "AUDIO": {
             "MUTE": false,
             "MUTESFX": false
-        }
+        },
+        "SPEED": {
+            "PEOPLE": 50,
+            "BIRD": 20,
+            "DINOSAUR": 20,
+            "CAR": 20,
+            "TRUCK": 20
+        },
+        "LEVEL": 1
     },
     "ASSETS": {
         "PEOPLE": {

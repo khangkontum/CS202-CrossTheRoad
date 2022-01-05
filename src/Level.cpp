@@ -4,17 +4,18 @@
 Level* Level::instance = nullptr;
 
 Level::Level() {
-	level = 1;
+	level = para::CONFIG["LEVEL"];
 	gap = 0;
-	_peopleSpeed = 50;
-	_birdSpeed = 20;
-	_dinosaurSpeed = 20;
-	_carSpeed = 20;
-	_truckSpeed = 20;
+	_peopleSpeed = para::CONFIG["SPEED"]["PEOPLE"];
+	_birdSpeed = para::CONFIG["SPEED"]["BIRD"];
+	_dinosaurSpeed = para::CONFIG["SPEED"]["DINOSAUR"];
+	_carSpeed = para::CONFIG["SPEED"]["CAR"];
+	_truckSpeed = para::CONFIG["SPEED"]["TRUCK"];
 }
 
 void Level::levelUp() {
 	level++;
+	updateConfig();
 }
 
 int Level::currentLevel() {
@@ -52,4 +53,10 @@ Level& Level::getInstance() {
 
 void Level::setLevel(int level) {
 	this->level = level;
+	updateConfig();
+}
+
+void Level::updateConfig()
+{
+	para::CONFIG["LEVEL"] = this->level;
 }

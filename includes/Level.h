@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <algorithm>
+#include "para.h"
 
 class Level {
 private:
@@ -31,6 +32,8 @@ public:
 	int currentLevel();
 
 	void levelUp();
+
+	void updateConfig();
 };
 
 
