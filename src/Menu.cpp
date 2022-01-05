@@ -171,7 +171,7 @@ void Menu::Settings::build(menuobject& menu)
 }
 menuobject& Menu::Settings::open(menuobject& menu)
 {
-	//build();
+	//build(menu);
 	return menu["main"]["Settings"];
 }
 int Menu::Settings::interact(int key, menumanager* manager, bool& stop, json* gameConfig, std::string* configPath, Level* level)

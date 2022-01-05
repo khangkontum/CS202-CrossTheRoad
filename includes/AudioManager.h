@@ -46,15 +46,15 @@ public:
 private:
 	PairMap listSound;
     float _fElapsedTime;
-
+    void updateConfig();
 private:
     AudioManager();
     ~AudioManager() {};
     static AudioManager* m_instanceAudioManager;
 
 private:
-	bool isMute = false;
-    bool isMuteBackground = false;
+	bool isMute = para::CONFIG["AUDIO"]["MUTE"];
+    bool isMuteBackground = para::CONFIG["AUDIO"]["MUTE"];
     bool isPlayingBackground = false;
 };
 

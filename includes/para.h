@@ -35,13 +35,7 @@ public:
 	}
 
 private:
-	para() 
-	{
-		std::ifstream fi("./configs/config.json");
-		fi >> gameConfig;
-		ASSETS = gameConfig["ASSETS"];
-		CONFIG = gameConfig["CONFIG"];
-	}
+	para();
 	~para() {};
 	static para* m_instancePara;
 

@@ -38,7 +38,7 @@ void AudioManager::play(std::string name_obj, std::string action, bool isLoop)
 	int id = listSound[{name_obj, action}].id;
 	if (isMute || id == -1)
 	{
-		if(!isMute) std::cout << "[ERROR] CANNOT PLAY SOUND " << name_obj << " " << action << std::endl;
+		if (!isMute) std::cout << "[ERROR] CANNOT PLAY SOUND " << name_obj << " " << action << std::endl;
 		return;
 	}
 
@@ -73,4 +73,11 @@ void AudioManager::stopBackground(bool _isMute)
 		isPlayingBackground = true;
 	}
 	isMuteBackground = _isMute;
+	updateConfig();
+}
+
+void AudioManager::updateConfig()
+{
+	para::CONFIG["AUDIO"]["MUTE"] = isMute;
+	para::CONFIG["AUDIO"]["MUTESFX"] = isMuteBackground;
 }

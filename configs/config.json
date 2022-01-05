@@ -6,6 +6,10 @@
                 "YELLOW": 2,
                 "GREEN": 6
             }
+        },
+        "AUDIO": {
+            "MUTE": false,
+            "MUTESFX": false
         }
     },
     "ASSETS": {
