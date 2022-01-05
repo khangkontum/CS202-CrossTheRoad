@@ -148,9 +148,9 @@ void Menu::Settings::build(menuobject& menu)
 	else
 		menu["main"]["Settings"]["Mute"].SetID(MUTE);
 	if (AudioManager->is_MuteBackground())
-		menu["main"]["Settings"]["On Music"].SetID(STOPMUSIC);
+		menu["main"]["Settings"]["Mute SFX"].SetID(STOPMUSIC);
 	else
-		menu["main"]["Settings"]["Off Music"].SetID(STOPMUSIC);
+		menu["main"]["Settings"]["Unmute SFX"].SetID(STOPMUSIC);
 	menu["main"]["Settings"]["Back"].SetID(BACK);
 	menu.Build();
 }

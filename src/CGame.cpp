@@ -84,15 +84,20 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 
 	//Save game
 	if (pge->GetKey(olc::Key::L).bPressed) {
-		while (configPath == "null") {
-			std::cout << "Path to save game: ";
-			std::cin >> configPath;
+		saveGame(&configPath);
+	}
+
+	//Load game
+	if (pge->GetKey(olc::Key::T).bPressed) {
+		if (loadGame(&configPath))
+		{
+			level->setLevel(para::CONFIG["LEVEL"]);
+			AudioManager->mute(para::CONFIG["SOUND"]["MUTE"]);
+			AudioManager->stopBackground(para::CONFIG["SOUND"]["MUTESFX"]);
+			std::cout << "Restart\n";
+			cPeople.get()->reset();
+			resetState = true;
 		}
-		std::ofstream fo(configPath);
-		gameConfig["level"] = level->currentLevel();
-		fo << gameConfig.dump();
-		fo.close();
-		std::cout << "Saved\n";
 	}
 
 	bool DEBUG = false;  // DEBUG COLLISION
@@ -104,21 +109,21 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 		while (true) {
 			if (pge->GetKey(olc::Key::W).bHeld || pge->GetKey(olc::Key::UP).bHeld) {
 				cPeople.get()->Up(fElapsedTime);
-				break;
+				//break;
 			}
 			if (pge->GetKey(olc::Key::S).bHeld || pge->GetKey(olc::Key::DOWN).bHeld) {
 				cPeople.get()->Down(fElapsedTime);
-				break;
+				//break;
 			}
 				
 			if (pge->GetKey(olc::Key::A).bHeld || pge->GetKey(olc::Key::LEFT).bHeld) {
 				cPeople.get()->Left(fElapsedTime);
-				break;
+				//break;
 			}
 				
 			if (pge->GetKey(olc::Key::D).bHeld || pge->GetKey(olc::Key::RIGHT).bHeld) {
 				cPeople.get()->Right(fElapsedTime);
-				break;
+				//break;
 			}	
 			break;
 		}
