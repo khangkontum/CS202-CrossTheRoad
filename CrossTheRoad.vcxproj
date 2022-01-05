@@ -59,6 +59,7 @@
     <ClInclude Include="includes\ObjectFactory.h" />
     <ClInclude Include="includes\ObjectSpawner.h" />
     <ClInclude Include="includes\para.h" />
+    <ClInclude Include="includes\SaveData.h" />
     <ClInclude Include="includes\TrafficLight.h" />
     <ClInclude Include="lib\json.hpp" />
     <ClInclude Include="lib\olcPGEX_Sound.h" />

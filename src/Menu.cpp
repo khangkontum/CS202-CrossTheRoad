@@ -60,24 +60,16 @@ int Menu::Loading::interact(int key, menumanager* manager, bool& stop, json* gam
 		gameConfig->operator[]("level") = 1;
 		*configPath = "null";
 		level->setLevel(1);
-		MenuCurrent = MenuIngame;
-		MenuLoading = MenuIngame;
 		return START;
 		break;
 	}
 	case LOADGAME:
 	{
-		std::cout << "Path to game file: ";
-		std::cin >> *configPath;
-		std::ifstream fi(*configPath);
-		if (!fi) {
-			std::cout << "File does not exsist. Please try again.\n";
-			break;
-		}
-		fi >> *gameConfig;
-		fi.close();
-		level->setLevel(gameConfig->operator[]("level"));
-		//std::cout << "[DEBUG] LEVEL : " << gameConfig->operator[]("level") << std::endl;
+		loadGame(configPath);
+		level->setLevel(para::CONFIG["LEVEL"]);
+		AudioManager->mute(para::CONFIG["SOUND"]["MUTE"]);
+		AudioManager->stopBackground(para::CONFIG["SOUND"]["MUTESFX"]);
+		std::cout << "[DEBUG] LEVEL : " << para::CONFIG["LEVEL"] << std::endl;
 		return START;
 		break;
 	}
@@ -134,16 +126,7 @@ int Menu::Ingame::interact(int key, menumanager* manager, bool& stop, json* game
 	}
 	case SAVEGAME:
 	{
-		std::ofstream fo;
-		if (*configPath == "null" || !fo) {
-			std::cout << "Path to save game: ";
-			std::cin >> *configPath;
-			fo.open(*configPath);
-		}
-		gameConfig->operator[]("level") = level->currentLevel();
-		fo << gameConfig->dump();
-		fo.close();
-		std::cout << "Saved\n";
+		saveGame(configPath);
 		break;
 	}
 	case EXIT:
@@ -236,7 +219,11 @@ int Menu::interact(bool& isIngame, bool& stop) {
 		else if (res == TRUE)
 			return true;
 		else if (res == START)
+		{
+			MenuCurrent = MenuIngame;
+			MenuLoading = MenuIngame;
 			isIngame = true;
+		}
 		/*switch (command->GetID()) {
 		case 0:
 		{

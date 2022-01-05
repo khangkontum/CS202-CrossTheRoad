@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include "AudioManager.h"
 #include "para.h"
+#include "SaveData.h"
 
 constexpr int32_t nPatch = 8;
 
