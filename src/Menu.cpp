@@ -22,7 +22,7 @@ Menu::Menu() {
 	MenuLoading = new Menu::Loading();
 	MenuSettings = new Menu::Settings();
 	MenuCurrent = MenuLoading;
-	
+
 	MenuIngame->build(menu);
 	MenuLoading->build(menu);
 	MenuSettings->build(menu);
@@ -65,12 +65,14 @@ int Menu::Loading::interact(int key, menumanager* manager, bool& stop, json* gam
 	}
 	case LOADGAME:
 	{
-		loadGame(configPath);
-		level->setLevel(para::CONFIG["LEVEL"]);
-		AudioManager->mute(para::CONFIG["SOUND"]["MUTE"]);
-		AudioManager->stopBackground(para::CONFIG["SOUND"]["MUTESFX"]);
-		std::cout << "[DEBUG] LEVEL : " << para::CONFIG["LEVEL"] << std::endl;
-		return START;
+		if (loadGame(configPath))
+		{
+			level->setLevel(para::CONFIG["LEVEL"]);
+			AudioManager->mute(para::CONFIG["SOUND"]["MUTE"]);
+			AudioManager->stopBackground(para::CONFIG["SOUND"]["MUTESFX"]);
+			std::cout << "[DEBUG] LEVEL : " << para::CONFIG["LEVEL"] << std::endl;
+			return START;
+		}
 		break;
 	}
 	case SETTING:
@@ -85,7 +87,7 @@ int Menu::Loading::interact(int key, menumanager* manager, bool& stop, json* gam
 	return DEFAULT;
 }
 
-void Menu::Ingame::build(menuobject &menu)
+void Menu::Ingame::build(menuobject& menu)
 {
 	//Ingame Menu
 	menu["main"]["Ingame"].SetTable(1, 5);
@@ -141,11 +143,11 @@ int Menu::Ingame::interact(int key, menumanager* manager, bool& stop, json* game
 void Menu::Settings::build(menuobject& menu)
 {
 	menu["main"]["Settings"].SetTable(1, 3);
-	if(AudioManager->is_Mute())
+	if (AudioManager->is_Mute())
 		menu["main"]["Settings"]["Unmute"].SetID(MUTE);
 	else
 		menu["main"]["Settings"]["Mute"].SetID(MUTE);
-	if(AudioManager->is_MuteBackground())
+	if (AudioManager->is_MuteBackground())
 		menu["main"]["Settings"]["On Music"].SetID(STOPMUSIC);
 	else
 		menu["main"]["Settings"]["Off Music"].SetID(STOPMUSIC);
@@ -212,7 +214,7 @@ int Menu::interact(bool& isIngame, bool& stop) {
 		sLastAction = "Selected: " + command->GetName() + " ID: " + std::to_string(command->GetID());
 		Level* level = &Level::getInstance();
 		ID = ID == DEFAULT ? command->GetID() : ID;
-		
+
 		int res = MenuCurrent->interact(ID, manager, stop, gameConfig, configPath, level);
 		if (res == FALSE)
 			return false;
@@ -304,12 +306,12 @@ int Menu::interact(bool& isIngame, bool& stop) {
 		}*/
 		manager->Reset();
 	}
-	
+
 
 	pge->Clear(olc::SOFT_GREEN);
 	//if (sLastAction != "null")
 	//	AudioManager->play("MENU", sLastAction, false);
-	manager->Draw(*pge, sprite, {30,30});
+	manager->Draw(*pge, sprite, { 30,30 });
 	pge->DrawString(10, 200, sLastAction);
 	return true;
 }
@@ -322,6 +324,6 @@ void Menu::init(olc::PixelGameEngine* pge, json* gameConfig, std::string* config
 
 
 bool Menu::execute(int command, bool& isIngame) {
-	
+
 	return true;
 }

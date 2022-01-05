@@ -42,14 +42,21 @@ void saveGame(std::string* configPath)
 	std::cout << "Saved\n";
 }
 
-void loadGame(std::string* configPath)
+bool loadGame(std::string* configPath)
 {
 	if (*configPath == "null") {
 		std::cout << "Path to load game: ";
 		std::cin >> *configPath;
 	}
 	if (readData(*configPath))
+	{
 		std::cout << "Loaded\n";
+		return true;
+	}
 	else
+	{
 		std::cout << "No such file or directory" << std::endl;
+		*configPath = "null";
+		return false;
+	}	
 }
