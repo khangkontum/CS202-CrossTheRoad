@@ -200,8 +200,7 @@ void CGame::drawGame() {
 
 
 void CGame::loadingDefault() {
-	std::ifstream fi("./database/game.json");
-	fi >> gameData;
+	gameData = para::CONFIG["DATABASE"];
 
 	//Loading default bird
 	CBird* bird = new CBird(olc::vf2d({ 0, float(gameData["CBird"]) * pge->ScreenHeight() }), 1, pge);

@@ -45,7 +45,6 @@ public:
 
 private:
 	PairMap listSound;
-    float _fElapsedTime;
     void updateConfig();
 private:
     AudioManager();

@@ -18,7 +18,13 @@
             "CAR": 20,
             "TRUCK": 20
         },
-        "LEVEL": 1
+        "LEVEL": 1,
+        "DATABASE": {
+            "CBird": 0.2,
+            "CDinosaur": 0.35,
+            "CTruck": 0.5,
+            "CCar": 0.7
+        }
     },
     "ASSETS": {
         "PEOPLE": {
