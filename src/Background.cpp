@@ -67,7 +67,6 @@ void Background::DrawLoading(int loaded, int total) {
 	pge->FillRectDecal(olc::vf2d({ w6 - 1, float(h / 2) - 1}), olc::vf2d({ 4 * w6 + 2, h20 + 2}));
 
 	pge->FillRectDecal(olc::vf2d({ w6, float(h / 2) }), olc::vf2d({ float(float(loaded) / float(total)) * 4 * w6, h20 }), olc::DARK_GREEN);
-	std::cout << loaded << ' ' << total << float(float(loaded) / float(total)) << '\n';
 }
 
 void Background::DrawBreakLine(int x1, int y1, int x2, int y2) {

@@ -9,7 +9,13 @@ CPeople::CPeople(olc::PixelGameEngine* pge) : pge(pge), Collider2D() {
 }
 
 void CPeople::Draw() {
-	pge->DrawDecal(this->position, decal.get(), { 0.1f, 0.1f });
+	float w = sprite.get()->width * 0.1;
+	float h = sprite.get()->height * 0.1;
+	olc::vf2d offset = { w , h };
+	if (isdead)
+		pge->DrawRotatedDecal(this->position, decal.get(), 90, offset * 2, { 0.1f, 0.1f });
+	else 
+		pge->DrawDecal(this->position, decal.get(), { 0.1f, 0.1f });
 }
 
 void CPeople::Up(float fElapsedTime) {
