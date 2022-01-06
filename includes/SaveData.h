@@ -2,6 +2,9 @@
 #include <fstream>
 #include <iostream>
 #include "para.h"
+#include <nfd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void writeData(std::string configPath);
 bool readData(std::string configPath);
