@@ -35,7 +35,7 @@ void writeData(std::string configPath) {
 void saveGame(std::string* configPath)
 {
 	nfdchar_t* outPath = NULL;
-	nfdresult_t result = NFD_SaveDialog(NULL, NULL, &outPath);
+	nfdresult_t result = NFD_SaveDialog("dat", NULL, &outPath);
 	if (result == NFD_OKAY)
 	{
 		writeData(outPath);
@@ -61,7 +61,7 @@ void saveGame(std::string* configPath)
 bool loadGame(std::string* configPath)
 {
 	nfdchar_t* outPath = NULL;
-	nfdresult_t result = NFD_OpenDialog(NULL, NULL, &outPath);
+	nfdresult_t result = NFD_OpenDialog("dat", NULL, &outPath);
 
 	if (result == NFD_OKAY) {
 
