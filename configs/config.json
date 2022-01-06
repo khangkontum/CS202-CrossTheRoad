@@ -43,7 +43,7 @@
                     1
                 ],
                 "FINISH": [
-                    "./assets/sound/***.wav",
+                    "./assets/sound/LevelUp.wav",
                     1
                 ]
             }
