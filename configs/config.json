@@ -36,7 +36,7 @@
                     "./assets/sound/wahwahwah.wav",
                     1
                 ],
-                "FINSH": [
+                "FINISH": [
                     "./assets/sound/***.wav",
                     1
                 ]
@@ -57,7 +57,7 @@
                     "./assets/sound/***.wav",
                     1
                 ],
-                "FINSH": [
+                "FINISH": [
                     "./assets/sound/***.wav",
                     1
                 ]
@@ -78,7 +78,7 @@
                     "./assets/sound/***.wav",
                     1
                 ],
-                "FINSH": [
+                "FINISH": [
                     "./assets/sound/***.wav",
                     1
                 ]
@@ -99,7 +99,7 @@
                     "./assets/sound/***.wav",
                     1
                 ],
-                "FINSH": [
+                "FINISH": [
                     "./assets/sound/***.wav",
                     1
                 ]
@@ -120,7 +120,7 @@
                     "./assets/sound/***.wav",
                     1
                 ],
-                "FINSH": [
+                "FINISH": [
                     "./assets/sound/***.wav",
                     1
                 ]

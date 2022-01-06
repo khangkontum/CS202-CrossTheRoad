@@ -8,7 +8,7 @@ AudioManager::AudioManager()
 	listSound[{"PEOPLE", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["MOVE"]);
 	listSound[{"PEOPLE", "IMPACT"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["IMPACT"]);
 	listSound[{"PEOPLE", "DEAD"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["DEAD"]);
-	listSound[{"PEOPLE", "FINSH"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["FINSH"]);
+	listSound[{"PEOPLE", "FINISH"}] = olc::SOUND::LoadAudioSample(para::ASSETS["PEOPLE"]["SOUND"]["FINISH"]);
 
 	listSound[{"CAR", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["CAR"]["SOUND"]["MOVE"]);
 	listSound[{"BIRD", "MOVE"}] = olc::SOUND::LoadAudioSample(para::ASSETS["BIRD"]["SOUND"]["MOVE"]);
@@ -20,8 +20,6 @@ AudioManager::AudioManager()
 	listSound[{"MENU", "OPEN"}] = olc::SOUND::LoadAudioSample(para::ASSETS["MENU"]["SOUND"]["OPEN"]);
 
 	listSound[{"BACKGROUND", ""}] = olc::SOUND::LoadAudioSample(para::ASSETS["BACKGROUND"]["SOUND"]);
-
-	_fElapsedTime = 0;
 }
 
 void AudioManager::mute(bool _isMute)

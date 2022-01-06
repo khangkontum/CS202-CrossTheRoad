@@ -72,7 +72,7 @@ bool CGame::OnUserUpdate(float fElapsedTime) {
 	if (pge->GetKey(olc::Key::ENTER).bPressed && cPeople.get()->isFinish()) {
 		cPeople.get()->reset();
 		level->levelUp();
-		AudioManager->play("PEOPLE", "FINSH", false);
+		AudioManager->play("PEOPLE", "FINISH", false);
 		resetState = true;
 	}
 
